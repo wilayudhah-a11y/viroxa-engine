@@ -42,6 +42,17 @@ export default function GeneratorPage() {
       .split('\n')
       .map((img) => img.trim())
       .filter(Boolean)
+	  
+	const titleList = title
+		.split('\n')
+		.map((item) => item.trim())
+		.filter(Boolean)
+	const descriptionList = description
+		.split('\n')
+		.map((item) =>
+		item.trim()
+		)
+		.filter(Boolean)
 
 if (!target.trim()) {
   alert(
@@ -63,9 +74,26 @@ setLoading(true)
           )
         ]
 
-      const data: Payload = {
-        title,
-        description,
+      const randomTitle =
+  titleList[
+    Math.floor(
+      Math.random() *
+        titleList.length
+    )
+  ] || ''
+  
+  const randomDescription =
+  descriptionList[
+    Math.floor(
+      Math.random() *
+        descriptionList.length
+    )
+  ] || ''
+
+const data: Payload = {
+  title: randomTitle,
+  
+        description:  randomDescription,
         image: randomImage,
         target,
       }
