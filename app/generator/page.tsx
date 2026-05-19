@@ -335,7 +335,7 @@ if (!access) {
 				/>
 			
 				<textarea
-					className="w-full h-25 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full h-30 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="1 URL gambar per baris"
 					value={images}
 					onChange={(e) =>
@@ -381,7 +381,7 @@ if (!access) {
 				<input
 					type="number"
 					min="1"
-					max="100"
+					max="1000"
 					className="w-full p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="Jumlah generate"
 					value={count}
