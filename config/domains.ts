@@ -1,11 +1,11 @@
 export const domains = [
   {
-    name: 'viroxa-engine.vercel.app',
+    name: 'Viroxa Main',
     url: 'https://viroxa-engine.vercel.app',
   },
 
   {
-    name: 'go.cooleen.space',
+    name: 'Domain 2',
     url: 'https://go.cooleen.space',
   },
 
