@@ -26,6 +26,11 @@ export function encodePayload(
 
   const compressed =
     compressToEncodedURIComponent(json)
+	
+	const safe =
+  compressed
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
 
   const reversed =
     compressed

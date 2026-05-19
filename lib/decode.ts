@@ -14,11 +14,15 @@ export function decodePayload(
         .split('')
         .reverse()
         .join('')
-
+const unsafe =
+  reversed
+    .replace(/-/g, '+')
+    .replace(/_/g, '/')
+	
     const decompressed =
-      decompressFromEncodedURIComponent(
-        reversed
-      )
+  decompressFromEncodedURIComponent(
+    unsafe
+  )
 
     if (!decompressed) {
       return null
