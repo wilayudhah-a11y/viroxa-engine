@@ -6,7 +6,7 @@ export const domains = [
 
   {
     name: 'Domain 2',
-    url: 'https://domain2.com',
+    url: 'https://go.cooleen.space',
   },
 
   {
