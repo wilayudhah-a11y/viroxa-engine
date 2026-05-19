@@ -90,11 +90,17 @@ const randomTitle =
     )
   ] || ''
   
-  const randomDescription =
-  descriptionList[
+const cleanDescriptions =
+  descriptionList.filter(
+    (item) =>
+      item.trim().length > 0
+  )
+
+const randomDescription =
+  cleanDescriptions[
     Math.floor(
       Math.random() *
-        descriptionList.length
+        cleanDescriptions.length
     )
   ] || ''
 
