@@ -317,7 +317,7 @@ if (!access) {
 				<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 space-y-4">
 			
 				<textarea
-					className="w-full h-15 p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+					className="w-full h-15 p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
 					placeholder="1 judul per baris"
 					value={title}
 					onChange={(e) =>
@@ -326,7 +326,7 @@ if (!access) {
 					/>
 			
 				<textarea
-					className="w-full p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="Deskripsi"
 					value={description}
 					onChange={(e) =>
@@ -335,7 +335,7 @@ if (!access) {
 				/>
 			
 				<textarea
-					className="w-full h-28 p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full h-28 p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="1 URL gambar per baris"
 					value={images}
 					onChange={(e) =>
@@ -344,7 +344,7 @@ if (!access) {
 				/>
 			
 				<input
-					className="w-full p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="Link tujuan"
 					value={target}
 					onChange={(e) =>
@@ -359,7 +359,7 @@ if (!access) {
 						e.target.value
 						)
 					}
-					className="w-full p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					>
 					<option
   value="random"
@@ -382,7 +382,7 @@ if (!access) {
 					type="number"
 					min="1"
 					max="1000"
-					className="w-full p-3 text-sm rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="Jumlah generate"
 					value={count}
 					onChange={(e) =>
@@ -404,7 +404,7 @@ if (!access) {
 					{generatedLinks.length > 0 && (
 					<button
 						onClick={copyAll}
-						className="px-3 py-1.5 text-sm rounded-xl bg-emerald-600 hover:bg-emerald-500 transition font-semibold shadow-lg shadow-emerald-900/40"
+						className="px-3 py-1.5 text-xs rounded-xl bg-emerald-600 hover:bg-emerald-500 transition font-semibold shadow-lg shadow-emerald-900/40"
 					>
 						📋 Copy
 					</button>
