@@ -76,11 +76,17 @@ setLoading(true)
           )
         ]
 
-      const randomTitle =
-  titleList[
+const cleanTitles =
+  titleList.filter(
+    (item) =>
+      item.trim().length > 0
+  )
+
+const randomTitle =
+  cleanTitles[
     Math.floor(
       Math.random() *
-        titleList.length
+        cleanTitles.length
     )
   ] || ''
   
