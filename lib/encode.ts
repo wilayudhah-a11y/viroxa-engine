@@ -31,12 +31,13 @@ export function encodePayload(
   compressed
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
+    .replace(/=/g, '')
 
   const reversed =
-    compressed
-      .split('')
-      .reverse()
-      .join('')
+  safe
+    .split('')
+    .reverse()
+    .join('')
 
   return `${randomPrefix()}${reversed}`
 }
