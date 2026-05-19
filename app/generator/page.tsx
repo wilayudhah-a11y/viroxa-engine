@@ -439,7 +439,7 @@ if (!access) {
 				className="w-full h-[510px] rounded-xl bg-black/20 border border-white/10 p-4 text-[11px] leading-5 focus:outline-none resize-none"
 				/>
 			</div>
-				<div className="flex items-center justify-between mt-1 text-[11px] text-zinc-500">
+				<div className="flex items-center justify-between mt-1 text-[12px] text-zinc-500">
 
 				<div className="flex items-center gap-3">
 				
