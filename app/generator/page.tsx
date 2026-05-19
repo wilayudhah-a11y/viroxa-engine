@@ -436,10 +436,10 @@ if (!access) {
 				readOnly
 				value={generatedLinks.join('\n')}
 				placeholder="Generated links..."
-				className="w-full h-[535px] rounded-xl bg-black/20 border border-white/10 p-4 text-[11px] leading-5 focus:outline-none resize-none"
+				className="w-full h-[525px] rounded-xl bg-black/20 border border-white/10 p-4 text-[11px] leading-5 focus:outline-none resize-none"
 				/>
 			</div>
-				<div className="flex items-center justify-between mt-1.5 text-[11px] text-zinc-500">
+				<div className="flex items-center justify-between mt-1 text-[11px] text-zinc-500">
 
 				<div className="flex items-center gap-3">
 				
