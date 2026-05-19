@@ -327,7 +327,7 @@ if (!access) {
 			
 				<textarea
 					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-					placeholder="Deskripsi"
+					placeholder="1 Deskripsi per baris"
 					value={description}
 					onChange={(e) =>
 					setDescription(e.target.value)
@@ -436,7 +436,7 @@ if (!access) {
 				readOnly
 				value={generatedLinks.join('\n')}
 				placeholder="Generated links..."
-				className="w-full h-[525px] rounded-xl bg-black/20 border border-white/10 p-4 text-[11px] leading-5 focus:outline-none resize-none"
+				className="w-full h-[510px] rounded-xl bg-black/20 border border-white/10 p-4 text-[11px] leading-5 focus:outline-none resize-none"
 				/>
 			</div>
 				<div className="flex items-center justify-between mt-1 text-[11px] text-zinc-500">
