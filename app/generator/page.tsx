@@ -317,7 +317,7 @@ if (!access) {
 				<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 space-y-4">
 			
 				<textarea
-					className="w-full h-14 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+					className="w-full h-15 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
 					placeholder="1 judul per baris"
 					value={title}
 					onChange={(e) =>
@@ -335,7 +335,7 @@ if (!access) {
 				/>
 			
 				<textarea
-					className="w-full h-32 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full h-15 p-3 rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="1 URL gambar per baris"
 					value={images}
 					onChange={(e) =>
