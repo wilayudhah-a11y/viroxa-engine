@@ -34,7 +34,9 @@ export default function GeneratorPage() {
     useState(false)
   
   const [password, setPassword] =
-  useState('')
+	useState('')
+  const [showPassword,  setShowPassword] =
+    useState(false)
 
   async function generateLinks() {
   
@@ -167,13 +169,44 @@ if (!access) {
           Access Required
         </h1>
 
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+       <div className="relative">
+
+  <input
+    type={
+      showPassword
+        ? 'text'
+        : 'password'
+    }
+    placeholder="Enter password"
+    value={password}
+    onChange={(e) =>
+      setPassword(
+        e.target.value
+      )
+    }
+    onKeyDown={(e) => {
+      if (e.key === 'Enter') {
+        unlock()
+      }
+    }}
+    className="w-full p-4 pr-14 rounded-2xl bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+  />
+
+  <button
+    type="button"
+    onClick={() =>
+      setShowPassword(
+        !showPassword
+      )
+    }
+    className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+  >
+    {showPassword
+      ? '🙈'
+      : '👁️'}
+  </button>
+
+</div>
           className="w-full p-4 rounded-2xl bg-white/5 border border-white/10 text-white"
         />
 
