@@ -66,7 +66,8 @@ if (!target.trim()) {
 
 setLoading(true)
 
-    const links: string[] = []
+const links = []  
+const requests = []
 
     for (let i = 0; i < count; i++) {
       const randomImage =
@@ -129,8 +130,9 @@ const domain =
       ].url
     : selectedDomain
 
-const response =
-  await fetch(
+requests.push(
+
+  fetch(
     'https://viroxa-api.wilayudhah.workers.dev/create',
     {
       method: 'POST',
@@ -146,14 +148,22 @@ const response =
     }
   )
 
-const result =
-  await response.json()
+  .then((res) =>
+    res.json()
+  )
 
-const url =
-  `${domain}/p/${result.slug}`
+  .then((result) => {
 
-      links.unshift(url)
-    }
+    const url =
+      `${domain}/p/${result.slug}`
+
+    links.unshift(url)
+
+  })
+
+)
+
+await Promise.all(requests)
 
     setGeneratedLinks(links)
 	setTimeout(() => {
