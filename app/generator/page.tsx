@@ -163,6 +163,7 @@ requests.push(
 
 )
 
+}
 await Promise.all(requests)
 
     setGeneratedLinks(links)
