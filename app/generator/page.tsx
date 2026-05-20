@@ -66,7 +66,7 @@ if (!target.trim()) {
 
 setLoading(true)
 
-const links = []  
+const links: string[] = []
 const requests = []
 
     for (let i = 0; i < count; i++) {
