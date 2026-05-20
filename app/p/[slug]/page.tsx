@@ -1,6 +1,9 @@
 import type { Metadata }
 from 'next'
 
+import { decodePayload }
+from '@/lib/decode'
+
 type Props = {
   params: Promise<{
     slug: string
@@ -25,32 +28,15 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const { slug } = await params
 
-  const response =
-  await fetch(
+  const data =
+    decodePayload(slug)
 
-    `https://viroxa-api.wilayudhah.workers.dev/get/${slug}`,
-
-    {
-      cache: 'no-store',
+  if (!data) {
+    return {
+      title: 'Invalid Link',
     }
-
-  )
-
-const text =
-  await response.text()
-
-if (
-  !text ||
-  text === 'not found'
-) {
-  return {
-    title: 'Invalid Link',
   }
-}
 
-const data =
-  JSON.parse(text)
-  
   return {
     title: data.title,
 
@@ -93,34 +79,16 @@ export default async function Page({
 }: Props) {
   const { slug } = await params
 
-  
-const response =
-  await fetch(
+  const data =
+    decodePayload(slug)
 
-    `https://viroxa-api.wilayudhah.workers.dev/get/${slug}`,
-
-    {
-      cache: 'no-store',
-    }
-
-  )
-
-const text =
-  await response.text()
-
-if (
-  !text ||
-  text === 'not found'
-) {
-  return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      Invalid Link
-    </main>
-  )
-}
-
-const data =
-  JSON.parse(text)
+  if (!data) {
+    return (
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        Invalid Link
+      </main>
+    )
+  }
 
   if (
     !isValidUrl(data.target)

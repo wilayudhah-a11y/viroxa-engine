@@ -66,8 +66,7 @@ if (!target.trim()) {
 
 setLoading(true)
 
-const links: string[] = []
-const requests = []
+    const links: string[] = []
 
     for (let i = 0; i < count; i++) {
       const randomImage =
@@ -103,14 +102,12 @@ const cleanDescriptions =
   )
 
 const randomDescription =
-  cleanDescriptions.length > 0
-    ? cleanDescriptions[
-        Math.floor(
-          Math.random() *
-            cleanDescriptions.length
-        )
-      ]
-    : ''
+  cleanDescriptions[
+    Math.floor(
+      Math.random() *
+        cleanDescriptions.length
+    )
+  ] || ''
 
 const data: Payload = {
   title: randomTitle,
@@ -120,7 +117,10 @@ const data: Payload = {
         target,
       }
 
-const domain =
+      const encoded =
+        encodePayload(data)
+
+      const domain =
   selectedDomain === 'random'
     ? domains[
         Math.floor(
@@ -130,41 +130,11 @@ const domain =
       ].url
     : selectedDomain
 
-requests.push(
+const url =
+  `${domain}/p/${encoded}`
 
-  fetch(
-    'https://viroxa-api.wilayudhah.workers.dev/create',
-    {
-      method: 'POST',
-
-      headers: {
-        'Content-Type':
-          'application/json',
-      },
-
-      body: JSON.stringify(
-        data
-      ),
+      links.unshift(url)
     }
-  )
-
-  .then((res) =>
-    res.json()
-  )
-
-  .then((result) => {
-
-    const url =
-      `${domain}/p/${result.slug}`
-
-    links.unshift(url)
-
-  })
-
-)
-
-}
-await Promise.all(requests)
 
     setGeneratedLinks(links)
 	setTimeout(() => {
