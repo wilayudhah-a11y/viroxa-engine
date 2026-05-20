@@ -70,11 +70,14 @@ setLoading(true)
 
     for (let i = 0; i < count; i++) {
       const randomImage =
-        imageList[
-          Math.floor(
-            Math.random() * imageList.length
-          )
-        ]
+  imageList.length > 0
+    ? imageList[
+        Math.floor(
+          Math.random() *
+            imageList.length
+        )
+      ]
+    : ''
 
 const cleanTitles =
   titleList.filter(
@@ -83,12 +86,14 @@ const cleanTitles =
   )
 
 const randomTitle =
-  cleanTitles[
-    Math.floor(
-      Math.random() *
-        cleanTitles.length
-    )
-  ] || ''
+  cleanTitles.length > 0
+    ? cleanTitles[
+        Math.floor(
+          Math.random() *
+            cleanTitles.length
+        )
+      ]
+    : ''
   
 const cleanDescriptions =
   descriptionList.filter(
@@ -97,12 +102,14 @@ const cleanDescriptions =
   )
 
 const randomDescription =
-  cleanDescriptions[
-    Math.floor(
-      Math.random() *
-        cleanDescriptions.length
-    )
-  ] || ''
+  cleanDescriptions.length > 0
+    ? cleanDescriptions[
+        Math.floor(
+          Math.random() *
+            cleanDescriptions.length
+        )
+      ]
+    : ''
 
 const data: Payload = {
   title: randomTitle,
