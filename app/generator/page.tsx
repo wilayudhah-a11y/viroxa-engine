@@ -119,10 +119,7 @@ const data: Payload = {
         target,
       }
 
-      const encoded =
-        encodePayload(data)
-
-      const domain =
+const domain =
   selectedDomain === 'random'
     ? domains[
         Math.floor(
@@ -132,8 +129,28 @@ const data: Payload = {
       ].url
     : selectedDomain
 
+const response =
+  await fetch(
+    'https://viroxa-api.wilayudhah.workers.dev/create',
+    {
+      method: 'POST',
+
+      headers: {
+        'Content-Type':
+          'application/json',
+      },
+
+      body: JSON.stringify(
+        data
+      ),
+    }
+  )
+
+const result =
+  await response.json()
+
 const url =
-  `${domain}/p/${encoded}`
+  `${domain}/p/${result.slug}`
 
       links.unshift(url)
     }
