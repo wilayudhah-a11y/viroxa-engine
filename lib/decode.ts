@@ -6,8 +6,11 @@ export function decodePayload(
   slug: string
 ) {
   try {
-    const stripped =
-      slug.slice(6)
+    const parts =
+  slug.split('~')
+
+const stripped =
+  parts.slice(1).join('~')
 
     const reversed =
       stripped

@@ -39,5 +39,5 @@ export function encodePayload(
     .reverse()
     .join('')
 
-  return `${randomPrefix()}${reversed}`
+	return `${randomPrefix()}~${reversed}`
 }
