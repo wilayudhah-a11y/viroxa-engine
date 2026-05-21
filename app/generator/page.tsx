@@ -1,6 +1,8 @@
 'use client'
 import { domains } from '@/config/domains'
 
+import { offers } from '@/config/offers'
+
 import { useState } from 'react'
 
 import { encodePayload } from '@/lib/encode'
@@ -16,6 +18,11 @@ export default function GeneratorPage() {
   const [images, setImages] = useState('')
 
   const [target, setTarget] = useState('')
+  
+  const [
+		selectedOffer,
+		setSelectedOffer
+		] = useState('Manual')
 
   const [count, setCount] = useState(1)
   
@@ -360,6 +367,49 @@ if (!access) {
 					}
 				/>
 			
+			<select
+
+  value={selectedOffer}
+
+  onChange={(e) => {
+
+    const value =
+      e.target.value
+
+    setSelectedOffer(value)
+
+    const found =
+      offers.find(
+        (o) =>
+          o.name === value
+      )
+
+    if (found) {
+      setTarget(found.url)
+    }
+
+  }}
+
+  className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10"
+
+>
+
+  {offers.map((offer) => (
+
+    <option
+      key={offer.name}
+      value={offer.name}
+      className="bg-black"
+    >
+
+      {offer.name}
+
+    </option>
+
+  ))}
+
+</select>
+
 				<input
 					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="Link tujuan"
