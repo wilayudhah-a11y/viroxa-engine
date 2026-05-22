@@ -1,5 +1,6 @@
 'use client'
 
+import { users as defaultUsers } from '@/config/users'
 
 import {  useParams,  useRouter,} from 'next/navigation'
 
@@ -9,7 +10,9 @@ export default function LoginPage() {
 
 const [users,
 setUsers] =
-  useState<any[]>([])
+  useState<any[]>(
+    defaultUsers
+  )
   
   useEffect(() => {
 
