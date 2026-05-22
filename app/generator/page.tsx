@@ -9,6 +9,8 @@ import { encodePayload } from '@/lib/encode'
 
 import type { Payload } from '@/types/payload'
 
+import {  useState,  useEffect} from 'react'
+
 export default function GeneratorPage() {
   const [title, setTitle] = useState('')
 
@@ -39,6 +41,19 @@ export default function GeneratorPage() {
   
   const [access, setAccess] =
     useState(false)
+	
+	useEffect(() => {
+
+  const saved =
+    localStorage.getItem(
+      'viroxa_access'
+    )
+
+  if (saved === 'granted') {
+    setAccess(true)
+  }
+
+}, [])
   
   const [password, setPassword] =
 	useState('')
