@@ -256,31 +256,60 @@ if (!access) {
 
 </button>
 
-<button
+</div>
 
-  onClick={() => {
+<div className="space-y-4">
 
-    alert(
-      'Delete nanti pakai D1 😎'
-    )
+  {userList.map((user) => (
 
-  }}
+    <div
+      key={user.username}
+      className="p-4 rounded-2xl bg-black/20 border border-white/10"
+    >
 
-  className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+      <div className="flex items-center justify-between">
 
->
+        <div>
 
-  Delete
+          <p className="font-semibold">
 
-</button>
+            {user.username}
 
-                  </div>
+          </p>
 
-                </div>
+          <p className="text-sm text-zinc-400">
 
-              ))}
+            0 offers
 
-            </div>
+          </p>
+
+        </div>
+
+        <button
+
+          onClick={() => {
+
+            alert(
+              'Delete nanti pakai D1 😎'
+            )
+
+          }}
+
+          className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+
+        >
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </div>
+
+  ))}
+
+</div>
 
           </div>
 
