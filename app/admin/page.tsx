@@ -280,31 +280,56 @@ if (!access) {
 
 <button
 
-  onClick={() => {
+onClick={async () => {
 
-const updatedUsers =
+  if (
+    !newUsername ||
+    !newPassword
+  ) return
 
-  userList.filter(
-    (u) =>
-      u.username !==
-      user.username
-  )
+  const response =
+    await fetch(
 
-setUserList(
-  updatedUsers
-)
+      'https://viroxa-api.wilayudhah.workers.dev/add-user',
 
-localStorage.setItem(
+      {
 
-  'viroxa_users',
+        method: 'POST',
 
-  JSON.stringify(
-    updatedUsers
-  )
+        headers: {
+          'Content-Type':
+            'application/json',
+        },
 
-)
+        body: JSON.stringify({
 
-  }}
+          username:
+            newUsername,
+
+          password:
+            newPassword,
+
+        }),
+
+      }
+
+    )
+
+  const result =
+    await response.json()
+
+  if (result.success) {
+
+    alert(
+      'User added'
+    )
+
+    setNewUsername('')
+    setNewPassword('')
+
+  }
+
+}}
 
   className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
 >
