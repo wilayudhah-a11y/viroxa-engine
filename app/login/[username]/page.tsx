@@ -25,6 +25,12 @@ useEffect(() => {
       JSON.parse(saved)
     )
 
+  } else {
+
+    setUsers(
+      defaultUsers
+    )
+
   }
 
 }, [])
