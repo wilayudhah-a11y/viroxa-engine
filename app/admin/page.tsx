@@ -55,9 +55,9 @@ function unlock() {
 
 const [userList,
 setUserList] =
-  useState(users)
+  useState<any[]>([])
   
-  useEffect(() => {
+useEffect(() => {
 
   const saved =
     localStorage.getItem(
@@ -68,6 +68,20 @@ setUserList] =
 
     setUserList(
       JSON.parse(saved)
+    )
+
+  } else {
+
+    setUserList(users)
+
+    localStorage.setItem(
+
+      'viroxa_users',
+
+      JSON.stringify(
+        users
+      )
+
     )
 
   }
