@@ -23,6 +23,10 @@ const [
   setOfferUrl
 ] = useState('')
 
+const [offers,
+setOffers] =
+  useState<any[]>([])
+
 const [access,
 setAccess] =
   useState(false)
@@ -30,7 +34,7 @@ setAccess] =
 const [password,
 setPassword] =
   useState('')
-
+  
 useEffect(() => {
 
   const saved =
@@ -88,6 +92,22 @@ setDomains] =
   
 useEffect(() => {
 
+async function loadOffers() {
+
+  const response =
+    await fetch(
+
+      'https://viroxa-api.wilayudhah.workers.dev/get-offers-admin'
+
+    )
+
+  const data =
+    await response.json()
+
+  setOffers(data)
+
+}
+
 async function loadDomains() {
 
   const response =
@@ -122,6 +142,7 @@ async function loadDomains() {
 
   loadUsers()
   loadDomains()
+  loadOffers()
 
 }, [])
 
@@ -486,6 +507,103 @@ if (!access) {
     </button>
 
   </div>
+
+<div className="space-y-4 mt-5">
+
+  {offers.map((offer) => (
+
+    <div
+      key={offer.id}
+      className="p-4 rounded-2xl bg-black/20 border border-white/10"
+    >
+
+      <div className="flex items-center justify-between">
+
+        <div>
+
+          <p className="font-semibold">
+
+            {offer.name}
+
+          </p>
+
+          <p className="text-sm text-zinc-400">
+
+            {offer.username}
+
+          </p>
+
+          <p className="text-sm text-zinc-500 break-all">
+
+            {offer.url}
+
+          </p>
+
+        </div>
+
+        <button
+
+          onClick={async () => {
+
+            const response =
+              await fetch(
+
+                'https://viroxa-api.wilayudhah.workers.dev/delete-offer',
+
+                {
+
+                  method: 'POST',
+
+                  headers: {
+                    'Content-Type':
+                      'application/json',
+                  },
+
+                  body: JSON.stringify({
+
+                    id:
+                      offer.id,
+
+                  }),
+
+                }
+
+              )
+
+            const result =
+              await response.json()
+
+            if (result.success) {
+
+              setOffers(
+
+                offers.filter(
+                  (o) =>
+                    o.id !==
+                    offer.id
+                )
+
+              )
+
+            }
+
+          }}
+
+          className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+
+        >
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </div>
+
+  ))}
+
+</div>
 
 </div>
     </div>
