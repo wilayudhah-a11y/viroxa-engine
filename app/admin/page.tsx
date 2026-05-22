@@ -59,32 +59,23 @@ setUserList] =
   
 useEffect(() => {
 
-  const saved =
-    localStorage.getItem(
-      'viroxa_users'
-    )
+  async function loadUsers() {
 
-  if (saved) {
+    const response =
+      await fetch(
 
-    setUserList(
-      JSON.parse(saved)
-    )
+        'https://viroxa-api.wilayudhah.workers.dev/get-users'
 
-  } else {
-
-    setUserList(users)
-
-    localStorage.setItem(
-
-      'viroxa_users',
-
-      JSON.stringify(
-        users
       )
 
-    )
+    const data =
+      await response.json()
+
+    setUserList(data)
 
   }
+
+  loadUsers()
 
 }, [])
 
