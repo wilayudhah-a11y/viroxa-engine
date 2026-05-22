@@ -3,8 +3,6 @@ import { domains } from '@/config/domains'
 
 import { offers } from '@/config/offers'
 
-import { useState } from 'react'
-
 import { encodePayload } from '@/lib/encode'
 
 import type { Payload } from '@/types/payload'
