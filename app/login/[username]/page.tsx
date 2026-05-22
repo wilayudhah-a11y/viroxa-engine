@@ -52,6 +52,11 @@ export default function LoginPage() {
         'viroxa_user',
         username
       )
+	  
+	  localStorage.setItem(
+		'viroxa_access',
+		'granted'
+		)
 
       router.push(
         '/generator'
