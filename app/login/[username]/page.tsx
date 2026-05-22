@@ -10,11 +10,9 @@ export default function LoginPage() {
 
 const [users,
 setUsers] =
-  useState<any[]>(
-    defaultUsers
-  )
+  useState<any[]>([])
   
-  useEffect(() => {
+useEffect(() => {
 
   const saved =
     localStorage.getItem(
