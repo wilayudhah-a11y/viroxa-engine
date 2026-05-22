@@ -1,17 +1,32 @@
 'use client'
 
-import { users }
-from '@/config/users'
 
-import {
-  useParams,
-  useRouter,
-} from 'next/navigation'
+import {  useParams,  useRouter,} from 'next/navigation'
 
-import { useState }
-from 'react'
+import { useState } from 'react'
 
 export default function LoginPage() {
+
+const [users,
+setUsers] =
+  useState<any[]>([])
+  
+  useEffect(() => {
+
+  const saved =
+    localStorage.getItem(
+      'viroxa_users'
+    )
+
+  if (saved) {
+
+    setUsers(
+      JSON.parse(saved)
+    )
+
+  }
+
+}, [])
 
   const params =
     useParams()

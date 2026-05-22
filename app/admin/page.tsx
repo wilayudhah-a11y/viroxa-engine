@@ -56,6 +56,23 @@ function unlock() {
 const [userList,
 setUserList] =
   useState(users)
+  
+  useEffect(() => {
+
+  const saved =
+    localStorage.getItem(
+      'viroxa_users'
+    )
+
+  if (saved) {
+
+    setUserList(
+      JSON.parse(saved)
+    )
+
+  }
+
+}, [])
 
 const [newUsername,
 setNewUsername] =
@@ -173,21 +190,35 @@ if (!access) {
         !newPassword
       ) return
 
-      setUserList([
+const updatedUsers = [
 
-        ...userList,
+  ...userList,
 
-        {
-          username:
-            newUsername,
+  {
+    username:
+      newUsername,
 
-          password:
-            newPassword,
+    password:
+      newPassword,
 
-          offers: [],
-        },
+    offers: [],
+  },
 
-      ])
+]
+
+setUserList(
+  updatedUsers
+)
+
+localStorage.setItem(
+
+  'viroxa_users',
+
+  JSON.stringify(
+    updatedUsers
+  )
+
+)
 
       setNewUsername('')
       setNewPassword('')
@@ -235,15 +266,27 @@ if (!access) {
 
   onClick={() => {
 
-    setUserList(
+const updatedUsers =
 
-      userList.filter(
-        (u) =>
-          u.username !==
-          user.username
-      )
+  userList.filter(
+    (u) =>
+      u.username !==
+      user.username
+  )
 
-    )
+setUserList(
+  updatedUsers
+)
+
+localStorage.setItem(
+
+  'viroxa_users',
+
+  JSON.stringify(
+    updatedUsers
+  )
+
+)
 
   }}
 
