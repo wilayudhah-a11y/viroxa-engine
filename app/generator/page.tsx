@@ -1,7 +1,7 @@
 'use client'
 import { domains } from '@/config/domains'
 
-import { offers } from '@/config/offers'
+import { users } from '@/config/users'
 
 import { encodePayload } from '@/lib/encode'
 
@@ -18,6 +18,34 @@ export default function GeneratorPage() {
   const [images, setImages] = useState('')
 
   const [target, setTarget] = useState('')
+  
+  const currentUser =
+  typeof window !==
+  'undefined'
+
+    ? localStorage.getItem(
+        'viroxa_user'
+      )
+
+    : null
+
+const user =
+  users.find(
+    (u) =>
+      u.username ===
+      currentUser
+  )
+
+const offers = [
+
+  {
+    name: 'Manual',
+    url: '',
+  },
+
+  ...(user?.offers || [])
+
+]
   
   const [
 		selectedOffer,
