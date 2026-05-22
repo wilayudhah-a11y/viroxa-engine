@@ -237,7 +237,7 @@ if (!access) {
 
                       Delete
 
-                    </button>
+                  
 					
 					onClick={() => {
 
@@ -252,6 +252,8 @@ if (!access) {
   )
 
 }}
+
+  </button>
 
                   </div>
 
