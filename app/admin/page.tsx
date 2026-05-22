@@ -2,13 +2,9 @@
 
 import {  useState,  useEffect} from 'react'
 
-import {  useState,  useEffect} 
+import { users } from '@/config/users'
 
-import { users }
-from '@/config/users'
-
-import { domains }
-from '@/config/domains'
+import { domains } from '@/config/domains'
 
 export default function AdminPage() {
 
