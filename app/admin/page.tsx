@@ -72,7 +72,27 @@ const [userList,
 setUserList] =
   useState<any[]>([])
   
+const [domains,
+setDomains] =
+  useState<any[]>([])
+  
 useEffect(() => {
+
+async function loadDomains() {
+
+  const response =
+    await fetch(
+
+      'https://viroxa-api.wilayudhah.workers.dev/get-domains'
+
+    )
+
+  const data =
+    await response.json()
+
+  setDomains(data)
+
+}
 
   async function loadUsers() {
 
@@ -91,8 +111,11 @@ useEffect(() => {
   }
 
   loadUsers()
+  loadDomains()
 
 }, [])
+
+
 
 const [newUsername,
 setNewUsername] =
