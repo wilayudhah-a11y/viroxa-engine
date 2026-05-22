@@ -238,6 +238,20 @@ if (!access) {
                       Delete
 
                     </button>
+					
+					onClick={() => {
+
+  setUserList(
+
+    userList.filter(
+      (u) =>
+        u.username !==
+        user.username
+    )
+
+  )
+
+}}
 
                   </div>
 
