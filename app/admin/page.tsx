@@ -339,7 +339,7 @@ if (!access) {
 			
 					<p className="text-sm text-zinc-400">
 			
-						0 offers
+						D1 User
 			
 					</p>
 			
