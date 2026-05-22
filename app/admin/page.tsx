@@ -197,47 +197,54 @@ if (!access) {
 
   <button
 
-  onClick={() => {
+  onClick={async () => {
 
     if (
       !newUsername ||
       !newPassword
     ) return
 
-    const updatedUsers = [
+    const response =
+      await fetch(
 
-      ...userList,
+        'https://viroxa-api.wilayudhah.workers.dev/add-user',
 
-      {
-        username:
-          newUsername,
+        {
 
-        password:
-          newPassword,
+          method: 'POST',
 
-        offers: [],
-      },
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
 
-    ]
+          body: JSON.stringify({
 
-    setUserList(
-      updatedUsers
-    )
+            username:
+              newUsername,
 
-    localStorage.setItem(
+            password:
+              newPassword,
 
-      'viroxa_users',
+          }),
 
-      JSON.stringify(
-        updatedUsers
+        }
+
       )
 
-    )
+    const result =
+      await response.json()
 
-    setNewUsername('')
-    setNewPassword('')
+    if (result.success) {
 
-    window.location.reload()
+      alert(
+        'User added'
+      )
+
+      setNewUsername('')
+      setNewPassword('')
+
+    }
 
   }}
 
@@ -248,88 +255,6 @@ if (!access) {
   Add User
 
 </button>
-
-</div>
-
-            <div className="space-y-4">
-
-              {userList.map((user) => (
-
-                <div
-                  key={user.username}
-                  className="p-4 rounded-2xl bg-black/20 border border-white/10"
-                >
-
-                  <div className="flex items-center justify-between">
-
-                    <div>
-
-                      <p className="font-semibold">
-
-                        {user.username}
-
-                      </p>
-
-                      <p className="text-sm text-zinc-400">
-
-                        {user.offers.length} offers
-
-                      </p>
-
-                    </div>
-
-<button
-
-onClick={async () => {
-
-  if (
-    !newUsername ||
-    !newPassword
-  ) return
-
-  const response =
-    await fetch(
-
-      'https://viroxa-api.wilayudhah.workers.dev/add-user',
-
-      {
-
-        method: 'POST',
-
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
-
-        body: JSON.stringify({
-
-          username:
-            newUsername,
-
-          password:
-            newPassword,
-
-        }),
-
-      }
-
-    )
-
-  const result =
-    await response.json()
-
-  if (result.success) {
-
-    alert(
-      'User added'
-    )
-
-    setNewUsername('')
-    setNewPassword('')
-
-  }
-
-}}
 
   className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
 >
