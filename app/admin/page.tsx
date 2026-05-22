@@ -68,6 +68,16 @@ function unlock() {
 
 }
 
+const [
+  domainName,
+  setDomainName
+] = useState('')
+
+const [
+  domainUrl,
+  setDomainUrl
+] = useState('')
+
 const [userList,
 setUserList] =
   useState<any[]>([])
@@ -495,6 +505,88 @@ if (!access) {
               Domains
 
             </h2>
+
+<div className="mb-5 space-y-3">
+
+  <input
+    placeholder="Domain Name"
+    value={domainName}
+    onChange={(e) =>
+      setDomainName(
+        e.target.value
+      )
+    }
+    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+  />
+
+  <input
+    placeholder="https://domain.com"
+    value={domainUrl}
+    onChange={(e) =>
+      setDomainUrl(
+        e.target.value
+      )
+    }
+    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+  />
+
+  <button
+
+    onClick={async () => {
+
+      const response =
+        await fetch(
+
+          'https://viroxa-api.wilayudhah.workers.dev/add-domain',
+
+          {
+
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'application/json',
+            },
+
+            body: JSON.stringify({
+
+              name:
+                domainName,
+
+              url:
+                domainUrl,
+
+            }),
+
+          }
+
+        )
+
+      const result =
+        await response.json()
+
+      if (result.success) {
+
+        alert(
+          'Domain added'
+        )
+
+        setDomainName('')
+        setDomainUrl('')
+
+      }
+
+    }}
+
+    className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+
+  >
+
+    Add Domain
+
+  </button>
+
+</div>
 
             <div className="space-y-4">
 
