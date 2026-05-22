@@ -8,6 +8,21 @@ import { domains } from '@/config/domains'
 
 export default function AdminPage() {
 
+const [
+  offerUsername,
+  setOfferUsername
+] = useState('')
+
+const [
+  offerName,
+  setOfferName
+] = useState('')
+
+const [
+  offerUrl,
+  setOfferUrl
+] = useState('')
+
 const [access,
 setAccess] =
   useState(false)
@@ -323,6 +338,113 @@ if (!access) {
   }
 
 }}
+
+<div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
+
+  <h2 className="text-2xl font-bold mb-5">
+
+    Add Offer
+
+  </h2>
+
+  <div className="space-y-3">
+
+    <input
+      placeholder="Username"
+      value={offerUsername}
+      onChange={(e) =>
+        setOfferUsername(
+          e.target.value
+        )
+      }
+      className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+    />
+
+    <input
+      placeholder="Offer Name"
+      value={offerName}
+      onChange={(e) =>
+        setOfferName(
+          e.target.value
+        )
+      }
+      className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+    />
+
+    <input
+      placeholder="Offer URL"
+      value={offerUrl}
+      onChange={(e) =>
+        setOfferUrl(
+          e.target.value
+        )
+      }
+      className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+    />
+
+    <button
+
+      onClick={async () => {
+
+        const response =
+          await fetch(
+
+            'https://viroxa-api.wilayudhah.workers.dev/add-offer',
+
+            {
+
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+              },
+
+              body: JSON.stringify({
+
+                username:
+                  offerUsername,
+
+                name:
+                  offerName,
+
+                url:
+                  offerUrl,
+
+              }),
+
+            }
+
+          )
+
+        const result =
+          await response.json()
+
+        if (result.success) {
+
+          alert(
+            'Offer added'
+          )
+
+          setOfferUsername('')
+          setOfferName('')
+          setOfferUrl('')
+
+        }
+
+      }}
+
+      className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+
+    >
+
+      Add Offer
+
+    </button>
+
+  </div>
+
+</div>
 
           className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
 
