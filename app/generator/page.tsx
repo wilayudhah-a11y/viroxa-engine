@@ -36,16 +36,66 @@ const user =
       currentUser
   )
 
-const offers = [
+const [offers,
+setOffers] =
+  useState<any[]>([])
+  
+  useEffect(() => {
 
-  {
-    name: 'Manual',
-    url: '',
-  },
+  async function loadOffers() {
 
-  ...(user?.offers || [])
+    const currentUser =
+      localStorage.getItem(
+        'viroxa_user'
+      )
 
-]
+    if (!currentUser)
+      return
+
+    const response =
+      await fetch(
+
+        'https://viroxa-api.wilayudhah.workers.dev/get-offers',
+
+        {
+
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+
+          body: JSON.stringify({
+
+            username:
+              currentUser,
+
+          }),
+
+        }
+
+      )
+
+    const data =
+      await response.json()
+
+    setOffers([
+
+      {
+        name: 'Manual',
+        url: '',
+      },
+
+      ...data,
+
+    ])
+
+  }
+
+  loadOffers()
+
+}, [])
   
   const [
 		selectedOffer,
