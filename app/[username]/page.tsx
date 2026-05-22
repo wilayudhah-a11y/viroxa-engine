@@ -43,8 +43,10 @@ export default function LoginPage() {
   function login() {
 
     if (
-      password ===
-      user.password
+      if (
+  password ===
+  user?.password
+)
     ) {
 
       localStorage.setItem(
