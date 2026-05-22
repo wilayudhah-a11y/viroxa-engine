@@ -1,6 +1,6 @@
- 'use client'
+'use client'
 
-import { users as defaultUsers }
+import { users }
 from '@/config/users'
 
 import {
@@ -8,45 +8,10 @@ import {
   useRouter,
 } from 'next/navigation'
 
-import {
-  useState,
-  useEffect
-} from 'react'
+import { useState }
+from 'react'
 
 export default function LoginPage() {
-
-  const [users,
-  setUsers] =
-    useState<any[]>([])
-
-  const [loaded,
-  setLoaded] =
-    useState(false)
-
-  useEffect(() => {
-
-    const saved =
-      localStorage.getItem(
-        'viroxa_users'
-      )
-
-    if (saved) {
-
-      setUsers(
-        JSON.parse(saved)
-      )
-
-    } else {
-
-      setUsers(
-        defaultUsers
-      )
-
-    }
-
-    setLoaded(true)
-
-  }, [])
 
   const params =
     useParams()
@@ -61,7 +26,7 @@ export default function LoginPage() {
 
   const user =
     users.find(
-      (u: any) =>
+      (u) =>
         u.username ===
         username
     )
@@ -69,16 +34,6 @@ export default function LoginPage() {
   const [password,
   setPassword] =
     useState('')
-
-  if (!loaded) {
-
-    return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        Loading...
-      </main>
-    )
-
-  }
 
   if (!user) {
 
@@ -89,24 +44,23 @@ export default function LoginPage() {
     )
 
   }
-	
+
   function login() {
 
     if (
-  password ===
-  user?.password
-)
-	{
+      password ===
+      user.password
+    ) {
 
       localStorage.setItem(
         'viroxa_user',
         username
       )
-	  
-	  localStorage.setItem(
-		'viroxa_access',
-		'granted'
-		)
+
+      localStorage.setItem(
+        'viroxa_access',
+        'granted'
+      )
 
       router.push(
         '/generator'
@@ -123,6 +77,7 @@ export default function LoginPage() {
   }
 
   return (
+
     <main className="min-h-screen bg-[#070B14] flex items-center justify-center p-6">
 
       <div className="w-full max-w-sm bg-white/5 border border-white/10 rounded-3xl p-8">
@@ -164,5 +119,7 @@ export default function LoginPage() {
       </div>
 
     </main>
+
   )
+
 }
