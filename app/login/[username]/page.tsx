@@ -37,16 +37,25 @@ setUsers] =
   const username =
     params.username as string
 	
-	if (users.length === 0) {
+const user =
+  users.find(
+    (u: any) =>
+      u.username ===
+      username
+  )
+
+if (
+  users.length > 0 &&
+  !user
+) {
 
   return (
     <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      Loading...
+      User not found
     </main>
   )
 
 }
-
   const user =
     users.find(
       (u) =>
