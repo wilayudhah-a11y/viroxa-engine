@@ -56,11 +56,6 @@ if (
   )
 
 }
-  const user =
-    users.find(
-      (u) =>
-        u.username === username
-    )
 
   const [password,
   setPassword] =
