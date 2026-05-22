@@ -400,7 +400,7 @@ if (!access) {
 				/>
 			
 				<textarea
-					className="w-full h-28 p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
 					placeholder="1 URL gambar per baris"
 					value={images}
 					onChange={(e) =>
