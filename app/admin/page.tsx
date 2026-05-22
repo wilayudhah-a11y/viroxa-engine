@@ -177,169 +177,181 @@ if (!access) {
 
             </h2>
 
-<div className="mb-5 space-y-3">
+			<div className="mb-5 space-y-3">
+			
+			<input
+				placeholder="Username"
+				value={newUsername}
+				onChange={(e) =>
+				setNewUsername(
+					e.target.value
+				)
+				}
+				className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+			/>
+			
+			<input
+				placeholder="Password"
+				value={newPassword}
+				onChange={(e) =>
+				setNewPassword(
+					e.target.value
+				)
+				}
+				className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+			/>
+			
+			<button
+			
+			onClick={async () => {
+			
+				if (
+				!newUsername ||
+				!newPassword
+				) return
+			
+				const response =
+				await fetch(
+			
+					'https://viroxa-api.wilayudhah.workers.dev/add-user',
+			
+					{
+			
+					method: 'POST',
+			
+					headers: {
+						'Content-Type':
+						'application/json',
+					},
+			
+					body: JSON.stringify({
+			
+						username:
+						newUsername,
+			
+						password:
+						newPassword,
+			
+					}),
+			
+					}
+			
+				)
+			
+				const result =
+				await response.json()
+			
+				if (result.success) {
+			
+				alert(
+					'User added'
+				)
+			
+				setNewUsername('')
+				setNewPassword('')
+			
+				}
+			
+			}}
+			
+			className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+			
+			>
+			
+			Add User
+			
+			</button>
+			
+			</div>
+			
+			<div className="space-y-4">
+			
+			{userList.map((user) => (
+			
+				<div
+				key={user.username}
+				className="p-4 rounded-2xl bg-black/20 border border-white/10"
+				>
+			
+				<div className="flex items-center justify-between">
+			
+					<div>
+			
+					<p className="font-semibold">
+			
+						{user.username}
+			
+					</p>
+			
+					<p className="text-sm text-zinc-400">
+			
+						0 offers
+			
+					</p>
+			
+					</div>
+			
+					<button
+			
+					onClick={async () => {
+			
+			const response =
+				await fetch(
+			
+				'https://viroxa-api.wilayudhah.workers.dev/delete-user',
+			
+				{
+			
+					method: 'POST',
+			
+					headers: {
+					'Content-Type':
+						'application/json',
+					},
+			
+					body: JSON.stringify({
+			
+					username:
+						user.username,
+			
+					}),
+			
+				}
+			
+				)
+			
+			const result =
+				await response.json()
+			
+			if (result.success) {
+			
+				setUserList(
+			
+				userList.filter(
+					(u) =>
+					u.username !==
+					user.username
+				)
+			
+				)
+			
+			}
+			
+			}}
 
-  <input
-    placeholder="Username"
-    value={newUsername}
-    onChange={(e) =>
-      setNewUsername(
-        e.target.value
-      )
-    }
-    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
-  />
+          className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
 
-  <input
-    placeholder="Password"
-    value={newPassword}
-    onChange={(e) =>
-      setNewPassword(
-        e.target.value
-      )
-    }
-    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
-  />
+        >
 
-  <button
+          Delete
 
-  onClick={async () => {
+        </button>
 
-    if (
-      !newUsername ||
-      !newPassword
-    ) return
+      </div>
 
-    const response =
-      await fetch(
-
-        'https://viroxa-api.wilayudhah.workers.dev/add-user',
-
-        {
-
-          method: 'POST',
-
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-
-          body: JSON.stringify({
-
-            username:
-              newUsername,
-
-            password:
-              newPassword,
-
-          }),
-
-        }
-
-      )
-
-    const result =
-      await response.json()
-
-    if (result.success) {
-
-      alert(
-        'User added'
-      )
-
-      setNewUsername('')
-      setNewPassword('')
-
-    }
-
-  }}
-
-  className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
-
->
-
-  Add User
-
-</button>
-
-</div>
-
-<div className="space-y-4">
-
-  {userList.map((user) => (
-
-    <div
-      key={user.username}
-      className="p-4 rounded-2xl bg-black/20 border border-white/10"
-    >
-
-      <div className="flex items-center justify-between">
-
-        <div>
-
-          <p className="font-semibold">
-
-            {user.username}
-
-          </p>
-
-          <p className="text-sm text-zinc-400">
-
-            0 offers
-
-          </p>
-
-        </div>
-
-        <button
-
-        onClick={async () => {
-
-  const response =
-    await fetch(
-
-      'https://viroxa-api.wilayudhah.workers.dev/delete-user',
-
-      {
-
-        method: 'POST',
-
-        headers: {
-          'Content-Type':
-            'application/json',
-        },
-
-        body: JSON.stringify({
-
-          username:
-            user.username,
-
-        }),
-
-      }
-
-    )
-
-  const result =
-    await response.json()
-
-  if (result.success) {
-
-    setUserList(
-
-      userList.filter(
-        (u) =>
-          u.username !==
-          user.username
-      )
-
-    )
-
-  }
-
-}}
-
-<div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
+    </div>
+	
+	<div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
 
   <h2 className="text-2xl font-bold mb-5">
 
@@ -446,23 +458,11 @@ if (!access) {
 
 </div>
 
-          className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
-
-        >
-
-          Delete
-
-        </button>
-
-      </div>
-
-    </div>
-
   ))}
 
 </div>
 
-          </div>
+</div>
 
           {/* DOMAINS */}
 
