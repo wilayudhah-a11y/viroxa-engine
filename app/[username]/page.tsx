@@ -43,11 +43,10 @@ export default function LoginPage() {
   function login() {
 
     if (
-      if (
   password ===
   user?.password
 )
-    ) {
+	{
 
       localStorage.setItem(
         'viroxa_user',
