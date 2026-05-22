@@ -38,7 +38,19 @@ setUsers] =
     useRouter()
 
   const username =
-    params.username as string
+  String(
+    params.username || ''
+  )
+  
+  console.log(
+  'USERNAME:',
+  username
+)
+
+console.log(
+  'USERS:',
+  users
+)
 	
 const user =
   users.find(
