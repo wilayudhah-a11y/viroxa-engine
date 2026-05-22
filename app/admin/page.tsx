@@ -231,29 +231,28 @@ if (!access) {
 
                     </div>
 
-                    <button
-                      className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
-                    >
+<button
 
-                      Delete
+  onClick={() => {
 
-                  
-					
-					onClick={() => {
+    setUserList(
 
-  setUserList(
+      userList.filter(
+        (u) =>
+          u.username !==
+          user.username
+      )
 
-    userList.filter(
-      (u) =>
-        u.username !==
-        user.username
     )
 
-  )
+  }}
 
-}}
+  className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+>
 
-  </button>
+  Delete
+
+</button>
 
                   </div>
 
