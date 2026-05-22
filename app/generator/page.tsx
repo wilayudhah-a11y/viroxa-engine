@@ -80,16 +80,27 @@ setOffers] =
     const data =
       await response.json()
 
-    setOffers([
+const data =
+  await response.json()
 
-      {
-        name: 'Manual',
-        url: '',
-      },
+const filteredOffers =
 
-      ...data,
+  data.filter(
+    (offer: any) =>
+      offer.username ===
+      currentUser
+  )
 
-    ])
+setOffers([
+
+  {
+    name: 'Manual',
+    url: '',
+  },
+
+  ...filteredOffers,
+
+])
 
   }
 
