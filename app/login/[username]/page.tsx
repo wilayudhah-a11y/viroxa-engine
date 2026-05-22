@@ -45,36 +45,61 @@ export default function LoginPage() {
 
   }
 
-  function login() {
+async function login() {
 
-   if (
-  password ===
-  user?.password
-) {
+  const response =
+    await fetch(
 
-      localStorage.setItem(
-        'viroxa_user',
-        username
-      )
+      'https://viroxa-api.wilayudhah.workers.dev/login',
 
-      localStorage.setItem(
-        'viroxa_access',
-        'granted'
-      )
+      {
 
-      router.push(
-        '/generator'
-      )
+        method: 'POST',
 
-    } else {
+        headers: {
+          'Content-Type':
+            'application/json',
+        },
 
-      alert(
-        'Wrong password'
-      )
+        body: JSON.stringify({
 
-    }
+          username,
+          password,
+
+        }),
+
+      }
+
+    )
+
+  const result =
+    await response.json()
+
+  if (result.success) {
+
+    localStorage.setItem(
+      'viroxa_user',
+      username
+    )
+
+    localStorage.setItem(
+      'viroxa_access',
+      'granted'
+    )
+
+    router.push(
+      '/generator'
+    )
+
+  } else {
+
+    alert(
+      'Wrong password'
+    )
 
   }
+
+}
 
   return (
 
