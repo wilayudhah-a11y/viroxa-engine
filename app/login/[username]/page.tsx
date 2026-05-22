@@ -90,38 +90,6 @@ export default function LoginPage() {
 
   }
 	
-const user =
-  users.find(
-    (u: any) =>
-      u.username ===
-      username
-  )
-
-if (
-  users.length > 0 &&
-  !user
-) {
-
-  return (
-    <main className="min-h-screen bg-black text-white flex items-center justify-center">
-      User not found
-    </main>
-  )
-
-}
-
-  const [password,
-  setPassword] =
-    useState('')
-
-  if (!user) {
-    return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        User not found
-      </main>
-    )
-  }
-
   function login() {
 
     if (
