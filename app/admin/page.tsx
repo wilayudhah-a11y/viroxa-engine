@@ -338,10 +338,16 @@ if (!access) {
 					</p>
 			
 					<p className="text-sm text-zinc-400">
-			
-						D1 User
-			
-					</p>
+
+  {
+    offers.filter(
+      (o) =>
+        o.username ===
+        user.username
+    ).length
+  } offers
+
+</p>
 			
 					</div>
 			
