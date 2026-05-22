@@ -590,28 +590,92 @@ if (!access) {
 
             <div className="space-y-4">
 
-              {domains.map((domain) => (
+{domains.map((domain) => (
 
-                <div
-                  key={domain.url}
-                  className="p-4 rounded-2xl bg-black/20 border border-white/10"
-                >
+  <div
+    key={domain.id}
+    className="p-4 rounded-2xl bg-black/20 border border-white/10"
+  >
 
-                  <p className="font-semibold">
+    <div className="flex items-center justify-between">
 
-                    {domain.name}
+      <div>
 
-                  </p>
+        <p className="font-semibold">
 
-                  <p className="text-sm text-zinc-400 break-all">
+          {domain.name}
 
-                    {domain.url}
+        </p>
 
-                  </p>
+        <p className="text-sm text-zinc-400 break-all">
 
-                </div>
+          {domain.url}
 
-              ))}
+        </p>
+
+      </div>
+
+      <button
+
+        onClick={async () => {
+
+          const response =
+            await fetch(
+
+              'https://viroxa-api.wilayudhah.workers.dev/delete-domain',
+
+              {
+
+                method: 'POST',
+
+                headers: {
+                  'Content-Type':
+                    'application/json',
+                },
+
+                body: JSON.stringify({
+
+                  id:
+                    domain.id,
+
+                }),
+
+              }
+
+            )
+
+          const result =
+            await response.json()
+
+          if (result.success) {
+
+            setDomains(
+
+              domains.filter(
+                (d) =>
+                  d.id !==
+                  domain.id
+              )
+
+            )
+
+          }
+
+        }}
+
+        className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+
+      >
+
+        Delete
+
+      </button>
+
+    </div>
+
+  </div>
+
+))}
 
             </div>
 
