@@ -256,7 +256,18 @@ if (!access) {
 
 </button>
 
+<button
+
+  onClick={() => {
+
+    alert(
+      'Delete nanti pakai D1 😎'
+    )
+
+  }}
+
   className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+
 >
 
   Delete
