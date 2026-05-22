@@ -46,15 +46,97 @@ useEffect(() => {
     params.username || ''
   )
   
-  console.log(
-  'USERNAME:',
-  username
-)
+ 'use client'
 
-console.log(
-  'USERS:',
-  users
-)
+import { users as defaultUsers }
+from '@/config/users'
+
+import {
+  useParams,
+  useRouter,
+} from 'next/navigation'
+
+import {
+  useState,
+  useEffect
+} from 'react'
+
+export default function LoginPage() {
+
+  const [users,
+  setUsers] =
+    useState<any[]>([])
+
+  const [loaded,
+  setLoaded] =
+    useState(false)
+
+  useEffect(() => {
+
+    const saved =
+      localStorage.getItem(
+        'viroxa_users'
+      )
+
+    if (saved) {
+
+      setUsers(
+        JSON.parse(saved)
+      )
+
+    } else {
+
+      setUsers(
+        defaultUsers
+      )
+
+    }
+
+    setLoaded(true)
+
+  }, [])
+
+  const params =
+    useParams()
+
+  const router =
+    useRouter()
+
+  const username =
+    String(
+      params.username || ''
+    )
+
+  const user =
+    users.find(
+      (u: any) =>
+        u.username ===
+        username
+    )
+
+  const [password,
+  setPassword] =
+    useState('')
+
+  if (!loaded) {
+
+    return (
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        Loading...
+      </main>
+    )
+
+  }
+
+  if (!user) {
+
+    return (
+      <main className="min-h-screen bg-black text-white flex items-center justify-center">
+        User not found
+      </main>
+    )
+
+  }
 	
 const user =
   users.find(
