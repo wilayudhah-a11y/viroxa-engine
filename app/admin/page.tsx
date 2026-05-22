@@ -2,6 +2,8 @@
 
 import {  useState,  useEffect} from 'react'
 
+import {  useState,  useEffect} 
+
 import { users }
 from '@/config/users'
 
@@ -54,6 +56,19 @@ function unlock() {
   }
 
 }
+
+const [userList,
+setUserList] =
+  useState(users)
+
+const [newUsername,
+setNewUsername] =
+  useState('')
+
+const [newPassword,
+setNewPassword] =
+  useState('')
+  
 
 if (!access) {
 
@@ -129,9 +144,73 @@ if (!access) {
 
             </h2>
 
+<div className="mb-5 space-y-3">
+
+  <input
+    placeholder="Username"
+    value={newUsername}
+    onChange={(e) =>
+      setNewUsername(
+        e.target.value
+      )
+    }
+    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+  />
+
+  <input
+    placeholder="Password"
+    value={newPassword}
+    onChange={(e) =>
+      setNewPassword(
+        e.target.value
+      )
+    }
+    className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+  />
+
+  <button
+
+    onClick={() => {
+
+      if (
+        !newUsername ||
+        !newPassword
+      ) return
+
+      setUserList([
+
+        ...userList,
+
+        {
+          username:
+            newUsername,
+
+          password:
+            newPassword,
+
+          offers: [],
+        },
+
+      ])
+
+      setNewUsername('')
+      setNewPassword('')
+
+    }}
+
+    className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+
+  >
+
+    Add User
+
+  </button>
+
+</div>
+
             <div className="space-y-4">
 
-              {users.map((user) => (
+              {userList.map((user) => (
 
                 <div
                   key={user.username}
