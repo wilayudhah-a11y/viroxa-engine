@@ -1,5 +1,7 @@
 'use client'
 
+import {  useState,  useEffect} from 'react'
+
 import { users }
 from '@/config/users'
 
@@ -7,6 +9,101 @@ import { domains }
 from '@/config/domains'
 
 export default function AdminPage() {
+
+const [access,
+setAccess] =
+  useState(false)
+
+const [password,
+setPassword] =
+  useState('')
+
+useEffect(() => {
+
+  const saved =
+    localStorage.getItem(
+      'viroxa_admin'
+    )
+
+  if (saved === 'granted') {
+    setAccess(true)
+  }
+
+}, [])
+
+function unlock() {
+
+  if (
+    password ===
+    'admin2026'
+  ) {
+
+    localStorage.setItem(
+      'viroxa_admin',
+      'granted'
+    )
+
+    setAccess(true)
+
+  } else {
+
+    alert(
+      'Wrong password'
+    )
+
+  }
+
+}
+
+if (!access) {
+
+  return (
+
+    <main className="min-h-screen bg-[#070B14] flex items-center justify-center p-6">
+
+      <div className="w-full max-w-sm bg-white/5 border border-white/10 rounded-3xl p-8">
+
+        <h1 className="text-3xl font-bold text-white mb-6">
+
+          Admin Access
+
+        </h1>
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) =>
+            setPassword(
+              e.target.value
+            )
+          }
+          onKeyDown={(e) => {
+            if (
+              e.key === 'Enter'
+            ) {
+              unlock()
+            }
+          }}
+          className="w-full p-4 rounded-2xl bg-black/20 border border-white/10 text-white"
+        />
+
+        <button
+          onClick={unlock}
+          className="w-full mt-5 py-4 rounded-2xl bg-indigo-600 text-white font-bold"
+        >
+
+          Unlock
+
+        </button>
+
+      </div>
+
+    </main>
+
+  )
+
+}
 
   return (
 
