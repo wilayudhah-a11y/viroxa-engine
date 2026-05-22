@@ -36,6 +36,16 @@ setUsers] =
 
   const username =
     params.username as string
+	
+	if (users.length === 0) {
+
+  return (
+    <main className="min-h-screen bg-black text-white flex items-center justify-center">
+      Loading...
+    </main>
+  )
+
+}
 
   const user =
     users.find(
