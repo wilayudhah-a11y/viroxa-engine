@@ -197,55 +197,57 @@ if (!access) {
 
   <button
 
-    onClick={() => {
+  onClick={() => {
 
-      if (
-        !newUsername ||
-        !newPassword
-      ) return
+    if (
+      !newUsername ||
+      !newPassword
+    ) return
 
-const updatedUsers = [
+    const updatedUsers = [
 
-  ...userList,
+      ...userList,
 
-  {
-    username:
-      newUsername,
+      {
+        username:
+          newUsername,
 
-    password:
-      newPassword,
+        password:
+          newPassword,
 
-    offers: [],
-  },
+        offers: [],
+      },
 
-]
+    ]
 
-setUserList(
-  updatedUsers
-)
+    setUserList(
+      updatedUsers
+    )
 
-localStorage.setItem(
+    localStorage.setItem(
 
-  'viroxa_users',
+      'viroxa_users',
 
-  JSON.stringify(
-    updatedUsers
-  )
+      JSON.stringify(
+        updatedUsers
+      )
 
-)
+    )
 
-      setNewUsername('')
-      setNewPassword('')
+    setNewUsername('')
+    setNewPassword('')
 
-    }}
+    window.location.reload()
 
-    className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+  }}
 
-  >
+  className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
 
-    Add User
+>
 
-  </button>
+  Add User
+
+</button>
 
 </div>
 
