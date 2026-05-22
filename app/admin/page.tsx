@@ -278,13 +278,51 @@ if (!access) {
 
         <button
 
-          onClick={() => {
+        onClick={async () => {
 
-            alert(
-              'Delete nanti pakai D1 😎'
-            )
+  const response =
+    await fetch(
 
-          }}
+      'https://viroxa-api.wilayudhah.workers.dev/delete-user',
+
+      {
+
+        method: 'POST',
+
+        headers: {
+          'Content-Type':
+            'application/json',
+        },
+
+        body: JSON.stringify({
+
+          username:
+            user.username,
+
+        }),
+
+      }
+
+    )
+
+  const result =
+    await response.json()
+
+  if (result.success) {
+
+    setUserList(
+
+      userList.filter(
+        (u) =>
+          u.username !==
+          user.username
+      )
+
+    )
+
+  }
+
+}}
 
           className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
 
