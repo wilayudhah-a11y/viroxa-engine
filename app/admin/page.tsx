@@ -195,7 +195,7 @@ if (!access) {
 
         <button
           onClick={unlock}
-          className="w-full mt-5 py-4 rounded-2xl bg-indigo-600 text-white font-bold"
+          className="w-full mt-5 py-4 rounded-2xl bg-indigo-600 hover:opacity-80 transition text-white font-bold"
         >
 
           Unlock
@@ -222,7 +222,7 @@ if (!access) {
 
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
           {/* USERS */}
 
@@ -230,7 +230,7 @@ if (!access) {
 
             <h2 className="text-2xl font-bold mb-5">
 
-              Users
+              Users ({userList.length})
 
             </h2>
 
@@ -313,7 +313,7 @@ if (!access) {
 			
 			}}
 			
-			className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+			className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 			
 			>
 			
@@ -436,7 +436,7 @@ if (!access) {
 
   <h2 className="text-2xl font-bold mb-5">
 
-    Add Offer
+    Offers ({offers.length})
 
   </h2>
 
@@ -529,7 +529,7 @@ if (result.success) {
 
       }}
 
-      className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+      className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 
     >
 
@@ -539,7 +539,7 @@ if (result.success) {
 
   </div>
 
-<div className="space-y-4 mt-5">
+<div className="space-y-4 mt-5 max-h-[400px] overflow-y-auto pr-1">
 
   {offers.map((offer) => (
 
@@ -640,11 +640,11 @@ if (result.success) {
 
           {/* DOMAINS */}
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 lg:col-span-2">
 
             <h2 className="text-2xl font-bold mb-5">
 
-              Domains
+              Domains ({domains.length})
 
             </h2>
 
@@ -720,7 +720,7 @@ if (result.success) {
 
     }}
 
-    className="w-full py-3 rounded-2xl bg-indigo-600 font-semibold"
+    className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 
   >
 
