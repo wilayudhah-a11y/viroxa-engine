@@ -21,23 +21,23 @@ function randomPrefix(length = 6) {
 export function encodePayload(
   data: unknown
 ) {
-  const json =
+
+  return btoa(
+
     JSON.stringify(data)
 
-  const compressed =
-    compressToEncodedURIComponent(json)
-	
-	const safe =
-  compressed
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=/g, '')
+  )
 
-  const reversed =
-  safe
-    .split('')
-    .reverse()
-    .join('')
+}
 
-	return `${randomPrefix()}~${reversed}`
+export function decodePayload(
+  payload: string
+) {
+
+  return JSON.parse(
+
+    atob(payload)
+
+  )
+
 }
