@@ -7,11 +7,6 @@ import {
   useEffect
 } from 'react'
 
-import {
-  User,
-  Globe,
-  Tag
-} from 'lucide-react'
 
 export default function AdminPage() {
 
@@ -248,13 +243,11 @@ if (!access) {
 
           <div className="bg-white/5 border border-white/10 rounded-3xl p-6 h-fit">
 
-            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+            <h2 className="text-2xl font-bold mb-6">
 
-			<User size={18} />
+  Users ({userList.length})
 
-			Users ({userList.length})
-
-			</h2>
+</h2>
 
 			<div className="mb-5 space-y-3">
 			
@@ -463,9 +456,7 @@ if (!access) {
    
    <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
 
-  <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-
-  <Tag size={18} />
+ <h2 className="text-2xl font-bold mb-6">
 
   Offers ({offers.length})
 
@@ -673,9 +664,7 @@ if (result.success) {
 
 			<div className="bg-white/5 border border-white/10 rounded-3xl p-6">
 
-             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-
-  <Globe size={18} />
+<h2 className="text-2xl font-bold mb-6">
 
   Domains ({domains.length})
 
