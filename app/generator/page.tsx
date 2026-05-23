@@ -84,6 +84,41 @@ const [savedDescriptions] =
 }
 
   const [images, setImages] = useState('')
+  
+const [savedImages] =
+  useState([
+
+    'Url Image 1',
+    'Url Image 2',
+    'Url Image 3',
+    'Url Image 4',
+    'Url Image 5',
+    'Url Image 6',
+    'Url Image 7',
+    'Url Image 8',
+
+  ])
+  
+function randomizeImages() {
+
+  const randomImages =
+
+    [...savedImages]
+
+      .sort(
+        () =>
+          0.5 - Math.random()
+      )
+
+      .slice(0, 5)
+
+  setImages(
+
+    randomImages.join('\n')
+
+  )
+
+}
 
   const [target, setTarget] = useState('')
   
@@ -595,6 +630,28 @@ if (!access) {
 					setDescription(e.target.value)
 					}
 				/>
+			
+<div className="flex justify-between items-start mb-1">
+
+  <p className="text-[10px] text-zinc-50">
+
+    Descriptions
+
+  </p>
+
+  <button
+
+    onClick={randomizeImages}
+
+    className="text-[7px] px-2 py-1 rounded-lg bg-white/5 border border-white/7 hover:bg-white/7 transition"
+
+  >
+
+    🎲 Random 5
+
+  </button>
+
+</div>
 			
 				<textarea
 					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
