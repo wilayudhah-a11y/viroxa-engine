@@ -413,7 +413,8 @@ if (!access) {
         'viroxa_access'
       )
 
-      window.location.href = '/'
+      window.location.href =
+    `/login/${currentUser}`
 
     }}
 
