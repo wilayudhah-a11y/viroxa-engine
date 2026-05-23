@@ -201,7 +201,7 @@ if (!access) {
 
         <button
           onClick={unlock}
-          className="w-full mt-5 py-4 rounded-2xl bg-indigo-600 hover:opacity-80 transition text-white font-bold"
+          className="w-full mt-5 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-80 transition text-white font-bold"
         >
 
           Unlock
@@ -223,7 +223,7 @@ if (!access) {
 			 
 			<div className="text-center mb-10">
 			
-			<h1 className="text-4xl md:text-5xl font-black text-white">
+			<h1 className="text-5xl md:text-6xl font-black text-white">
 			
 				Admin Panel
 			
@@ -241,7 +241,7 @@ if (!access) {
 
           {/* USERS */}
 
-          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-3xl p-6 h-fit">
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-3xl p-6 shadow-2xl h-fit">
 
             <h2 className="text-2xl font-bold mb-6">
 
@@ -328,7 +328,7 @@ if (!access) {
 			
 			}}
 			
-			className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+			className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-80 transition font-semibold"
 			
 			>
 			
@@ -454,7 +454,7 @@ if (!access) {
 </div>
    
    
-   <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
+   <div className="bg-white/5 border border-white/10 rounded-3xl p-6 shadow-2xl mt-6">
 
  <h2 className="text-2xl font-bold mb-6">
 
@@ -551,7 +551,7 @@ if (result.success) {
 
       }}
 
-      className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+      className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-80 transition font-semibold"
 
     >
 
@@ -662,7 +662,7 @@ if (result.success) {
 
           {/* DOMAINS */}
 
-			<div className="bg-white/5 border border-white/10 rounded-3xl p-6">
+			<div className="bg-white/5 border border-white/10 rounded-3xl p-6 shadow-2xl">
 
 <h2 className="text-2xl font-bold mb-6">
 
@@ -742,7 +742,7 @@ if (result.success) {
 
     }}
 
-    className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+    className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:opacity-80 transition font-semibold"
 
   >
 
