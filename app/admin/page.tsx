@@ -7,6 +7,7 @@ import {
   useEffect
 } from 'react'
 
+import { LogOut } from 'lucide-react'
 
 export default function AdminPage() {
 
@@ -222,6 +223,32 @@ if (!access) {
 			 <div className="w-full max-w-[1700px] mx-auto">
 			 
 			<div className="text-center mb-10">
+			
+			<div className="flex justify-end mb-4">
+
+  <button
+
+    onClick={() => {
+
+      localStorage.removeItem(
+        'viroxa_admin'
+      )
+
+      window.location.reload()
+
+    }}
+
+    className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-red-500/20 hover:border-red-500/20 transition text-sm"
+
+  >
+
+    <LogOut size={16} />
+
+    Logout
+
+  </button>
+
+</div>
 			
 			<h1 className="text-5xl md:text-6xl font-black text-white">
 			
