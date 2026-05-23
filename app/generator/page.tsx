@@ -576,7 +576,7 @@ if (!access) {
 
     onClick={randomizeDescriptions}
 
-    className="text-[5px] px-2 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition"
+    className="text-[7px] px-2 py-1 rounded-lg bg-white/5 border border-white/7 hover:bg-white/7 transition"
 
   >
 
