@@ -385,6 +385,12 @@ if (!access) {
 					</p>
 					</div>
 					
+				
+					
+				</div>
+			
+				</div>
+			
 <div className="flex items-center gap-3">
 
   <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 text-sm">
@@ -422,12 +428,6 @@ if (!access) {
   </button>
 
 </div>					
-					
-				</div>
-			
-				</div>
-			
-				
 			
 			</div>
 			
