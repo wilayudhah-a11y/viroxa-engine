@@ -47,6 +47,41 @@ export default function GeneratorPage() {
 
   const [description, setDescription] =
     useState('')
+	
+const [savedDescriptions] =
+  useState([
+
+    'Des Viral 1',
+    'Des Viral 2',
+    'Des Viral 3',
+    'Des Viral 4',
+    'Des Viral 5',
+    'Des Viral 6',
+    'Des Viral 7',
+    'Des Viral 8',
+
+  ])
+
+  function randomizeDescriptions() {
+
+  const randomDescriptions =
+
+    [...savedDescriptions]
+
+      .sort(
+        () =>
+          0.5 - Math.random()
+      )
+
+      .slice(0, 5)
+
+  setDescriptions(
+
+    randomDescriptions.join('\n')
+
+  )
+
+}
 
   const [images, setImages] = useState('')
 
@@ -528,6 +563,29 @@ if (!access) {
 						setTitle(e.target.value)
 					}
 					/>
+			
+	<div className="flex justify-between items-center mb-2">
+
+  <p className="text-sm text-zinc-200">
+
+    Descriptions
+
+  </p>
+
+  <button
+
+    onClick={randomizeDescriptions}
+
+    className="text-[10px] px-2 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition"
+
+  >
+
+    🎲 Random 5
+
+  </button>
+
+</div>
+	
 			
 				<textarea
 					className="w-full p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
