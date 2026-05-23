@@ -497,19 +497,38 @@ if (!access) {
         const result =
           await response.json()
 
-        if (result.success) {
+if (result.success) {
 
-          alert(
-            'Offer added'
-          )
+  alert(
+    'Offer added'
+  )
 
-          setOfferUsername('')
-          setOfferName('')
-          setOfferUrl('')
-		  
-		  window.location.reload()
+  const newOffer = {
 
-        }
+    username:
+      offerUsername,
+
+    name:
+      offerName,
+
+    url:
+      offerUrl,
+
+  }
+
+  setOffers([
+
+    ...offers,
+
+    newOffer,
+
+  ])
+
+  setOfferUsername('')
+  setOfferName('')
+  setOfferUrl('')
+
+}
 
       }}
 
