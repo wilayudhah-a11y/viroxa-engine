@@ -434,24 +434,31 @@ if (!access) {
 			
 			</div>
 	  
-	  <div className="flex items-center gap-3 mb-4">
+	  <div className="flex items-center gap-3 mb-3">
 
-			<div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
-			
-			<p className="text-sm text-zinc-400">
-				System Online
-			</p>
-			
-		</div>
-	  
-        <h1 className="text-4xl font-black mb-4 tracking-tight">
-          Viroxa Generator
-        </h1>
-			<p className="text-zinc-400 text-sm mb-8 leading-6 max-w-lg">
-			Modern social preview generator engine
-			</p>
-			
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
+  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+
+  <p className="text-sm text-zinc-500">
+
+    System Online
+
+  </p>
+
+</div>
+
+<h1 className="text-4xl font-black mb-3 tracking-tight">
+
+  Viroxa Generator
+
+</h1>
+
+<p className="text-zinc-400 text-sm mb-6 leading-6 max-w-lg">
+
+  Modern social preview generator engine
+
+</p>
+
+<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
 
 			<div className="space-y-5">
 				<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 space-y-4">
