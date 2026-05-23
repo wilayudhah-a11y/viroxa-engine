@@ -170,7 +170,7 @@ if (!access) {
 
   return (
 
-    <main className="min-h-screen bg-[#070B14] flex items-center justify-center p-6">
+    <main className="min-h-screen flex flex-col bg-[#070B14] flex items-center justify-center p-6">
 
       <div className="w-full max-w-sm bg-white/5 border border-white/10 rounded-3xl p-8">
 
@@ -217,9 +217,9 @@ if (!access) {
 }
 
   return (
-			 <main className="min-h-screen bg-[#070B14] text-white px-6 py-8">
+			 <main className="min-h-screen flex flex-col bg-[#070B14] text-white px-6 py-8">
 			 
-			 <div className="w-full">
+			 <div className="w-full max-w-[1700px] mx-auto">
 			 
 			<div className="text-center mb-10">
 			
@@ -561,7 +561,7 @@ if (result.success) {
 
   </div>
 
-<div className="space-y-4 mt-5 max-h-[320px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
+<div className="space-y-4 mt-5 max-h-[420px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
 
   {offers.map((offer) => (
 
@@ -848,6 +848,12 @@ if (result.success) {
         </div>
 
       </div>
+
+<div className="text-center text-xs text-zinc-500 py-6">
+
+  © 2026 Viroxa Admin Panel
+
+</div>
 
     </main>
 
