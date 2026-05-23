@@ -616,8 +616,6 @@ if (!access) {
 	  
 	</div>
  
-  </div>
-		
   ))}
 
 </div>
