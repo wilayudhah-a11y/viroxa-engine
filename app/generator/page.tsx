@@ -533,7 +533,7 @@ if (!access) {
 			<div className="space-y-5">
 				<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 space-y-4">
 	
-	<div className="flex justify-between items-center mb-2">
+	<div className="flex justify-between items-start mb-1">
 
   <p className="text-sm text-zinc-200">
 
@@ -564,7 +564,7 @@ if (!access) {
 					}
 					/>
 			
-	<div className="flex justify-between items-center mb-2">
+	<div className="flex justify-between items-start mb-1">
 
   <p className="text-sm text-zinc-200">
 
