@@ -510,7 +510,7 @@ if (!access) {
 
     onClick={randomizeTitles}
 
-    className="text-xs px-2 py-1 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition"
+    className="text-[10px] px-2 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition"
 
   >
 
