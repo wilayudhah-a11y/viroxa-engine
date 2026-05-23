@@ -24,20 +24,36 @@ export function encodePayload(
 
   return btoa(
 
-    JSON.stringify(data)
+    encodeURIComponent(
+
+      JSON.stringify(data)
+
+    )
 
   )
 
 }
 
 export function decodePayload(
-  payload: string
+  slug: string
 ) {
 
-  return JSON.parse(
+  try {
 
-    atob(payload)
+    return JSON.parse(
 
-  )
+      decodeURIComponent(
+
+        atob(slug)
+
+      )
+
+    )
+
+  } catch {
+
+    return null
+
+  }
 
 }
