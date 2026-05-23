@@ -424,19 +424,7 @@ if (!access) {
 </div>					
 					
 				</div>
-			
-				</div>
-			
-				<div className="flex items-center gap-3">
-			
-				<div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
-			
-				<p className="text-xs text-zinc-400">
-					Online
-				</p>
-			
-				</div>
-			
+					
 			</div>
 			
 			</div>
