@@ -5,6 +5,8 @@ import type { Payload } from '@/types/payload'
 
 import { useState, useEffect } from 'react'
 
+import {  User,  LogOut} from 'lucide-react'
+
 export default function GeneratorPage() {
   const [title, setTitle] = useState('')
 
@@ -382,6 +384,45 @@ if (!access) {
 						Generator Platform
 					</p>
 					</div>
+					
+<div className="flex items-center gap-3">
+
+  <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 text-sm">
+
+    <User size={16} />
+
+    {currentUser}
+
+  </div>
+
+  <button
+
+    onClick={() => {
+
+      localStorage.removeItem(
+        'viroxa_user'
+      )
+
+      localStorage.removeItem(
+        'viroxa_access'
+      )
+
+      window.location.href = '/'
+
+    }}
+
+    className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-red-500/20 hover:border-red-500/20 transition text-sm"
+
+  >
+
+    <LogOut size={16} />
+
+    Logout
+
+  </button>
+
+</div>					
+					
 				</div>
 			
 				<div className="hidden md:flex items-center gap-3 text-sm">
