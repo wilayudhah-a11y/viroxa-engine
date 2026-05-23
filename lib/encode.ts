@@ -24,9 +24,13 @@ export function encodePayload(
 
   return btoa(
 
-    encodeURIComponent(
+    unescape(
 
-      JSON.stringify(data)
+      encodeURIComponent(
+
+        JSON.stringify(data)
+
+      )
 
     )
 
@@ -44,7 +48,11 @@ export function decodePayload(
 
       decodeURIComponent(
 
-        atob(slug)
+        escape(
+
+          atob(slug)
+
+        )
 
       )
 
