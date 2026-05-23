@@ -342,17 +342,26 @@ if (!access) {
 			
 					</p>
 			
-					<p className="text-sm text-zinc-400">
+<p className="text-sm text-zinc-400">
 
   {
     offers.filter(
       (o) =>
-        o.username ===
+
+        o.username
+          ?.trim()
+          .toLowerCase()
+
+        ===
+
         user.username
+          ?.trim()
+          .toLowerCase()
+
     ).length
   } offers
 
-</p>
+</p>					
 			
 					</div>
 			
