@@ -1,6 +1,3 @@
-import { compressToEncodedURIComponent }
-from 'lz-string'
-
 function randomPrefix(length = 6) {
   const chars =
     'abcdefghijklmnopqrstuvwxyz0123456789'
@@ -25,12 +22,15 @@ export function encodePayload(
   const json =
     JSON.stringify(data)
 
-  return Array.from(json)
+  const bytes =
+    new TextEncoder()
+      .encode(json)
 
-    .map((char) =>
+  return Array.from(bytes)
 
-      char
-        .charCodeAt(0)
+    .map((b) =>
+
+      b
         .toString(16)
         .padStart(2, '0')
 
@@ -46,23 +46,24 @@ export function decodePayload(
 
   try {
 
-    const json =
+    const bytes =
+      new Uint8Array(
 
-      payload.match(/.{1,2}/g)
+        payload.match(/.{1,2}/g)
 
-        ?.map((hex) =>
+          ?.map((hex) =>
 
-          String.fromCharCode(
             parseInt(hex, 16)
-          )
 
-        )
+          ) || []
 
-        .join('')
+      )
 
-    return JSON.parse(
-      json || ''
-    )
+    const json =
+      new TextDecoder()
+        .decode(bytes)
+
+    return JSON.parse(json)
 
   } catch {
 
