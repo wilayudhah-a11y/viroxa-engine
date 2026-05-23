@@ -225,8 +225,11 @@ if (!access) {
 			<div className="text-center mb-10">
 			
 			<div className="flex justify-end mb-4">
-
-  <button
+			
+			<h1 className="text-5xl md:text-6xl font-black text-white">
+			
+				Admin Panel
+			  <button
 
     onClick={() => {
 
@@ -249,11 +252,6 @@ if (!access) {
   </button>
 
 </div>
-			
-			<h1 className="text-5xl md:text-6xl font-black text-white">
-			
-				Admin Panel
-			
 			</h1>
 			
 			<p className="text-zinc-400 mt-3">
