@@ -221,14 +221,18 @@ if (!access) {
           Admin Panel
 
         </h1>
+		
+<p className="text-zinc-400 mt-2">
+  Viroxa Control Center
+</p>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
           {/* USERS */}
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6">
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 h-fit">
 
-            <h2 className="text-2xl font-bold mb-5">
+            <h2 className="text-2xl font-bold mb-6">
 
               Users ({userList.length})
 
@@ -434,7 +438,7 @@ if (!access) {
    
    <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
 
-  <h2 className="text-2xl font-bold mb-5">
+  <h2 className="text-2xl font-bold mb-6">
 
     Offers ({offers.length})
 
@@ -539,7 +543,7 @@ if (result.success) {
 
   </div>
 
-<div className="space-y-4 mt-5 max-h-[400px] overflow-y-auto pr-1">
+<div className="space-y-4 mt-5 max-h-[400px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
 
   {offers.map((offer) => (
 
@@ -642,7 +646,7 @@ if (result.success) {
 
           <div className="bg-white/5 border border-white/10 rounded-3xl p-6 lg:col-span-2">
 
-            <h2 className="text-2xl font-bold mb-5">
+            <h2 className="text-2xl font-bold mb-6">
 
               Domains ({domains.length})
 
@@ -805,7 +809,7 @@ if (result.success) {
 
         }}
 
-        className="px-3 py-1 rounded-xl bg-red-500/20 border border-red-500/20 text-red-300 text-sm"
+        className="px-3 py-1 rounded-xl bg-white/5 hover:bg-red-500/20 transition border border-red-500/20 text-red-300 text-sm"
 
       >
 
