@@ -119,6 +119,32 @@ useEffect(() => {
   }
 
 }, [])
+
+const [domains,
+setDomains] =
+  useState<any[]>([])
+  
+useEffect(() => {
+
+  async function loadDomains() {
+
+    const response =
+      await fetch(
+
+        'https://viroxa-api.wilayudhah.workers.dev/get-domains'
+
+      )
+
+    const data =
+      await response.json()
+
+    setDomains(data)
+
+  }
+
+  loadDomains()
+
+}, [])
   
   const [password, setPassword] =
 	useState('')
