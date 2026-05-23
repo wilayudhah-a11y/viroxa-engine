@@ -214,7 +214,7 @@ if (!access) {
 
     <main className="min-h-screen bg-[#070B14] text-white p-6">
 
-      <div className="max-w-6xl mx-auto">
+      <div className="w-full">
 
         <h1 className="text-4xl font-black mb-8">
 
