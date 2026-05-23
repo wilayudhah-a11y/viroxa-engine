@@ -355,33 +355,28 @@ if (!access) {
 						{user.username}
 			
 					</p>
-			
-<p className="text-sm text-zinc-400">
+								
+					<p className="text-sm text-zinc-400">
+					
+					{
+						offers.filter(
+						(o) =>
+					
+							o.username
+							?.trim()
+							.toLowerCase()
+					
+							===
+					
+							user.username
+							?.trim()
+							.toLowerCase()
+					
+						).length
+					} offers
+					
+					</p>					
 
-  {
-    offers.filter(
-      (o) =>
-
-        o.username
-          ?.trim()
-          .toLowerCase()
-
-        ===
-
-        user.username
-          ?.trim()
-          .toLowerCase()
-
-    ).length
-  } offers
-
-</p>					
-
-<div className="mt-5 pt-5 border-t border-white/10 text-sm text-zinc-400">
-
-  Total Users: {userList.length}
-
-</div>		
 		
 					</div>
 			
@@ -446,6 +441,12 @@ if (!access) {
     </div>
 
   ))}
+
+</div>
+
+<div className="mt-5 pt-5 border-t border-white/10 text-sm text-zinc-400">
+
+  Total Users: {userList.length}
 
 </div>
 
