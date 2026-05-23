@@ -425,30 +425,6 @@ if (!access) {
 					
 				</div>
 			
-				<div className="hidden md:flex items-center gap-3 text-sm">
-			
-					<button className="px-3 py-1.5 rounded-xl bg-indigo-600/20 border border-indigo-500/20 text-indigo-300">
-					Generator
-					</button>
-			
-					<button className="px-3 py-1.5 rounded-xl text-zinc-400 hover:text-white transition">
-					Analytics
-					</button>
-			
-					<button className="px-3 py-1.5 rounded-xl text-zinc-400 hover:text-white transition">
-					Domains
-					</button>
-			
-					<button className="px-3 py-1.5 rounded-xl text-zinc-400 hover:text-white transition">
-					Users
-					</button>
-			
-					<button className="px-3 py-1.5 rounded-xl text-zinc-400 hover:text-white transition">
-					Settings
-					</button>
-			
-				</div>
-			
 				</div>
 			
 				<div className="flex items-center gap-3">
