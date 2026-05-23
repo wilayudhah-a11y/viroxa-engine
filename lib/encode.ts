@@ -36,6 +36,10 @@ export function encodePayload(
 
   )
 
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+
 }
 
 export function decodePayload(
@@ -44,13 +48,26 @@ export function decodePayload(
 
   try {
 
+    const base64 =
+
+      slug
+        .replace(/-/g, '+')
+        .replace(/_/g, '/')
+
+    const padded =
+
+      base64 +
+      '='.repeat(
+        (4 - base64.length % 4) % 4
+      )
+
     return JSON.parse(
 
       decodeURIComponent(
 
         escape(
 
-          atob(slug)
+          atob(padded)
 
         )
 
