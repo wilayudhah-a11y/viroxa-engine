@@ -226,7 +226,7 @@ if (!access) {
   Viroxa Control Center
 </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
 
           {/* USERS */}
 
@@ -543,7 +543,7 @@ if (result.success) {
 
   </div>
 
-<div className="space-y-4 mt-5 max-h-[400px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
+<div className="space-y-4 mt-5 max-h-[320px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/10">
 
   {offers.map((offer) => (
 
@@ -644,9 +644,7 @@ if (result.success) {
 
           {/* DOMAINS */}
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 lg:col-span-2">
-
-            <h2 className="text-2xl font-bold mb-6">
+             <h2 className="text-2xl font-bold mb-6">
 
               Domains ({domains.length})
 
