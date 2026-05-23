@@ -535,7 +535,7 @@ if (!access) {
 	
 	<div className="flex justify-between items-start mb-1">
 
-  <p className="text-sm text-zinc-200">
+  <p className="text-sm text-zinc-50">
 
     Titles
 
@@ -566,7 +566,7 @@ if (!access) {
 			
 	<div className="flex justify-between items-start mb-1">
 
-  <p className="text-sm text-zinc-200">
+  <p className="text-sm text-zinc-50">
 
     Descriptions
 
