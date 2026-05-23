@@ -217,7 +217,10 @@ if (!access) {
 }
 
   return (
-
+			 <main className="min-h-screen bg-[#070B14] text-white px-6 py-8">
+			 
+			 <div className="w-full">
+			 
 			<div className="text-center mb-10">
 			
 			<h1 className="text-5xl font-black text-white">
