@@ -566,11 +566,17 @@ if (!access) {
 			
 	<div className="flex justify-between items-start mb-1">
 
-  
+  <p className="text-sm text-zinc-50">
+
+    Descriptions
+
+  </p>
+
+  <button
 
     onClick={randomizeDescriptions}
 
-    className="text-[10px] px-2 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition"
+    className="text-[5px] px-2 py-1 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition"
 
   >
 
