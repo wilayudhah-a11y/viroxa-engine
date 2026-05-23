@@ -25,63 +25,44 @@ export function encodePayload(
   const json =
     JSON.stringify(data)
 
-  const bytes =
-    new TextEncoder()
-      .encode(json)
+  return Array.from(json)
 
-  let binary = ''
+    .map((char) =>
 
-  bytes.forEach((b) => {
+      char
+        .charCodeAt(0)
+        .toString(16)
+        .padStart(2, '0')
 
-    binary +=
-      String.fromCharCode(b)
+    )
 
-  })
-
-  return btoa(binary)
-
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '')
+    .join('')
 
 }
 
 export function decodePayload(
-  slug: string
+  payload: string
 ) {
 
   try {
 
-    const base64 =
-
-      slug
-        .replace(/-/g, '+')
-        .replace(/_/g, '/')
-
-    const padded =
-
-      base64 +
-      '='.repeat(
-        (4 - base64.length % 4) % 4
-      )
-
-    const binary =
-      atob(padded)
-
-    const bytes =
-      Uint8Array.from(
-
-        binary,
-        (c) =>
-          c.charCodeAt(0)
-
-      )
-
     const json =
-      new TextDecoder()
-        .decode(bytes)
 
-    return JSON.parse(json)
+      payload.match(/.{1,2}/g)
+
+        ?.map((hex) =>
+
+          String.fromCharCode(
+            parseInt(hex, 16)
+          )
+
+        )
+
+        .join('')
+
+    return JSON.parse(
+      json || ''
+    )
 
   } catch {
 
