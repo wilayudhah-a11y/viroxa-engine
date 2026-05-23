@@ -1,7 +1,5 @@
 'use client'
 
-import { users }
-from '@/config/users'
 
 import {
   useParams,
@@ -24,26 +22,10 @@ export default function LoginPage() {
       params.username || ''
     )
 
-  const user =
-    users.find(
-      (u) =>
-        u.username ===
-        username
-    )
-
   const [password,
   setPassword] =
     useState('')
 
-  if (!user) {
-
-    return (
-      <main className="min-h-screen bg-black text-white flex items-center justify-center">
-        User not found
-      </main>
-    )
-
-  }
 
 async function login() {
 
