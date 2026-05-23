@@ -7,7 +7,6 @@ import {
   useEffect
 } from 'react'
 
-import { LogOut } from 'lucide-react'
 
 export default function AdminPage() {
 
