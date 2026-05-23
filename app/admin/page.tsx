@@ -503,26 +503,7 @@ if (result.success) {
     'Offer added'
   )
 
-  const newOffer = {
-
-    username:
-      offerUsername,
-
-    name:
-      offerName,
-
-    url:
-      offerUrl,
-
-  }
-
-  setOffers([
-
-    ...offers,
-
-    newOffer,
-
-  ])
+  await loadOffers()
 
   setOfferUsername('')
   setOfferName('')
