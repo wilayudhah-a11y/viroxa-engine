@@ -9,6 +9,41 @@ import {  User,  LogOut} from 'lucide-react'
 
 export default function GeneratorPage() {
   const [title, setTitle] = useState('')
+  
+  const [savedTitles] =
+  useState([
+
+    'Judul Viral 1',
+    'Judul Viral 2',
+    'Judul Viral 3',
+    'Judul Viral 4',
+    'Judul Viral 5',
+    'Judul Viral 6',
+    'Judul Viral 7',
+    'Judul Viral 8',
+
+  ])
+  
+  function randomizeTitles() {
+
+  const randomTitles =
+
+    [...savedTitles]
+
+      .sort(
+        () =>
+          0.5 - Math.random()
+      )
+
+      .slice(0, 5)
+
+  setTitle(
+
+    randomTitles.join('\n')
+
+  )
+
+}
 
   const [description, setDescription] =
     useState('')
@@ -462,7 +497,29 @@ if (!access) {
 
 			<div className="space-y-5">
 				<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 space-y-4">
-			
+	
+	<div className="flex justify-between items-center mb-2">
+
+  <p className="text-sm text-zinc-400">
+
+    Titles
+
+  </p>
+
+  <button
+
+    onClick={randomizeTitles}
+
+    className="text-xs px-3 py-1 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition"
+
+  >
+
+    🎲 Random 5
+
+  </button>
+
+</div>
+	
 				<textarea
 					className="w-full h-15 p-3 text-xs rounded-xl bg-black/20 border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
 					placeholder="1 judul per baris"
