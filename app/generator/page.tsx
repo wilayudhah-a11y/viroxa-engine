@@ -467,7 +467,7 @@ if (!access) {
 		</div>
 		
 			
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 mt-2 min-h-screen flex flex-col justify-start px-8 pt-10 pb-16">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 mt-0 min-h-screen flex flex-col justify-start px-8 pt-10 pb-16">
 	  
 				<div className="mb-5">
 			
@@ -539,7 +539,7 @@ if (!access) {
 			
 			</div>
 	  
-	  <div className="flex items-center gap-3 mb-3">
+	  <div className="flex items-center gap-3 mb-1">
 
   <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
 
@@ -557,7 +557,7 @@ if (!access) {
 
 </h1>
 
-<p className="text-zinc-400 text-sm mb-6 leading-6 max-w-lg">
+<p className="text-zinc-400 text-sm mb-5 leading-6 max-w-lg">
 
   Modern social preview generator engine
 
