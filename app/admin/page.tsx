@@ -409,7 +409,16 @@ if (!access) {
 
       </div>
 
-<div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
+    </div>
+
+  ))}
+
+</div>
+
+</div>
+   
+   
+   <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
 
   <h2 className="text-2xl font-bold mb-5">
 
@@ -604,15 +613,10 @@ if (!access) {
         </button>
 
       </div>
-
-    </div>
-
-  ))}
-
-</div>
-
-</div>
-    </div>
+	  
+	</div>
+ 
+  </div>
 		
   ))}
 
