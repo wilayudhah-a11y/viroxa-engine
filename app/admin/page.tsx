@@ -2,6 +2,12 @@
 
 import {  useState,  useEffect} from 'react'
 
+import {
+  User,
+  Globe,
+  Tag
+} from 'lucide-react'
+
 export default function AdminPage() {
 
 const [
@@ -212,21 +218,21 @@ if (!access) {
 
   return (
 
-<div className="text-center mb-10">
-
-  <h1 className="text-5xl font-black text-white">
-
-    Admin Panel
-
-  </h1>
-
-  <p className="text-zinc-400 mt-3">
-
-    Viroxa Control Center
-
-  </p>
-
-</div>
+			<div className="text-center mb-10">
+			
+			<h1 className="text-5xl font-black text-white">
+			
+				Admin Panel
+			
+			</h1>
+			
+			<p className="text-zinc-400 mt-3">
+			
+				Viroxa Control Center
+			
+			</p>
+			
+			</div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
@@ -234,11 +240,13 @@ if (!access) {
 
           <div className="bg-white/5 border border-white/10 rounded-3xl p-6 h-fit">
 
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
 
-              Users ({userList.length})
+			<User size={18} />
 
-            </h2>
+			Users ({userList.length})
+
+			</h2>
 
 			<div className="mb-5 space-y-3">
 			
@@ -446,11 +454,13 @@ if (!access) {
    
    <div className="bg-white/5 border border-white/10 rounded-3xl p-6 mt-6">
 
-  <h2 className="text-2xl font-bold mb-6">
+  <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
 
-    Offers ({offers.length})
+  <Tag size={18} />
 
-  </h2>
+  Offers ({offers.length})
+
+</h2>
 
   <div className="space-y-3">
 
@@ -654,11 +664,13 @@ if (result.success) {
 
 			<div className="bg-white/5 border border-white/10 rounded-3xl p-6">
 
-             <h2 className="text-2xl font-bold mb-6">
+             <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
 
-              Domains ({domains.length})
+  <Globe size={18} />
 
-            </h2>
+  Domains ({domains.length})
+
+</h2>
 
 <div className="mb-5 space-y-3">
 
