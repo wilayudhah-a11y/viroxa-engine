@@ -22,19 +22,23 @@ export function encodePayload(
   data: unknown
 ) {
 
-  return btoa(
+  const json =
+    JSON.stringify(data)
 
-    unescape(
+  const bytes =
+    new TextEncoder()
+      .encode(json)
 
-      encodeURIComponent(
+  let binary = ''
 
-        JSON.stringify(data)
+  bytes.forEach((b) => {
 
-      )
+    binary +=
+      String.fromCharCode(b)
 
-    )
+  })
 
-  )
+  return btoa(binary)
 
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
@@ -61,19 +65,23 @@ export function decodePayload(
         (4 - base64.length % 4) % 4
       )
 
-    return JSON.parse(
+    const binary =
+      atob(padded)
 
-      decodeURIComponent(
+    const bytes =
+      Uint8Array.from(
 
-        escape(
-
-          atob(padded)
-
-        )
+        binary,
+        (c) =>
+          c.charCodeAt(0)
 
       )
 
-    )
+    const json =
+      new TextDecoder()
+        .decode(bytes)
+
+    return JSON.parse(json)
 
   } catch {
 
