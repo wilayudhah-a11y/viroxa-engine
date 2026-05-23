@@ -635,7 +635,7 @@ if (!access) {
 
   <p className="text-[10px] text-zinc-50">
 
-    Descriptions
+    Images
 
   </p>
 
