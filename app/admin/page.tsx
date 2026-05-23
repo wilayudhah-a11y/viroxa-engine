@@ -212,21 +212,23 @@ if (!access) {
 
   return (
 
-    <main className="min-h-screen bg-[#070B14] text-white p-6">
+<div className="text-center mb-10">
 
-      <div className="w-full">
+  <h1 className="text-5xl font-black text-white">
 
-        <h1 className="text-4xl font-black mb-8">
+    Admin Panel
 
-          Admin Panel
+  </h1>
 
-        </h1>
-		
-<p className="text-zinc-400 mt-2">
-  Viroxa Control Center
-</p>
+  <p className="text-zinc-400 mt-3">
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+    Viroxa Control Center
+
+  </p>
+
+</div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
           {/* USERS */}
 
@@ -366,7 +368,13 @@ if (!access) {
   } offers
 
 </p>					
-			
+
+<div className="mt-5 pt-5 border-t border-white/10 text-sm text-zinc-400">
+
+  Total Users: {userList.length}
+
+</div>		
+		
 					</div>
 			
 					<button
