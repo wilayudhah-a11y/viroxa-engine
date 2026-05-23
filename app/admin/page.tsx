@@ -19,9 +19,6 @@ const [
   setOfferUrl
 ] = useState('')
 
-const [offers,
-setOffers] =
-  useState<any[]>([])
 
 const [access,
 setAccess] =
@@ -85,8 +82,10 @@ setUserList] =
 const [domains,
 setDomains] =
   useState<any[]>([])
-  
-useEffect(() => {
+ 
+const [offers,
+setOffers] =
+  useState<any[]>([])
 
 async function loadOffers() {
 
@@ -103,6 +102,14 @@ async function loadOffers() {
   setOffers(data)
 
 }
+
+useEffect(() => {
+
+  loadOffers()
+
+}, [])
+ 
+useEffect(() => {
 
 async function loadDomains() {
 
