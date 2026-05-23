@@ -508,6 +508,8 @@ if (!access) {
           setOfferUsername('')
           setOfferName('')
           setOfferUrl('')
+		  
+		  window.location.reload()
 
         }
 
