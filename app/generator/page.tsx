@@ -75,7 +75,7 @@ const [savedDescriptions] =
 
       .slice(0, 5)
 
-  setDescriptions(
+  setDescription(
 
     randomDescriptions.join('\n')
 
