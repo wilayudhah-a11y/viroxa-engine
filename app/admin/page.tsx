@@ -223,7 +223,7 @@ if (!access) {
 			 
 			<div className="text-center mb-10">
 			
-			<h1 className="text-5xl font-black text-white">
+			<h1 className="text-4xl md:text-5xl font-black text-white">
 			
 				Admin Panel
 			
@@ -237,11 +237,11 @@ if (!access) {
 			
 			</div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1fr] gap-5 items-start">
 
           {/* USERS */}
 
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 h-fit">
+          <div className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-3xl p-6 h-fit">
 
             <h2 className="text-2xl font-bold mb-6">
 
@@ -259,7 +259,7 @@ if (!access) {
 					e.target.value
 				)
 				}
-				className="w-full p-3 rounded-2xl bg-black/20 border border-white/10 text-white"
+				className="w-full p-3 rounded-2xl bg-black/30 focus:border-indigo-500 transition border border-white/10 text-white"
 			/>
 			
 			<input
@@ -328,7 +328,7 @@ if (!access) {
 			
 			}}
 			
-			className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+			className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 			
 			>
 			
@@ -551,7 +551,7 @@ if (result.success) {
 
       }}
 
-      className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+      className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 
     >
 
@@ -742,7 +742,7 @@ if (result.success) {
 
     }}
 
-    className="w-full py-3 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
+    className="w-full py-3.5 rounded-2xl bg-indigo-600 hover:opacity-80 transition font-semibold"
 
   >
 
