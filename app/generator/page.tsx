@@ -500,7 +500,7 @@ if (!access) {
 	
 	<div className="flex justify-between items-center mb-2">
 
-  <p className="text-sm text-zinc-400">
+  <p className="text-sm text-zinc-200">
 
     Titles
 
