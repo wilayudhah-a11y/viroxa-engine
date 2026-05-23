@@ -1,13 +1,9 @@
 'use client'
-import { domains } from '@/config/domains'
-
-import { users } from '@/config/users'
-
 import { encodePayload } from '@/lib/encode'
 
 import type { Payload } from '@/types/payload'
 
-import {  useState,  useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
 export default function GeneratorPage() {
   const [title, setTitle] = useState('')
@@ -29,18 +25,11 @@ export default function GeneratorPage() {
 
     : null
 
-const user =
-  users.find(
-    (u) =>
-      u.username ===
-      currentUser
-  )
-
 const [offers,
 setOffers] =
   useState<any[]>([])
   
-  useEffect(() => {
+useEffect(() => {
 
   async function loadOffers() {
 
@@ -77,27 +66,19 @@ setOffers] =
 
       )
 
-const data =
-  await response.json()
+    const data =
+      await response.json()
 
-const filteredOffers =
+    setOffers([
 
-  data.filter(
-    (offer: any) =>
-      offer.username ===
-      currentUser
-  )
+      {
+        name: 'Manual',
+        url: '',
+      },
 
-setOffers([
+      ...data,
 
-  {
-    name: 'Manual',
-    url: '',
-  },
-
-  ...filteredOffers,
-
-])
+    ])
 
   }
 
