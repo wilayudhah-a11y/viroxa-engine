@@ -2,10 +2,6 @@
 
 import {  useState,  useEffect} from 'react'
 
-import { users } from '@/config/users'
-
-import { domains } from '@/config/domains'
-
 export default function AdminPage() {
 
 const [
@@ -303,6 +299,8 @@ if (!access) {
 			
 				setNewUsername('')
 				setNewPassword('')
+				
+				 window.location.reload()
 			
 				}
 			
