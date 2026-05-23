@@ -225,11 +225,8 @@ if (!access) {
 			<div className="text-center mb-10">
 			
 			<div className="flex justify-end mb-4">
-			
-			<h1 className="text-5xl md:text-6xl font-black text-white">
-			
-				Admin Panel
-			  <button
+
+  <button
 
     onClick={() => {
 
@@ -241,17 +238,20 @@ if (!access) {
 
     }}
 
-    className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-red-500/20 hover:border-red-500/20 transition text-sm"
+    className="px-4 py-2 rounded-2xl bg-white/5 border border-white/10 hover:bg-red-500/20 hover:border-red-500/20 transition text-sm"
 
   >
-
-    <LogOut size={16} />
 
     Logout
 
   </button>
 
 </div>
+			
+			<h1 className="text-5xl md:text-6xl font-black text-white">
+			
+				Admin Panel
+			
 			</h1>
 			
 			<p className="text-zinc-400 mt-3">
