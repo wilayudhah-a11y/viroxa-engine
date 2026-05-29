@@ -59,7 +59,7 @@ const [networkId, setNetworkId] =
         "/api/traffic-sources"
       )
 
-    const sourceData =
+    const sourceData:any =
       await sourceRes.json()
 
     setSources(
@@ -71,7 +71,7 @@ const [networkId, setNetworkId] =
         "/api/offers"
       )
 
-    const offerData =
+    const offerData:any =
       await offerRes.json()
 
     setOffers(
@@ -83,7 +83,7 @@ const [networkId, setNetworkId] =
         "/api/networks"
       )
 
-    const networkData =
+    const networkData:any =
       await networkRes.json()
 
     setNetworks(
@@ -95,7 +95,7 @@ const campaignRes =
     "/api/campaigns"
   )
 
-const campaignData =
+const campaignData:any =
   await campaignRes.json()
 
 setCampaigns(
@@ -142,7 +142,7 @@ async function createCampaign() {
 
     )
 
-  const data =
+  const data:any =
     await res.json()
 
   console.log(data)
@@ -179,7 +179,7 @@ async function createOffer() {
 
     )
 
-  const data =
+  const data:any =
     await res.json()
 
 if (data.success) {
@@ -187,7 +187,7 @@ if (data.success) {
   const offerRes =
     await fetch("/api/offers")
 
-  const offerData =
+  const offerData:any =
     await offerRes.json()
 
   setOffers(
@@ -265,7 +265,7 @@ async function updateOffer() {
 
     )
 
-  const data =
+  const data:any =
     await res.json()
 
   if (data.success) {
@@ -275,7 +275,7 @@ async function updateOffer() {
         "/api/offers"
       )
 
-    const offerData =
+    const offerData:any =
       await offerRes.json()
 
     setOffers(

@@ -39,7 +39,7 @@ async function loadClicks() {
     const res =
       await fetch("/api/clicks");
 
-const data =
+const data:any =
   await res.json();
 
 setClicks(
@@ -61,7 +61,7 @@ async function loadConversions() {
     const res =
       await fetch("/api/conversions");
 
-const data =
+const data:any =
   await res.json();
 
 setConversions(
@@ -83,7 +83,7 @@ setConversions(
       const res =
         await fetch("/api/stats");
 
-      const data =
+      const data:any =
         await res.json();
 
       setStats({

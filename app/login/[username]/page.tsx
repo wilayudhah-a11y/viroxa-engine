@@ -54,7 +54,7 @@ async function login() {
 
     )
 
-  const result =
+  const result:any =
     await response.json()
 
   if (result.success) {

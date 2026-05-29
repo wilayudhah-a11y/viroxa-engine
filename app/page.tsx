@@ -35,7 +35,7 @@ const [
     "/api/conversions"
   )
 
-const conversionsData =
+const conversionsData:any =
   await conversionsRes.json()
 
 setConversions(
@@ -48,7 +48,7 @@ setConversions(
           "/api/stats"
         )
 
-      const data =
+      const data:any =
         await res.json()
 
       setStats(data)

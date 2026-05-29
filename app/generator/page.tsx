@@ -318,7 +318,7 @@ useEffect(() => {
 
       )
 
-    const data =
+    const data:any =
       await response.json()
 
     setOffers([
@@ -387,7 +387,7 @@ useEffect(() => {
 
       )
 
-    const data =
+    const data:any =
       await response.json()
 
     setDomains(data)
