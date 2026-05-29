@@ -20,7 +20,7 @@ export default function ClicksPage() {
           "/api/clicks"
         )
 
-      const data =
+      const body:any =
         await res.json()
 
       setClicks(
