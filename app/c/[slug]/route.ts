@@ -69,7 +69,7 @@ export async function GET(
 destinationUrl =
   destinationUrl.replaceAll(
     "{campaignName}",
-    "TEST_VIROXA"
+    campaign.name
   )
 
   const redirectUrl =
