@@ -22,7 +22,7 @@ export default function ConversionsPage() {
           "/api/conversions"
         )
 
-      const data =
+      const data:any =
         await res.json()
 
       setConversions(
