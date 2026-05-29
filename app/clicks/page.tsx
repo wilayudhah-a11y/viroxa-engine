@@ -15,17 +15,15 @@ export default function ClicksPage() {
 
     async function fetchClicks() {
 
-      const res =
-        await fetch(
-          "/api/clicks"
-        )
+const response =
+  await fetch("/api/clicks")
 
-      const body:any =
-        await res.json()
+const data:any =
+  await response.json()
 
-      setClicks(
-        data.clicks || []
-      )
+setClicks(
+  data.clicks || []
+)
 
       setLoading(false)
 
