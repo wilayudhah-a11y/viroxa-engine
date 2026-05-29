@@ -103,7 +103,7 @@ async function loadOffers() {
 
     )
 
-  const data =
+  const data:any =
     await response.json()
 
   setOffers(data)

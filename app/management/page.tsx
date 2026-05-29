@@ -179,6 +179,8 @@ async function createOffer() {
 
     )
 
+  const data =
+    await res.json()
 
 if (data.success) {
 
