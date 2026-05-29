@@ -437,7 +437,7 @@ if (!access) {
 			
 				)
 			
-			const result =
+			const result:any =
 				await response.json()
 			
 			if (result.success) {
@@ -650,7 +650,7 @@ if (result.success) {
 
               )
 
-            const result =
+            const result:any =
               await response.json()
 
             if (result.success) {
@@ -753,7 +753,7 @@ if (result.success) {
 
         )
 
-      const result =
+      const result:any =
         await response.json()
 
       if (result.success) {
@@ -835,7 +835,7 @@ if (result.success) {
 
             )
 
-          const result =
+          const result:any =
             await response.json()
 
           if (result.success) {
