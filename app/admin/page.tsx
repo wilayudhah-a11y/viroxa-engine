@@ -127,7 +127,7 @@ async function loadDomains() {
 
     )
 
-  const data =
+  const data:any =
     await response.json()
 
   setDomains(data)
@@ -143,7 +143,7 @@ async function loadDomains() {
 
       )
 
-    const data =
+    const data:any =
       await response.json()
 
     setUserList(data)
