@@ -42,13 +42,13 @@ export async function GET(
     return new NextResponse(
       "Campaign Not Found",
       {
-        status:404
+        status: 404
       }
     )
 
   }
 
-  const destinationUrl =
+  let destinationUrl =
     campaign.offers
       ?.destination_url
 
@@ -57,14 +57,31 @@ export async function GET(
     return new NextResponse(
       "Offer Not Found",
       {
-        status:404
+        status: 404
       }
     )
 
   }
 
+  const clickId =
+    crypto.randomUUID()
+
+destinationUrl =
+  destinationUrl.replaceAll(
+    "{campaignName}",
+    "TEST_VIROXA"
+  )
+
+  const redirectUrl =
+    new URL(destinationUrl)
+
+  redirectUrl.searchParams.set(
+    "click_id",
+    clickId
+  )
+
   return NextResponse.redirect(
-    destinationUrl
+    redirectUrl.toString()
   )
 
 }
