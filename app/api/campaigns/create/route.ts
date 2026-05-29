@@ -8,7 +8,7 @@ export async function POST(
   request: Request
 ) {
 
-  const body =
+  const body:any =
     await request.json()
 
   const slug =
