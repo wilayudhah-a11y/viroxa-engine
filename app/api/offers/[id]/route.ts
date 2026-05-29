@@ -18,7 +18,7 @@ export async function PUT(
   const { id } =
     await params
 
-  const body =
+  const body:any =
     await request.json()
 
   const { data, error } =
