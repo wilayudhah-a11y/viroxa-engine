@@ -31,15 +31,52 @@ const [activeTab, setActiveTab] =
 
 const [sources, setSources] =
   useState<any[]>([])
+  
+const [
+  showCreateSource,
+  setShowCreateSource
+] = useState(false)
+
+const [
+  sourceName,
+  setSourceName
+] = useState("")
+
+const [
+  editingSource,
+  setEditingSource
+] = useState<any>(null)
 
 const [offers, setOffers] =
   useState<any[]>([])
 
 const [networks, setNetworks] =
   useState<any[]>([])
-  
+
+const [
+  showCreateNetwork,
+  setShowCreateNetwork
+] = useState(false)
+
+const [
+  networkName,
+  setNetworkName
+] = useState("")
+
+const [
+  editingNetwork,
+  setEditingNetwork
+] = useState<any>(null)
+ 
 const [campaignName, setCampaignName] =
   useState("")
+  
+const [
+  editingCampaign,
+  setEditingCampaign
+] = useState<any>(
+  null
+)
 
 const [sourceId, setSourceId] =
   useState("")
@@ -51,7 +88,7 @@ const [networkId, setNetworkId] =
   useState("")
   
  useEffect(() => {
-
+ 
   async function loadData() {
 
     const sourceRes =
@@ -108,6 +145,352 @@ setCampaigns(
 
 }, []) 
 
+async function createSource() {
+
+  const res =
+    await fetch(
+
+      "/api/traffic-sources/create",
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+          name:
+            sourceName
+
+        })
+
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    const sourceRes =
+      await fetch(
+        "/api/traffic-sources"
+      )
+
+    const sourceData:any =
+      await sourceRes.json()
+
+    setSources(
+      sourceData.sources || []
+    )
+
+    setSourceName("")
+
+    setShowCreateSource(
+      false
+    )
+
+  }
+
+}
+
+async function updateSource() {
+
+  const res =
+    await fetch(
+
+      `/api/traffic-sources/${editingSource.id}`,
+
+      {
+
+        method:"PUT",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+          name:
+            sourceName
+
+        })
+
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    const sourceRes =
+      await fetch(
+        "/api/traffic-sources"
+      )
+
+    const sourceData:any =
+      await sourceRes.json()
+
+    setSources(
+      sourceData.sources || []
+    )
+
+    setEditingSource(
+      null
+    )
+
+    setSourceName("")
+
+    setShowCreateSource(
+      false
+    )
+
+  }
+
+}
+
+async function deleteSource(
+  id:number
+) {
+
+  if (
+    !confirm(
+      "Delete source?"
+    )
+  ) return
+
+  const res =
+    await fetch(
+
+      `/api/traffic-sources/${id}`,
+
+      {
+        method:"DELETE"
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    setSources(
+
+      sources.filter(
+
+        s => s.id !== id
+
+      )
+
+    )
+
+  }
+
+}
+
+async function createNetwork() {
+ 
+
+  const res =
+    await fetch(
+
+      "/api/networks/create",
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+          name:
+            networkName
+
+        })
+
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    const networkRes =
+      await fetch(
+        "/api/networks"
+      )
+
+    const networkData:any =
+      await networkRes.json()
+
+    setNetworks(
+      networkData.networks || []
+    )
+
+    setNetworkName("")
+
+    setShowCreateNetwork(
+      false
+    )
+
+  }
+
+}
+
+async function updateNetwork() {
+
+  const res =
+    await fetch(
+
+      `/api/networks/${editingNetwork.id}`,
+
+      {
+
+        method:"PUT",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+          name:
+            networkName
+
+        })
+
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    const networkRes =
+      await fetch(
+        "/api/networks"
+      )
+
+    const networkData:any =
+      await networkRes.json()
+
+    setNetworks(
+      networkData.networks || []
+    )
+
+    setEditingNetwork(
+      null
+    )
+
+    setNetworkName("")
+
+    setShowCreateNetwork(
+      false
+    )
+
+  }
+
+}
+
+async function deleteNetwork(
+  id:number
+) {
+
+  if (
+    !confirm(
+      "Delete network?"
+    )
+  ) return
+
+  const res =
+    await fetch(
+
+      `/api/networks/${id}`,
+
+      {
+        method:"DELETE"
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    setNetworks(
+
+      networks.filter(
+
+        n => n.id !== id
+
+      )
+
+    )
+
+  }
+
+}
+
+async function deleteCampaign(
+  id:number
+) {
+
+  if (
+    !confirm(
+      "Delete campaign?"
+    )
+  ) return
+
+  const res =
+    await fetch(
+
+      `/api/campaigns/${id}`,
+
+      {
+        method:"DELETE"
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    setCampaigns(
+
+      campaigns.filter(
+
+        (c) =>
+          c.id !== id
+
+      )
+
+    )
+
+  }
+
+}
+
 async function createCampaign() {
 
   const res =
@@ -145,7 +528,93 @@ async function createCampaign() {
   const data:any =
     await res.json()
 
-  console.log(data)
+  if (data.success) {
+
+    const campaignRes =
+      await fetch(
+        "/api/campaigns"
+      )
+
+    const campaignData:any =
+      await campaignRes.json()
+
+    setCampaigns(
+      campaignData.campaigns || []
+    )
+
+    setCampaignName("")
+    setSourceId("")
+    setOfferId("")
+    setNetworkId("")
+
+    setShowCreate(false)
+
+  }
+
+}
+
+async function updateCampaign() {
+
+  const res =
+    await fetch(
+
+      `/api/campaigns/${editingCampaign.id}`,
+
+      {
+
+        method: "PUT",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+
+          name:
+            campaignName,
+
+          traffic_source_id:
+            sourceId,
+
+          offer_id:
+            offerId,
+
+          network_id:
+            networkId
+
+        })
+
+      }
+
+    )
+
+  const data:any =
+    await res.json()
+
+  if (data.success) {
+
+    const campaignRes =
+      await fetch(
+        "/api/campaigns"
+      )
+
+    const campaignData:any =
+      await campaignRes.json()
+
+    setCampaigns(
+      campaignData.campaigns || []
+    )
+
+    setEditingCampaign(
+      null
+    )
+
+    setShowCreate(
+      false
+    )
+
+  }
 
 }
 
@@ -311,49 +780,117 @@ async function updateOffer() {
 
         <div className="space-y-3 p-4">
 
-          <div
-            onClick={() =>
-              setActiveTab(
-                "traffic-sources"
-              )
-            }
-            className="cursor-pointer rounded-lg border border-slate-800 px-3 py-2 text-sm hover:bg-slate-800"
-          >
-            Traffic Sources
-          </div>
+<div
+  onClick={() =>
+    setActiveTab(
+      "traffic-sources"
+    )
+  }
+  className={`
 
-          <div
-            onClick={() =>
-              setActiveTab(
-                "offers"
-              )
-            }
-            className="cursor-pointer rounded-lg border border-slate-800 px-3 py-2 text-sm hover:bg-slate-800"
-          >
-            Offers
-          </div>
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
 
-          <div
-            onClick={() =>
-              setActiveTab(
-                "networks"
-              )
-            }
-            className="cursor-pointer rounded-lg border border-slate-800 px-3 py-2 text-sm hover:bg-slate-800"
-          >
-            Networks
-          </div>
+    ${
+      activeTab ===
+      "traffic-sources"
 
-          <div
-            onClick={() =>
-              setActiveTab(
-                "campaigns"
-              )
-            }
-            className="cursor-pointer rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-sm text-blue-400"
-          >
-            Campaigns
-          </div>
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  Traffic Sources
+</div>
+
+<div
+  onClick={() =>
+    setActiveTab(
+      "offers"
+    )
+  }
+  className={`
+
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab ===
+      "offers"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  Offers
+</div>
+
+<div
+  onClick={() =>
+    setActiveTab(
+      "networks"
+    )
+  }
+  className={`
+
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab ===
+      "networks"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  networks
+</div>
+
+ <div
+  onClick={() =>
+    setActiveTab(
+      "campaigns"
+    )
+  }
+  className={`
+
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab ===
+      "campaigns"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  campaigns
+</div>
 
         </div>
 
@@ -367,13 +904,249 @@ async function updateOffer() {
 
   <div>
 
-    <h1 className="mb-6 text-3xl font-bold">
-      Traffic Sources
-    </h1>
+    <div className="mb-6 flex items-center justify-between">
 
-    <div className="rounded-xl border border-slate-800 bg-[#111827] p-6">
+      <div>
 
-      Traffic Sources Page
+        <h1 className="text-3xl font-bold">
+          Traffic Sources
+        </h1>
+
+        <p className="text-slate-400">
+          Manage traffic sources
+        </p>
+
+      </div>
+
+      <button
+
+        onClick={() =>
+          setShowCreateSource(
+            true
+          )
+        }
+
+        className="
+          rounded-xl
+          bg-blue-600
+          px-4
+          py-2
+          text-sm
+        "
+
+      >
+
+        + Create Source
+
+      </button>
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800">
+
+            <th className="p-4 text-left">
+              Source Name
+            </th>
+
+            <th className="p-4 text-left">
+              Status
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {sources.map(
+            (source:any) => (
+
+              <tr
+                key={source.id}
+                className="border-b border-slate-800"
+              >
+
+                <td className="p-4">
+                  {source.name}
+                </td>
+
+                <td className="p-4 text-green-400">
+                  active
+                </td>
+
+<td className="p-4">
+
+  <div className="flex gap-2">
+
+    <button
+
+      onClick={() => {
+
+        setEditingSource(
+          source
+        )
+
+        setSourceName(
+          source.name
+        )
+
+        setShowCreateSource(
+          true
+        )
+
+      }}
+
+      className="
+        rounded
+        bg-yellow-600
+        px-3
+        py-1
+        text-xs
+      "
+
+    >
+      Edit
+    </button>
+
+<button
+
+  onClick={() =>
+    deleteSource(
+      source.id
+    )
+  }
+
+  className="
+    rounded
+    bg-red-600
+    px-3
+    py-1
+    text-xs
+  "
+
+>
+  Delete
+</button>
+
+  </div>
+
+</td>
+
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+)}
+
+{showCreateSource && (
+
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+
+    <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+      <div className="mb-4 flex items-center justify-between">
+
+        <h2 className="text-xl font-bold">
+
+          {editingSource
+            ? "Edit Source"
+            : "Create Source"}
+
+        </h2>
+
+        <button
+
+          onClick={() => {
+
+            setShowCreateSource(false)
+
+            setEditingSource(null)
+
+            setSourceName("")
+
+          }}
+
+        >
+          ✕
+        </button>
+
+      </div>
+
+      <input
+
+        value={sourceName}
+
+        onChange={(e) =>
+          setSourceName(
+            e.target.value
+          )
+        }
+
+        placeholder="Source Name"
+
+        className="
+          mb-4
+          w-full
+          rounded-xl
+          border
+          border-slate-700
+          bg-slate-900
+          p-3
+        "
+
+      />
+
+      <button
+
+        onClick={() => {
+
+          if (
+            editingSource
+          ) {
+
+            updateSource()
+
+          } else {
+
+            createSource()
+
+          }
+
+        }}
+
+        className="
+          w-full
+          rounded-xl
+          bg-blue-600
+          py-3
+        "
+
+      >
+
+        {editingSource
+          ? "Save Changes"
+          : "Create Source"}
+
+      </button>
 
     </div>
 
@@ -560,17 +1333,254 @@ async function updateOffer() {
 
   <div>
 
-    <h1 className="mb-6 text-3xl font-bold">
-      Networks
-    </h1>
+    <div className="mb-6 flex items-center justify-between">
 
-    <div className="rounded-xl border border-slate-800 bg-[#111827] p-6">
+      <div>
 
-      Networks Page
+        <h1 className="text-3xl font-bold">
+          Networks
+        </h1>
+
+        <p className="text-slate-400">
+          Manage affiliate networks
+        </p>
+
+      </div>
+	  
+<button
+
+  onClick={() =>
+    setShowCreateNetwork(
+      true
+    )
+  }
+
+  className="
+    rounded-xl
+    bg-blue-600
+    px-4
+    py-2
+    text-sm
+  "
+
+>
+
+  + Create Network
+
+</button>
+
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800">
+
+            <th className="p-4 text-left">
+              Network Name
+            </th>
+
+            <th className="p-4 text-left">
+              Status
+            </th>
+
+			<th className="p-4 text-left">
+			Actions
+			</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {networks.map(
+            (network:any) => (
+
+              <tr
+                key={network.id}
+                className="border-b border-slate-800"
+              >
+
+                <td className="p-4">
+                  {network.name}
+                </td>
+
+                <td className="p-4 text-green-400">
+                  active
+                </td>
+				
+				<td className="p-4">
+				
+				<div className="flex gap-2">
+				
+					<button
+				
+					onClick={() => {
+				
+						setEditingNetwork(
+						network
+						)
+				
+						setNetworkName(
+						network.name
+						)
+				
+						setShowCreateNetwork(
+						true
+						)
+				
+					}}
+				
+					className="
+						rounded
+						bg-yellow-600
+						px-3
+						py-1
+						text-xs
+					"
+				
+					>
+					Edit
+					</button>
+					
+<button
+
+  onClick={() =>
+    deleteNetwork(
+      network.id
+    )
+  }
+
+  className="
+    rounded
+    bg-red-600
+    px-3
+    py-1
+    text-xs
+  "
+
+>
+  Delete
+</button>
+				
+				</div>
+				
+				</td>
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+{showCreateNetwork && (
+
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+
+    <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+      <div className="mb-4 flex items-center justify-between">
+
+        <h2 className="text-xl font-bold">
+
+          {editingNetwork
+            ? "Edit Network"
+            : "Create Network"}
+
+        </h2>
+
+        <button
+
+          onClick={() => {
+
+            setShowCreateNetwork(false)
+
+            setEditingNetwork(null)
+
+            setNetworkName("")
+
+          }}
+
+        >
+          ✕
+        </button>
+
+      </div>
+
+      <input
+
+        value={networkName}
+
+        onChange={(e) =>
+          setNetworkName(
+            e.target.value
+          )
+        }
+
+        placeholder="Network Name"
+
+        className="
+          mb-4
+          w-full
+          rounded-xl
+          border
+          border-slate-700
+          bg-slate-900
+          p-3
+        "
+
+      />
+
+<button
+
+  onClick={() => {
+
+    if (
+      editingNetwork
+    ) {
+
+      console.log(
+        updateNetwork()
+      )
+
+    } else {
+
+      createNetwork()
+
+    }
+
+  }}
+
+  className="
+    w-full
+    rounded-xl
+    bg-blue-600
+    py-3
+  "
+
+>
+
+  {editingNetwork
+    ? "Save Changes"
+    : "Create Network"}
+
+</button>
 
     </div>
 
   </div>
+
+)}
+  </div>
+
 
 )}
 
@@ -629,17 +1639,21 @@ async function updateOffer() {
                       Network
                     </th>
 
-<th className="p-4 text-left">
-  Tracker URL
-</th>
-
-<th className="p-4 text-left">
-  Postback URL
-</th>
-
-                    <th className="p-4 text-left">
-                      Status
-                    </th>
+					<th className="p-4 text-left">
+					Tracker URL
+					</th>
+					
+					<th className="p-4 text-left">
+					Postback URL
+					</th>
+					
+					<th className="p-4 text-left">
+					Status
+					</th>
+					
+					<th className="p-4 text-left">
+					Actions
+					</th>
 
                   </tr>
 
@@ -699,7 +1713,75 @@ async function updateOffer() {
   <td className="p-4 text-green-400">
     {campaign.status}
   </td>
+<td className="p-4">
 
+  <div className="flex gap-2">
+
+<button
+
+  onClick={() => {
+
+    setEditingCampaign(
+      campaign
+    )
+
+    setCampaignName(
+      campaign.name
+    )
+
+    setSourceId(
+      campaign.traffic_source_id
+    )
+
+    setOfferId(
+      campaign.offer_id
+    )
+
+    setNetworkId(
+      campaign.network_id
+    )
+
+    setShowCreate(
+      true
+    )
+
+  }}
+
+  className="
+    rounded
+    bg-yellow-600
+    px-3
+    py-1
+    text-xs
+  "
+
+>
+  Edit
+</button>
+
+    <button
+
+      onClick={() =>
+        deleteCampaign(
+          campaign.id
+        )
+      }
+
+      className="
+        rounded
+        bg-red-600
+        px-3
+        py-1
+        text-xs
+      "
+
+    >
+      Delete
+    </button>
+
+  </div>
+
+</td>
 </tr>
 
       )
@@ -801,11 +1883,13 @@ async function updateOffer() {
 
       <div className="mb-6 flex items-center justify-between">
 
-        <h2 className="text-xl font-bold">
-
-          Create Campaign
-
-        </h2>
+		<h2 className="text-xl font-bold">
+		
+		{editingCampaign
+			? "Edit Campaign"
+			: "Create Campaign"}
+		
+		</h2>
 
         <button
           onClick={() =>
@@ -904,12 +1988,39 @@ async function updateOffer() {
   ))}
 
 </select>
+
 <button
-  onClick={createCampaign}
-  className="w-full rounded-xl bg-blue-600 py-3"
+
+  onClick={() => {
+
+    if (
+      editingCampaign
+    ) {
+
+      updateCampaign()
+
+    } else {
+
+      createCampaign()
+
+    }
+
+  }}
+
+  className="
+    w-full
+    rounded-xl
+    bg-blue-600
+    py-3
+    text-sm
+    font-medium
+  "
+
 >
 
-  Create Campaign
+  {editingCampaign
+    ? "Save Changes"
+    : "Create Campaign"}
 
 </button>
 
