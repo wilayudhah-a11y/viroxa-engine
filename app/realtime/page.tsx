@@ -555,7 +555,7 @@ className={`
       )
   )
 
-  .slice(0, 50)
+  .slice(0, 15)
 
   .map(
             (
