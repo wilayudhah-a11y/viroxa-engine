@@ -770,79 +770,127 @@ if (!authorized) {
 
   return (
 
-    <div className="flex min-h-screen items-center justify-center bg-[#0B1220]">
+<div className="flex min-h-screen items-center justify-center bg-[#0B1220]">
 
-      <div className="w-full max-w-md rounded-xl border border-slate-800 bg-[#111827] p-6">
+  <div className="w-full max-w-md">
 
-        <h1 className="mb-4 text-2xl font-bold">
+    <div className="mb-8 text-center">
+
+      <h1 className="text-5xl font-bold">
+
+        VIROXA
+
+      </h1>
+
+      <p className="mt-3 text-slate-400">
+
+        Affiliate Tracking Platform
+
+      </p>
+
+    </div>
+
+    <div className="rounded-3xl border border-slate-800 bg-[#111827] p-8">
+
+      <div className="mb-6 text-center">
+
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600">
+
+          🔒
+
+        </div>
+
+        <h2 className="text-2xl font-semibold">
+
           Management Access
-        </h1>
 
-        <input
+        </h2>
 
-          type="password"
+        <p className="mt-2 text-sm text-slate-400">
 
-          value={password}
+          Secure dashboard authentication
 
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
-
-          placeholder="Password"
-
-          className="
-            mb-4
-            w-full
-            rounded-xl
-            border
-            border-slate-700
-            bg-slate-900
-            p-3
-          "
-
-        />
-
-        <button
-
-          onClick={() => {
-
-            if (
-              password ===
-              "Habiburrohman89"
-            ) {
-
-              setAuthorized(
-                true
-              )
-
-            } else {
-
-              alert(
-                "Wrong Password"
-              )
-
-            }
-
-          }}
-
-          className="
-            w-full
-            rounded-xl
-            bg-blue-600
-            py-3
-          "
-
-        >
-
-          Enter
-
-        </button>
+        </p>
 
       </div>
 
+      <input
+
+        type="password"
+
+        value={password}
+
+        onChange={(e) =>
+          setPassword(
+            e.target.value
+          )
+        }
+
+        placeholder="Enter Password"
+
+        className="
+          mb-4
+          w-full
+          rounded-xl
+          border
+          border-slate-700
+          bg-slate-900
+          p-4
+          outline-none
+        "
+
+      />
+
+      <button
+
+        onClick={() => {
+
+          if (
+            password ===
+            "Habiburrohman89"
+          ) {
+
+            setAuthorized(
+              true
+            )
+
+          } else {
+
+            alert(
+              "Wrong Password"
+            )
+
+          }
+
+        }}
+
+        className="
+          w-full
+          rounded-xl
+          bg-blue-600
+          py-4
+          font-medium
+          transition
+          hover:bg-blue-500
+        "
+
+      >
+
+        Access Management
+
+      </button>
+
     </div>
+
+    <p className="mt-6 text-center text-xs text-slate-500">
+
+      Viroxa Tracker © 2026
+
+    </p>
+
+  </div>
+
+</div>
 
   )
 
