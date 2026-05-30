@@ -35,6 +35,25 @@ const [stats,setStats] =
 
 useEffect(() => {
 
+  const auth =
+    localStorage.getItem(
+      "realtime_auth"
+    )
+
+  if (
+    auth === "true"
+  ) {
+
+    setAuthorized(
+      true
+    )
+
+  }
+
+}, [])
+
+useEffect(() => {
+
 async function loadClicks() {
 
   try {
@@ -225,22 +244,31 @@ return (
         </div>
 
         <button
-          onClick={() => {
+ onClick={() => {
 
-            if (
-              password ===
-              "Bhuijn900@"
-            ) {
+  if (
+    password ===
+    "Bhuijn900@"
+  ) {
 
-              setAuthorized(true)
+    localStorage.setItem(
+      "realtime_auth",
+      "true"
+    )
 
-            } else {
+    setAuthorized(
+      true
+    )
 
-              alert("Wrong Password")
+    return
 
-            }
+  }
 
-          }}
+  alert(
+    "Wrong Password"
+  )
+
+}}
           className="
             w-full
             rounded-2xl
