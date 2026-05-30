@@ -90,6 +90,28 @@ const { data: click } =
 
     .single()
 
+const { data: existing }
+  = await supabase
+
+    .from("conversions")
+
+    .select("id")
+
+    .eq(
+      "clickid",
+      clickid
+    )
+
+    .maybeSingle()
+
+if (existing) {
+
+  return new NextResponse(
+    "OK"
+  )
+
+}
+
   const { error } =
     await supabase
 
