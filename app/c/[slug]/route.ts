@@ -66,6 +66,26 @@ export async function GET(
   const clickId =
     crypto.randomUUID()
 
+const currentUrl =
+  new URL(
+    request.url
+  )
+
+const source =
+  currentUrl.searchParams.get(
+    "utm_source"
+  )
+
+  ||
+
+  currentUrl.searchParams.get(
+    "source"
+  )
+
+  ||
+
+  "Direct"
+
 destinationUrl =
   destinationUrl.replaceAll(
     "{campaignName}",
@@ -116,8 +136,7 @@ await supabase
 
         : "Desktop",
 
-    source:
-      "Direct"
+    source
 
   })
 

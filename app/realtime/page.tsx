@@ -11,6 +11,8 @@ export default function RealtimePage() {
 const [password, setPassword] = useState("")
 const [authorized, setAuthorized] = useState(false)
 const [showPassword, setShowPassword] = useState(false)
+const [activeTab, setActiveTab] =
+  useState("dashboard")
 
 const [clicks, setClicks] =
   useState<any[]>([]);
@@ -150,8 +152,6 @@ const interval =
 
 }, []);
 
-const [activeTab, setActiveTab] =
-  useState("dashboard")
 
 
 if (!authorized) {
@@ -304,6 +304,42 @@ return (
 
 }
 
+const countryStats =
+  Object.entries(
+
+    clicks.reduce(
+
+      (
+        acc:any,
+        click:any
+      ) => {
+
+        const country =
+          click.country ||
+          "Unknown"
+
+        acc[country] =
+          (acc[country] || 0) + 1
+
+        return acc
+
+      },
+
+      {}
+
+    )
+
+  )
+
+  .sort(
+    (a:any,b:any) =>
+      b[1] - a[1]
+  )
+
+  .slice(0,5)
+  
+
+
   return (
 
 <div className="min-h-screen bg-[#0B1220] text-white">
@@ -312,7 +348,7 @@ return (
 
     {/* LEFT SIDEBAR */}
 
-    <div className="col-span-1 border-r border-slate-800 bg-[#111827] h-screen flex flex-col pt-10">
+    <div className="col-span-2 border-r border-slate-800 bg-[#111827] h-screen flex flex-col pt-10">
 
       {/* LOGO */}
 
@@ -464,7 +500,7 @@ className={`
 
         {/* MAIN CONTENT */}
 
-<div className="col-span-9 p-6">
+<div className="col-span-8 p-6">
 
  {activeTab === "dashboard" && (
     <>
@@ -750,6 +786,10 @@ className={`
 			</th>
 			
 			<th className="p-4 text-left">
+			Source
+			</th>
+			
+			<th className="p-4 text-left">
 			IP
 			</th>
 
@@ -800,6 +840,12 @@ className={`
   <td className="p-4">
     {click.device || "-"}
   </td>
+
+<td className="p-4">
+
+  {click.source || "-"}
+
+</td>
 
   <td className="p-4 text-xs text-slate-500">
     {click.ip}
@@ -1156,13 +1202,15 @@ className={`
 
             </p>
 
-            <p className="text-xs text-slate-400">
+<p className="text-xs text-slate-400">
 
-                {click.country !== "unknown"
-					? click.country
-					: click.device}
+  {click.country}
 
-            </p>
+  {" • "}
+
+  {click.device}
+
+</p>
 
           </div>
 
@@ -1200,45 +1248,45 @@ className={`
 
     </div>
 
-    <div className="space-y-3">
+<div className="space-y-2">
 
-      <div className="flex items-center justify-between rounded-lg border border-slate-800 p-3">
+  {countryStats.map(
+    ([country,count]:any) => (
 
-        <span className="text-sm">
-          Indonesia
+      <div
+
+        key={country}
+
+        className="
+          flex
+          items-center
+          justify-between
+          rounded-lg
+          border
+          border-slate-800
+          p-3
+        "
+
+      >
+
+        <span>
+
+          {country}
+
         </span>
 
-        <span className="text-sm text-slate-400">
-          42%
-        </span>
+        <span className="text-slate-400">
 
-      </div>
+          {count}
 
-      <div className="flex items-center justify-between rounded-lg border border-slate-800 p-3">
-
-        <span className="text-sm">
-          USA
-        </span>
-
-        <span className="text-sm text-slate-400">
-          27%
-        </span>
-
-      </div>
-
-      <div className="flex items-center justify-between rounded-lg border border-slate-800 p-3">
-
-        <span className="text-sm">
-          Brazil
-        </span>
-
-        <span className="text-sm text-slate-400">
-          18%
         </span>
 
       </div>
 
-    </div>
+    )
+  )}
+
+</div>
 
   </div>
 
