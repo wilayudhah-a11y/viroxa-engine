@@ -35,6 +35,11 @@ export async function GET(
       ) || 0
     )
 
+const status =
+  url.searchParams.get(
+    "status"
+  ) || "approved"
+
   if (!clickid) {
 
     return new NextResponse(
@@ -71,33 +76,51 @@ export async function GET(
 
   }
 
+const { data: click } =
+  await supabase
+
+    .from("clicks")
+
+    .select("*")
+
+    .eq(
+      "clickid",
+      clickid
+    )
+
+    .single()
+
   const { error } =
     await supabase
 
       .from("conversions")
 
-      .insert({
+.insert({
 
-        clickid,
+  clickid,
 
-        campaign:
-          campaign.name,
+  campaign:
+    click?.campaign ||
+    campaign.name,
 
-        payout,
+  payout,
 
-        status:
-          "approved",
+  status,
+    
 
-        country:
-          "unknown",
+  country:
+    click?.country ||
+    "unknown",
 
-        device:
-          "unknown",
+  device:
+    click?.device ||
+    "unknown",
 
-        ip:
-          "unknown"
+  ip:
+    click?.ip ||
+    "unknown"
 
-      })
+})
 
   if (error) {
 
