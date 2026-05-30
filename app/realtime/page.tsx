@@ -482,6 +482,10 @@ className={`
       <h1 className="text-3xl font-bold">
         Clicks
       </h1>
+	  
+<p className="text-xs text-slate-500">
+  Showing latest 15 clicks
+</p>
 
       <p className="mt-2 text-slate-400">
         Live click logs
