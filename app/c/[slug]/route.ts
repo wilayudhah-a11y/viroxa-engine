@@ -80,6 +80,45 @@ destinationUrl =
     clickId
   )
 
+await supabase
+
+  .from("clicks")
+
+  .insert({
+
+    clickid:
+      clickId,
+
+    campaign:
+      campaign.name,
+
+    country:
+      "unknown",
+
+    ip:
+      request.headers.get(
+        "x-forwarded-for"
+      ) || "unknown",
+
+    ua:
+      request.headers.get(
+        "user-agent"
+      ) || "unknown",
+
+    device:
+      request.headers.get(
+        "user-agent"
+      )?.includes("Mobile")
+
+        ? "Mobile"
+
+        : "Desktop",
+
+    source:
+      "Direct"
+
+  })
+
   return NextResponse.redirect(
     redirectUrl.toString()
   )
