@@ -106,7 +106,13 @@ setConversions(
     }
 
   }
-  
+
+  loadStats();
+
+  loadConversions();
+
+  loadClicks();
+
 
 const interval =
   setInterval(() => {
