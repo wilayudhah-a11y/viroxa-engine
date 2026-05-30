@@ -396,11 +396,39 @@ className={`
 
       <div className="p-3 border-t border-slate-800">
 
-        <button className="w-full rounded-lg border border-red-500/20 bg-red-500/10 py-2 text-sm text-red-400 hover:bg-red-500/20">
+<button
 
-          Logout
+  onClick={() => {
 
-        </button>
+    localStorage.removeItem(
+      "realtime_auth"
+    )
+
+    setAuthorized(
+      false
+    )
+
+    setPassword("")
+
+  }}
+
+  className="
+    w-full
+    rounded-lg
+    border
+    border-red-500/20
+    bg-red-500/10
+    py-2
+    text-sm
+    text-red-400
+    hover:bg-red-500/20
+  "
+
+>
+
+  Logout
+
+</button>
 
       </div>
 
