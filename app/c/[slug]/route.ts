@@ -93,7 +93,9 @@ await supabase
       campaign.name,
 
     country:
-      "unknown",
+      request.headers.get(
+        "x-vercel-ip-country"
+      ) || "unknown",
 
     ip:
       request.headers.get(
