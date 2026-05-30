@@ -480,7 +480,7 @@ className={`
     <div className="mb-6">
 
       <h1 className="text-3xl font-bold">
-        Clicks
+        LIVE Clicks
       </h1>
 	  
 <p className="text-xs text-slate-500">
