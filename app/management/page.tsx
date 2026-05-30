@@ -6,11 +6,9 @@ import { useState, useEffect} from "react"
 
 export default function ManagementPage() {
 
-const [authorized, setAuthorized] =
-  useState(false)
-
-const [password, setPassword] =
-  useState("")
+const [password, setPassword] = useState("")
+const [authorized, setAuthorized] = useState(false)
+const [showPassword, setShowPassword] = useState(false)
 
 const [editingOffer,setEditingOffer] =
   useState<any>(null)
@@ -768,131 +766,142 @@ async function updateOffer() {
 
 if (!authorized) {
 
-  return (
+return (
+  <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0B1220]">
 
-<div className="flex min-h-screen items-center justify-center bg-[#0B1220]">
+    <div className="absolute top-0 left-0 h-[500px] w-[500px] rounded-full bg-orange-500/10 blur-[140px]" />
+    <div className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-purple-500/10 blur-[140px]" />
 
-  <div className="w-full max-w-md">
+    <div className="relative z-10 w-full max-w-md px-6">
 
-    <div className="mb-8 text-center">
+      <div className="mb-10 text-center">
 
-      <h1 className="text-5xl font-bold">
+        <h1 className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-6xl font-bold text-transparent">
+          VIROXA
+        </h1>
 
-        VIROXA
-
-      </h1>
-
-      <p className="mt-3 text-slate-400">
-
-        Affiliate Tracking Platform
-
-      </p>
-
-    </div>
-
-    <div className="rounded-3xl border border-slate-800 bg-[#111827] p-8">
-
-      <div className="mb-6 text-center">
-
-        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600">
-
-          🔒
-
-        </div>
-
-        <h2 className="text-2xl font-semibold">
-
-          Management Access
-
-        </h2>
-
-        <p className="mt-2 text-sm text-slate-400">
-
-          Secure dashboard authentication
-
+        <p className="mt-3 text-slate-400">
+          Affiliate Tracking Platform
         </p>
 
       </div>
 
-      <input
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-2xl shadow-[0_0_60px_rgba(0,0,0,0.35)]">
 
-        type="password"
+        <div className="mb-8 text-center">
 
-        value={password}
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 shadow-[0_0_25px_rgba(249,115,22,0.35)]">
 
-        onChange={(e) =>
-          setPassword(
-            e.target.value
-          )
-        }
+            🔒
 
-        placeholder="Enter Password"
+          </div>
 
-        className="
-          mb-4
-          w-full
-          rounded-xl
-          border
-          border-slate-700
-          bg-slate-900
-          p-4
-          outline-none
-        "
+          <h2 className="text-2xl font-semibold text-white">
+            Management Access
+          </h2>
 
-      />
+          <p className="mt-2 text-sm text-slate-400">
+            Secure dashboard authentication
+          </p>
 
-      <button
+        </div>
 
-        onClick={() => {
+        <div className="relative mb-5">
 
-          if (
-            password ===
-            "Habiburrohman89"
-          ) {
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter Password"
+            className="
+              w-full
+              rounded-2xl
+              border
+              border-white/10
+              bg-white/5
+              px-5
+              py-4
+              pr-14
+              text-white
+              placeholder:text-slate-500
+              outline-none
+              transition-all
+              duration-300
+              focus:border-orange-500/50
+              focus:bg-white/10
+              focus:shadow-[0_0_25px_rgba(249,115,22,0.15)]
+            "
+          />
 
-            setAuthorized(
-              true
-            )
+          <button
+            type="button"
+            onClick={() =>
+              setShowPassword(!showPassword)
+            }
+            className="
+              absolute
+              right-4
+              top-1/2
+              -translate-y-1/2
+              text-slate-400
+              hover:text-orange-400
+              transition-colors
+            "
+          >
+            {showPassword ? "🙈" : "👁"}
+          </button>
 
-          } else {
+        </div>
 
-            alert(
-              "Wrong Password"
-            )
+        <button
+          onClick={() => {
 
-          }
+            if (
+              password ===
+              "Habiburrohman89"
+            ) {
 
-        }}
+              setAuthorized(true)
 
-        className="
-          w-full
-          rounded-xl
-          bg-blue-600
-          py-4
-          font-medium
-          transition
-          hover:bg-blue-500
-        "
+            } else {
 
-      >
+              alert("Wrong Password")
 
-        Access Management
+            }
 
-      </button>
+          }}
+          className="
+            w-full
+            rounded-2xl
+            bg-gradient-to-r
+            from-orange-500
+            to-orange-600
+            py-4
+            font-semibold
+            text-white
+            transition-all
+            duration-300
+            hover:scale-[1.02]
+            hover:from-orange-400
+            hover:to-orange-500
+            shadow-[0_0_30px_rgba(249,115,22,0.35)]
+            hover:shadow-[0_0_50px_rgba(249,115,22,0.55)]
+            active:scale-[0.98]
+          "
+        >
+          Access Management
+        </button>
+
+      </div>
+
+      <p className="mt-8 text-center text-xs text-slate-500">
+        VIROXA Tracker © 2026
+      </p>
 
     </div>
 
-    <p className="mt-6 text-center text-xs text-slate-500">
-
-      Viroxa Tracker © 2026
-
-    </p>
-
   </div>
-
-</div>
-
-  )
+)
 
 }
 
