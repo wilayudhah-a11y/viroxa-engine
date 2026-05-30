@@ -572,7 +572,7 @@ className={`
       </h2>
 
       <p className="text-sm text-slate-400">
-        Live conversion activity
+        Showing latest 15 conversions
       </p>
 
     </div>
@@ -617,8 +617,16 @@ className={`
 
 <tbody>
 
-  {conversions.map(
-    (conversion:any,index:number) => (
+{conversions
+
+      
+  .slice(0, 15)
+
+  .map(
+    (
+      conversion:any,
+      index:number
+    ) => (
 
       <tr
         key={index}
@@ -823,7 +831,7 @@ className={`
       </h1>
 
       <p className="mt-2 text-slate-400">
-        Conversion activity
+        Showing latest 15 conversions
       </p>
 
     </div>
