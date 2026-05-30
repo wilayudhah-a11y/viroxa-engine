@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+
 import {
   useState,
   useEffect
@@ -7,6 +9,12 @@ import {
 
 
 export default function ManagementPage() {
+
+const [authorized, setAuthorized] =
+  useState(false)
+
+const [password, setPassword] =
+  useState("")
 
 const [editingOffer,setEditingOffer] =
   useState<any>(null)
@@ -759,6 +767,88 @@ async function updateOffer() {
     setShowCreateOffer(false)
 
   }
+
+}
+
+if (!authorized) {
+
+  return (
+
+    <div className="flex min-h-screen items-center justify-center bg-[#0B1220]">
+
+      <div className="w-full max-w-md rounded-xl border border-slate-800 bg-[#111827] p-6">
+
+        <h1 className="mb-4 text-2xl font-bold">
+          Management Access
+        </h1>
+
+        <input
+
+          type="password"
+
+          value={password}
+
+          onChange={(e) =>
+            setPassword(
+              e.target.value
+            )
+          }
+
+          placeholder="Password"
+
+          className="
+            mb-4
+            w-full
+            rounded-xl
+            border
+            border-slate-700
+            bg-slate-900
+            p-3
+          "
+
+        />
+
+        <button
+
+          onClick={() => {
+
+            if (
+              password ===
+              "Habiburrohman89"
+            ) {
+
+              setAuthorized(
+                true
+              )
+
+            } else {
+
+              alert(
+                "Wrong Password"
+              )
+
+            }
+
+          }}
+
+          className="
+            w-full
+            rounded-xl
+            bg-blue-600
+            py-3
+          "
+
+        >
+
+          Enter
+
+        </button>
+
+      </div>
+
+    </div>
+
+  )
 
 }
 
