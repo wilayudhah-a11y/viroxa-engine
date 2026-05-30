@@ -1,0 +1,119 @@
+import { NextResponse }
+from "next/server"
+
+import { supabase }
+from "@/lib/supabase"
+
+export async function GET(
+  request: Request,
+  {
+    params
+  }: {
+    params: Promise<{
+      slug:string
+    }>
+  }
+) {
+
+  const { slug } =
+    await params
+
+  const url =
+    new URL(
+      request.url
+    )
+
+  const clickid =
+    url.searchParams.get(
+      "click_id"
+    )
+
+  const payout =
+    Number(
+      url.searchParams.get(
+        "payout"
+      ) || 0
+    )
+
+  if (!clickid) {
+
+    return new NextResponse(
+      "Missing click_id",
+      {
+        status:400
+      }
+    )
+
+  }
+
+  const { data: campaign }
+    = await supabase
+
+      .from("campaigns")
+
+      .select("*")
+
+      .eq(
+        "slug",
+        slug
+      )
+
+      .single()
+
+  if (!campaign) {
+
+    return new NextResponse(
+      "Campaign Not Found",
+      {
+        status:404
+      }
+    )
+
+  }
+
+  const { error } =
+    await supabase
+
+      .from("conversions")
+
+      .insert({
+
+        clickid,
+
+        campaign:
+          campaign.name,
+
+        payout,
+
+        status:
+          "approved",
+
+        country:
+          "unknown",
+
+        device:
+          "unknown",
+
+        ip:
+          "unknown"
+
+      })
+
+  if (error) {
+
+    return NextResponse.json({
+
+      success:false,
+
+      error:
+        error.message
+
+    })
+
+  }
+
+  return new NextResponse(
+    "OK"
+  )
+
+}
