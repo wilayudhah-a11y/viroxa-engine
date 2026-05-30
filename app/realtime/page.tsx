@@ -298,7 +298,7 @@ className={`
 
   {/* TOP CARDS */}
 
-  <div className="grid grid-cols-3 gap-3">
+  <div className="grid grid-cols-4 gap-3">
 
     <div className="rounded-xl border border-slate-800 bg-[#111827] p-4">
 
@@ -335,6 +335,28 @@ className={`
       </h2>
 
     </div>
+
+<div className="rounded-xl border border-slate-800 bg-[#111827] p-4">
+
+  <p className="text-slate-400 text-sm">
+    CR %
+  </p>
+
+  <h2 className="text-xl font-bold mt-2">
+
+    {(
+      (
+        stats.conversions /
+        Math.max(
+          stats.clicks,
+          1
+        )
+      ) * 100
+    ).toFixed(2)}%
+
+  </h2>
+
+</div>
 
   </div>
 
