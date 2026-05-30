@@ -546,7 +546,7 @@ className={`
 
         <tbody>
 
-          {clicks
+{clicks
   .filter((click:any) =>
     click.campaign
       ?.toLowerCase()
@@ -554,6 +554,9 @@ className={`
         search.toLowerCase()
       )
   )
+
+  .slice(0, 50)
+
   .map(
             (
               click:any,
@@ -922,7 +925,7 @@ className={`
 <div className="space-y-3">
 
   {clicks
-    .slice(0,10)
+    .slice(0,5)
     .map((click:any,index:number) => (
 
       <div
