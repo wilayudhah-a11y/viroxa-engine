@@ -155,31 +155,92 @@ const [activeTab, setActiveTab] =
 
 <div className="flex-1 overflow-y-auto p-3 space-y-4">
 
-  <div
-    onClick={() => setActiveTab("dashboard")}
-    className="flex cursor-pointer items-center gap-2 rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-2 text-sm text-blue-400"
-  >
+<div
+  onClick={() =>
+    setActiveTab("dashboard")
+  }
+  className={`
+    flex
+    cursor-pointer
+    items-center
+    gap-2
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab === "dashboard"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+  `}
+>
     <div className="h-2 w-2 rounded-full bg-blue-400" />
     Dashboard
   </div>
 
   <div
     onClick={() => setActiveTab("clicks")}
-    className="cursor-pointer rounded-lg border border-blue-500/20 px-3 py-2 text-sm text-slate-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/10"
+className={`
+  cursor-pointer
+  rounded-lg
+  px-3
+  py-2
+  text-sm
+
+  ${
+    activeTab === "clicks"
+
+      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+      : "border border-slate-800 text-slate-400"
+  }
+`}
   >
     Clicks
   </div>
 
   <div
     onClick={() => setActiveTab("conversions")}
-    className="cursor-pointer rounded-lg border border-blue-500/20 px-3 py-2 text-sm text-slate-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/10"
+className={`
+  cursor-pointer
+  rounded-lg
+  px-3
+  py-2
+  text-sm
+
+  ${
+    activeTab === "conversions"
+
+      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+      : "border border-slate-800 text-slate-400"
+  }
+`}
   >
     Conversions
   </div>
 
   <div
     onClick={() => setActiveTab("reports")}
-    className="cursor-pointer rounded-lg border border-blue-500/20 px-3 py-2 text-sm text-slate-400 hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-cyan-500/10"
+className={`
+  cursor-pointer
+  rounded-lg
+  px-3
+  py-2
+  text-sm
+
+  ${
+    activeTab === "reports"
+
+      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+      : "border border-slate-800 text-slate-400"
+  }
+`}
   >
     Reports
   </div>
