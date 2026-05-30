@@ -1,199 +1,197 @@
-"use client"
-
-import { useEffect, useState }
-
-from "react"
-
-export default function Home() {
-
-const [
-  conversions,
-  setConversions
-] = useState<any[]>([])
-
-
-
-  const [stats, setStats] =
-    useState({
-
-      clicks: 0,
-
-      conversions: 0,
-
-      revenue: 0,
-
-      cr: 0,
-
-    })
-
-  useEffect(() => {
-
-    async function fetchStats() {
-	
-	const conversionsRes =
-  await fetch(
-    "/api/conversions"
-  )
-
-const conversionsData:any =
-  await conversionsRes.json()
-
-setConversions(
-  conversionsData
-    .conversions || []
-)
-
-      const res =
-        await fetch(
-          "/api/stats"
-        )
-
-      const data:any =
-        await res.json()
-
-      setStats(data)
-
-    }
-
-    fetchStats()
-
-  }, [])
+export default function HomePage() {
 
   return (
 
-    <div className="min-h-screen bg-[#0f172a] text-white p-10">
+    <div className="min-h-screen bg-[#0B1220] text-white">
 
-      <h1 className="text-4xl font-bold mb-10">
+      {/* HEADER */}
 
-        Viroxa Tracker
+      <header className="border-b border-slate-800">
 
-      </h1>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <h1 className="text-2xl font-bold">
+            VIROXA
+          </h1>
 
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div className="flex gap-3">
 
-          <p className="text-sm text-gray-400 mb-2">
+            <a
+              href="/management"
+              className="
+                rounded-xl
+                border
+                border-slate-700
+                px-4
+                py-2
+                text-sm
+              "
+            >
+              Management
+            </a>
 
-            Total Clicks
-
-          </p>
-
-          <h2 className="text-4xl font-bold">
-
-            {stats.clicks}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-
-          <p className="text-sm text-gray-400 mb-2">
-
-            Conversions
-
-          </p>
-
-          <h2 className="text-4xl font-bold">
-
-            {stats.conversions}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-
-          <p className="text-sm text-gray-400 mb-2">
-
-            Revenue
-
-          </p>
-
-          <h2 className="text-4xl font-bold text-green-400">
-
-            ${stats.revenue}
-
-          </h2>
-
-        </div>
-
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-
-          <p className="text-sm text-gray-400 mb-2">
-
-            CR
-
-          </p>
-
-          <h2 className="text-4xl font-bold text-orange-400">
-
-            {stats.cr}%
-
-          </h2>
-
-        </div>
-<div className="mt-10">
-
-  <h2 className="text-2xl font-bold mb-6">
-
-    Live Conversions
-
-  </h2>
-
-  <div className="space-y-4">
-
-    {conversions.map(
-      (item, index) => (
-
-        <div
-          key={index}
-          className="bg-white/5 border border-white/10 rounded-2xl p-5 flex items-center justify-between"
-        >
-
-          <div>
-
-            <p className="text-green-400 font-semibold">
-
-              New Conversion
-
-            </p>
-
-            <p className="text-sm text-gray-400">
-
-              {item.clickid}
-
-            </p>
-
-          </div>
-
-          <div className="text-right">
-
-            <p className="text-xl font-bold text-green-400">
-
-              ${item.payout}
-
-            </p>
-
-            <p className="text-xs text-gray-400">
-
-              {item.status}
-
-            </p>
+            <a
+              href="/realtime"
+              className="
+                rounded-xl
+                bg-blue-600
+                px-4
+                py-2
+                text-sm
+              "
+            >
+              Realtime
+            </a>
 
           </div>
 
         </div>
 
-      )
-    )}
+      </header>
 
-  </div>
+      {/* HERO */}
 
-</div>
+      <section className="mx-auto max-w-7xl px-6 py-24">
 
-      </div>
+        <div className="max-w-3xl">
+
+          <div className="mb-4 inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm text-blue-400">
+
+            Affiliate Tracking Platform
+
+          </div>
+
+          <h1 className="text-6xl font-bold leading-tight">
+
+            Track Every Click.
+            <br />
+            Optimize Every Conversion.
+
+          </h1>
+
+          <p className="mt-6 text-lg text-slate-400">
+
+            Modern self-hosted affiliate tracker
+            built for media buyers, affiliates,
+            agencies and performance marketers.
+
+          </p>
+
+          <div className="mt-8 flex gap-4">
+
+            <a
+              href="/management"
+              className="
+                rounded-xl
+                bg-blue-600
+                px-6
+                py-3
+                font-medium
+              "
+            >
+              Open Dashboard
+            </a>
+
+            <a
+              href="/realtime"
+              className="
+                rounded-xl
+                border
+                border-slate-700
+                px-6
+                py-3
+              "
+            >
+              View Realtime
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* FEATURES */}
+
+      <section className="mx-auto max-w-7xl px-6 pb-24">
+
+        <div className="grid gap-6 md:grid-cols-4">
+
+          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+            <h3 className="mb-3 text-lg font-semibold">
+              Click Tracking
+            </h3>
+
+            <p className="text-sm text-slate-400">
+
+              Capture every click with
+              unique click IDs and
+              realtime logging.
+
+            </p>
+
+          </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+            <h3 className="mb-3 text-lg font-semibold">
+              Conversion Tracking
+            </h3>
+
+            <p className="text-sm text-slate-400">
+
+              Receive postbacks and
+              attribute conversions
+              accurately.
+
+            </p>
+
+          </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+            <h3 className="mb-3 text-lg font-semibold">
+              Realtime Analytics
+            </h3>
+
+            <p className="text-sm text-slate-400">
+
+              Monitor clicks,
+              conversions and revenue
+              in realtime.
+
+            </p>
+
+          </div>
+
+          <div className="rounded-2xl border border-slate-800 bg-[#111827] p-6">
+
+            <h3 className="mb-3 text-lg font-semibold">
+              Custom Tracker
+            </h3>
+
+            <p className="text-sm text-slate-400">
+
+              Built for affiliate
+              marketers who want
+              full control.
+
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+
+      <footer className="border-t border-slate-800 py-8 text-center text-sm text-slate-500">
+
+        © 2026 Viroxa Tracker
+
+      </footer>
 
     </div>
 
