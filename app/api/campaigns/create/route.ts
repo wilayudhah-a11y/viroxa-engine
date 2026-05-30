@@ -27,7 +27,7 @@ export async function POST(
     `${appUrl}/c/${slug}`
 
   const postbackUrl =
-    `${appUrl}/api/postback/${slug}`
+    `${appUrl}/postback/${slug}?click_id=<click_id>&payout=<payout>&status=approved`
 
   const { data, error } =
     await supabase
