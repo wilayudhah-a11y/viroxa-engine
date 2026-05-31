@@ -1,10 +1,14 @@
-import { NextResponse }
-from "next/server"
-
-import { supabase }
-from "@/lib/supabase"
-
 export async function GET() {
+
+  const today =
+    new Date()
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  )
 
   const {
     count: clicks
@@ -17,6 +21,11 @@ export async function GET() {
       head: true,
     })
 
+    .gte(
+      "created_at",
+      today.toISOString()
+    )
+
   const {
     data: conversions
   } = await supabase
@@ -24,6 +33,11 @@ export async function GET() {
     .from("conversions")
 
     .select("*")
+
+    .gte(
+      "created_at",
+      today.toISOString()
+    )
 
   const totalConversions =
     conversions?.length || 0
@@ -69,4 +83,3 @@ export async function GET() {
   })
 
 }
-

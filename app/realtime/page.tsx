@@ -619,8 +619,12 @@ className={`
 
         <tr className="border-b border-slate-800 text-slate-400">
 		
-		<th className="text-left py-3">
-  Time
+<th className="p-4 text-left">
+  GMT
+</th>
+
+<th className="p-4 text-left">
+  WIB
 </th>
 
 <th className="text-left py-3">
@@ -669,13 +673,32 @@ className={`
         className="border-b border-slate-900"
       >
 
-        <td className="py-3">
+<td className="p-4 text-slate-400">
 
-          {new Date(
-            conversion.created_at
-          ).toLocaleTimeString()}
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:"UTC"
+    }
+  )}
 
-        </td>
+</td>
+
+<td className="p-4 text-slate-400">
+
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:
+        "Asia/Jakarta"
+    }
+  )}
+
+</td>
 
 <td>
   {conversion.campaign}
@@ -769,9 +792,13 @@ className={`
 
           <tr className="border-b border-slate-800 text-slate-400">
 
-			<th className="p-4 text-left">
-			Time
-			</th>
+<th className="p-4 text-left">
+  GMT
+</th>
+
+<th className="p-4 text-left">
+  WIB
+</th>
 			
 			<th className="p-4 text-left">
 			Campaign
@@ -821,13 +848,32 @@ className={`
   className="border-b border-slate-900"
 >
 
-  <td className="p-4 text-slate-400">
+<td className="p-4 text-slate-400">
 
-    {new Date(
-      click.created_at
-    ).toLocaleTimeString()}
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:"UTC"
+    }
+  )}
 
-  </td>
+</td>
+
+<td className="p-4 text-slate-400">
+
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:
+        "Asia/Jakarta"
+    }
+  )}
+
+</td>
 
   <td className="p-4 text-blue-400">
     {click.campaign}
@@ -890,9 +936,13 @@ className={`
 
           <tr className="border-b border-slate-800 text-slate-400">
 
-            <th className="text-left py-3">
-              Time
-            </th>
+<th className="p-4 text-left">
+  GMT
+</th>
+
+<th className="p-4 text-left">
+  WIB
+</th>
 
             <th className="text-left py-3">
               Campaign
@@ -935,13 +985,32 @@ className={`
                 className="border-b border-slate-900"
               >
 
-                <td className="py-3">
+<td className="p-4 text-slate-400">
 
-                  {new Date(
-                    conversion.created_at
-                  ).toLocaleTimeString()}
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:"UTC"
+    }
+  )}
 
-                </td>
+</td>
+
+<td className="p-4 text-slate-400">
+
+  {new Date(
+    click.created_at
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:
+        "Asia/Jakarta"
+    }
+  )}
+
+</td>
 
                 <td>
                   {conversion.campaign}

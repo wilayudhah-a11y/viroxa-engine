@@ -6,6 +6,16 @@ from "@/lib/supabase"
 
 export async function GET() {
 
+  const today =
+    new Date()
+
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  )
+
   const { data, error } =
     await supabase
 
@@ -13,9 +23,16 @@ export async function GET() {
 
       .select("*")
 
+      .gte(
+        "created_at",
+        today.toISOString()
+      )
+
       .order(
         "created_at",
-        { ascending: false }
+        {
+          ascending: false
+        }
       )
 
   if (error) {
@@ -40,4 +57,3 @@ export async function GET() {
   })
 
 }
-
