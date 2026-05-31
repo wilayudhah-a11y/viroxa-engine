@@ -338,11 +338,25 @@ const countryStats =
 
   .slice(0,5)
   
+function formatGMT(date:string){
+
+  return new Date(
+    date.replace(" ","T") + "Z"
+  ).toLocaleTimeString(
+    "en-GB",
+    {
+      timeZone:"UTC",
+      hour12:false
+    }
+  )
+
+}
+
 function formatWIB(date:string){
 
   return new Date(
     date.replace(" ","T") + "Z"
-  ).toLocaleString(
+  ).toLocaleTimeString(
     "id-ID",
     {
       timeZone:"Asia/Jakarta",
@@ -684,6 +698,13 @@ className={`
         key={index}
         className="border-b border-slate-900"
       >
+	  
+<td className="p-4 text-slate-400">
+  {formatGMT(
+    conversion.created_at
+  )}
+</td>
+
 <td className="p-4 text-slate-400">
   {formatWIB(
     conversion.created_at
@@ -970,31 +991,17 @@ className={`
               >
 
 <td className="p-4 text-slate-400">
-
-  {new Date(
+  {formatGMT(
     conversion.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:"UTC"
-    }
   )}
-
 </td>
 
 <td className="p-4 text-slate-400">
-
-  {new Date(
+  {formatWIB(
     conversion.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:
-        "Asia/Jakarta"
-    }
   )}
-
 </td>
+
 
                 <td>
                   {conversion.campaign}
