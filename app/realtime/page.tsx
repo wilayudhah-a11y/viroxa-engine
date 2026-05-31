@@ -690,20 +690,6 @@ className={`
   )}
 </td>
 
-<td className="p-4 text-slate-400">
-
-  {new Date(
-    conversion.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:
-        "Asia/Jakarta"
-    }
-  )}
-
-</td>
-
 
 <td>
   {conversion.campaign}
