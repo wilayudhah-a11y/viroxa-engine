@@ -672,11 +672,10 @@ className={`
         key={index}
         className="border-b border-slate-900"
       >
-
 <td className="p-4 text-slate-400">
 
   {new Date(
-    click.created_at
+    conversion.created_at
   ).toLocaleTimeString(
     "en-GB",
     {
@@ -689,7 +688,7 @@ className={`
 <td className="p-4 text-slate-400">
 
   {new Date(
-    click.created_at
+    conversion.created_at
   ).toLocaleTimeString(
     "en-GB",
     {
@@ -697,6 +696,8 @@ className={`
         "Asia/Jakarta"
     }
   )}
+
+</td>
 
 </td>
 
