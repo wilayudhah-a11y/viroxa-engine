@@ -699,7 +699,6 @@ className={`
 
 </td>
 
-</td>
 
 <td>
   {conversion.campaign}
