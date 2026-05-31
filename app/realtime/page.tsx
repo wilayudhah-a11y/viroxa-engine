@@ -304,30 +304,66 @@ return (
 
 }
 
+function getWIBDate(
+  date:string
+){
+
+  const d =
+    new Date(
+      date.replace(
+        " ",
+        "T"
+      )
+    )
+
+  d.setHours(
+    d.getHours() + 7
+  )
+
+  return d
+    .toISOString()
+    .split("T")[0]
+
+}
+
+const today =
+  new Date()
+    .toISOString()
+    .split("T")[0]
+
 const countryStats =
   Object.entries(
 
-    clicks.reduce(
+    clicks
 
-      (
-        acc:any,
-        click:any
-      ) => {
+      .filter(
+        (click:any) =>
+          getWIBDate(
+            click.created_at
+          ) === today
+      )
 
-        const country =
-          click.country ||
-          "Unknown"
+      .reduce(
 
-        acc[country] =
-          (acc[country] || 0) + 1
+        (
+          acc:any,
+          click:any
+        ) => {
 
-        return acc
+          const country =
+            click.country ||
+            "Unknown"
 
-      },
+          acc[country] =
+            (acc[country] || 0) + 1
 
-      {}
+          return acc
 
-    )
+        },
+
+        {}
+
+      )
 
   )
 
