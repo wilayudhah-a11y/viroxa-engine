@@ -862,23 +862,15 @@ className={`
 >
 
 <td className="p-4 text-slate-400">
-  {formatWIB(
+  {formatGMT(
     click.created_at
   )}
 </td>
 
 <td className="p-4 text-slate-400">
-
-  {new Date(
+  {formatWIB(
     click.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:
-        "Asia/Jakarta"
-    }
   )}
-
 </td>
 
   <td className="p-4 text-blue-400">
@@ -1278,9 +1270,9 @@ className={`
 
           <span className="text-xs text-slate-500">
 
-            {new Date(
-              click.created_at
-            ).toLocaleTimeString()}
+{formatWIB(
+  click.created_at
+)}
 
           </span>
 
