@@ -854,16 +854,9 @@ className={`
 >
 
 <td className="p-4 text-slate-400">
-
-  {new Date(
+  {formatWIB(
     click.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:"UTC"
-    }
   )}
-
 </td>
 
 <td className="p-4 text-slate-400">
