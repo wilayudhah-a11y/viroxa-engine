@@ -340,26 +340,26 @@ const countryStats =
   
 function formatGMT(date:string){
 
-  return new Date(
-    date.replace(" ","T") + "Z"
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:"UTC",
-      hour12:false
-    }
+  return date.substring(
+    11,
+    19
   )
 
 }
 
 function formatWIB(date:string){
 
-  return new Date(
-    date.replace(" ","T") + "Z"
-  ).toLocaleTimeString(
+  const d = new Date(
+    date.replace(" ","T")
+  )
+
+  d.setHours(
+    d.getHours() + 7
+  )
+
+  return d.toLocaleTimeString(
     "id-ID",
     {
-      timeZone:"Asia/Jakarta",
       hour12:false
     }
   )
@@ -712,6 +712,7 @@ className={`
 </td>
 
 
+
 <td>
   {conversion.campaign}
 </td>
@@ -1001,6 +1002,7 @@ className={`
     conversion.created_at
   )}
 </td>
+
 
 
                 <td>
