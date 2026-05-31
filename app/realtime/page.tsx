@@ -338,7 +338,19 @@ const countryStats =
 
   .slice(0,5)
   
+function formatWIB(date:string){
 
+  return new Date(
+    date.replace(" ","T") + "Z"
+  ).toLocaleString(
+    "id-ID",
+    {
+      timeZone:"Asia/Jakarta",
+      hour12:false
+    }
+  )
+
+}
 
   return (
 
@@ -673,16 +685,9 @@ className={`
         className="border-b border-slate-900"
       >
 <td className="p-4 text-slate-400">
-
-  {new Date(
+  {formatWIB(
     conversion.created_at
-  ).toLocaleTimeString(
-    "en-GB",
-    {
-      timeZone:"UTC"
-    }
   )}
-
 </td>
 
 <td className="p-4 text-slate-400">
