@@ -16,12 +16,18 @@ export async function GET() {
     0
   )
 
-const { data, error } =
+const {
+  data,
+  error,
+  count
+} =
   await supabase
 
     .from("clicks")
 
-    .select("*")
+    .select("*", {
+      count: "exact"
+    })
 
     .gte(
       "created_at",
