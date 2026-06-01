@@ -457,6 +457,10 @@ const filteredClicks =
     }
   )
 
+console.log(
+  filteredClicks.length
+)
+
 const campaignReports:any[]  =
   Object.values(
 
