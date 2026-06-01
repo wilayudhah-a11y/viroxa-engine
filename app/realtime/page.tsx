@@ -331,20 +331,29 @@ function getWIBDate(
 
 }
 
-const today =
+const now =
   new Date()
+
+const today =
+  new Date(
+    now.getTime() +
+    (7 * 60 * 60 * 1000)
+  )
     .toISOString()
     .split("T")[0]
-	
+
 const yesterday =
-  new Date()
+  new Date(now)
 
 yesterday.setDate(
   yesterday.getDate() - 1
 )
 
 const yesterdayStr =
-  yesterday
+  new Date(
+    yesterday.getTime() +
+    (7 * 60 * 60 * 1000)
+  )
     .toISOString()
     .split("T")[0]
 
