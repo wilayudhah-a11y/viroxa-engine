@@ -413,10 +413,6 @@ useEffect(() => {
 
 }, [])
 
-console.log(
-  'shortDomain =',
-  shortDomain
-)
 
 useEffect(() => {
 
