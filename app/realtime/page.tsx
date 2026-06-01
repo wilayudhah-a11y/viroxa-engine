@@ -451,17 +451,6 @@ const filteredClicks =
         )
 
       }
-console.log(
-  "RAW:",
-  clicks[0]?.created_at
-)
-
-console.log(
-  "WIB:",
-  getWIBDate(
-    clicks[0]?.created_at || ""
-  )
-)
       return true
 
     }
