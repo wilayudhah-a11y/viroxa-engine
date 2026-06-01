@@ -419,6 +419,21 @@ function formatWIB(date:string){
 
 }
 
+console.log(
+  "TODAY:",
+  today
+)
+
+console.log(
+  "YESTERDAY:",
+  yesterdayStr
+)
+
+console.log(
+  "PERIOD:",
+  reportPeriod
+)
+
 const filteredClicks =
   clicks.filter(
     (click:any) => {
