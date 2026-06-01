@@ -456,10 +456,7 @@ const filteredClicks =
     }
   )
 
-console.log(
-  "TOTAL CLICKS ARRAY:",
-  clicks.length
-)
+
 const campaignReports:any[]  =
   Object.values(
 
