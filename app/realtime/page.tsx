@@ -1273,19 +1273,21 @@ className={`
 
     <p className="mt-1 font-bold">
 
-      {
-        campaignReports.reduce(
-          (
-            total:any,
-            report:any
-          ) =>
+{
+  campaignReports.reduce(
+    (
+      total:number,
+      report:any
+    ) =>
 
-            total +
-            report.visits,
+      total +
+      Number(
+        report.visits || 0
+      ),
 
-          0
-        )
-      }
+    0
+  )
+}
 
     </p>
 
