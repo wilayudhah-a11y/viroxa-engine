@@ -458,6 +458,12 @@ const filteredClicks =
   )
 
 console.log(
+  "ALL CLICKS:",
+  clicks.length
+)
+
+console.log(
+  "FILTERED:",
   filteredClicks.length
 )
 
