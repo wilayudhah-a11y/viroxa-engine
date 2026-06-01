@@ -427,6 +427,13 @@ const filteredClicks =
         getWIBDate(
           click.created_at
         )
+		
+		 console.log(
+        "RAW:",
+        click.created_at,
+        "=>",
+        clickDate
+      )
 
       if(
         reportPeriod ===
