@@ -402,6 +402,105 @@ function formatWIB(date:string){
 
 }
 
+const campaignReports =
+  Object.values(
+
+    clicks.reduce(
+      (
+        acc:any,
+        click:any
+      ) => {
+
+        const campaign =
+          click.campaign ||
+          "Unknown"
+
+        if(
+          !acc[campaign]
+        ){
+
+          acc[campaign] = {
+
+            campaign,
+
+            visits:0,
+
+            conversions:0,
+
+            revenue:0
+
+          }
+
+        }
+
+        acc[campaign]
+          .visits++
+
+        return acc
+
+      },
+
+      {}
+
+    )
+
+  )
+  
+  conversions.forEach(
+  (conversion:any) => {
+
+    const campaign =
+      conversion.campaign ||
+      "Unknown"
+
+    const report:any =
+      campaignReports.find(
+        (item:any) =>
+          item.campaign ===
+          campaign
+      )
+
+    if(report){
+
+      report.conversions++
+
+      report.revenue +=
+        Number(
+          conversion.payout || 0
+        )
+
+    }
+
+  }
+)
+
+campaignReports.forEach(
+  (report:any) => {
+
+    report.cr =
+      report.visits > 0
+
+        ? (
+            report.conversions /
+            report.visits
+          ) * 100
+
+        : 0
+
+    report.epc =
+      report.visits > 0
+
+        ? (
+            report.revenue /
+            report.visits
+          )
+
+        : 0
+
+  }
+)
+
+
   return (
 
 <div className="min-h-screen bg-[#0B1220] text-white">
@@ -1101,20 +1200,26 @@ className={`
 
     <div className="mb-4">
 
-      <input
-        type="text"
-        placeholder="Search Campaign..."
-        className="
-          w-full
-          rounded-xl
-          border
-          border-slate-800
-          bg-[#111827]
-          px-4
-          py-3
-          outline-none
-        "
-      />
+<input
+  type="text"
+  value={reportSearch}
+  onChange={(e) =>
+    setReportSearch(
+      e.target.value
+    )
+  }
+  placeholder="Search Campaign..."
+  className="
+    w-full
+    rounded-xl
+    border
+    border-slate-800
+    bg-[#111827]
+    px-4
+    py-3
+    outline-none
+  "
+/>
 
     </div>
 
@@ -1145,6 +1250,104 @@ className={`
     </div>
 
     {/* REPORT TABLE */}
+	
+	<div className="mb-4 grid grid-cols-4 gap-3">
+
+  <div className="rounded-lg border border-slate-800 p-3">
+
+    <p className="text-xs text-slate-400">
+      Campaigns
+    </p>
+
+    <p className="mt-1 font-bold">
+      {campaignReports.length}
+    </p>
+
+  </div>
+
+  <div className="rounded-lg border border-slate-800 p-3">
+
+    <p className="text-xs text-slate-400">
+      Visits
+    </p>
+
+    <p className="mt-1 font-bold">
+
+      {
+        campaignReports.reduce(
+          (
+            total:any,
+            report:any
+          ) =>
+
+            total +
+            report.visits,
+
+          0
+        )
+      }
+
+    </p>
+
+  </div>
+
+  <div className="rounded-lg border border-slate-800 p-3">
+
+    <p className="text-xs text-slate-400">
+      Conv
+    </p>
+
+    <p className="mt-1 font-bold">
+
+      {
+        campaignReports.reduce(
+          (
+            total:any,
+            report:any
+          ) =>
+
+            total +
+            report.conversions,
+
+          0
+        )
+      }
+
+    </p>
+
+  </div>
+
+  <div className="rounded-lg border border-slate-800 p-3">
+
+    <p className="text-xs text-slate-400">
+      Revenue
+    </p>
+
+    <p className="mt-1 font-bold text-green-400">
+
+      $
+
+      {
+        campaignReports
+          .reduce(
+            (
+              total:any,
+              report:any
+            ) =>
+
+              total +
+              report.revenue,
+
+            0
+          )
+          .toFixed(2)
+      }
+
+    </p>
+
+  </div>
+
+</div>
 
     <div className="overflow-x-auto rounded-xl border border-slate-800 bg-[#111827]">
 
@@ -1182,65 +1385,84 @@ className={`
 
         </thead>
 
-        <tbody>
+<tbody>
 
-          <tr className="border-b border-slate-900">
+{campaignReports
 
-            <td className="p-4 text-blue-400">
-              IMO Main
-            </td>
+  .filter(
+    (report:any) =>
 
-            <td className="p-4">
-              245
-            </td>
+      report.campaign
+        ?.toLowerCase()
+        .includes(
+          reportSearch
+            .toLowerCase()
+        )
+  )
 
-            <td className="p-4">
-              12
-            </td>
+  .sort(
+    (a:any,b:any) =>
+      b.revenue - a.revenue
+  )
 
-            <td className="p-4">
-              4.89%
-            </td>
+  .map(
+  (
+    report:any,
+    index:number
+  ) => (
 
-            <td className="p-4">
-              $0.12
-            </td>
+<tr
+  key={index}
+  className="
+    border-b
+    border-slate-900
+  "
+>
 
-            <td className="p-4 text-green-400">
-              $29.00
-            </td>
+<td className="p-4 text-blue-400">
 
-          </tr>
+  {report.campaign}
 
-          <tr className="border-b border-slate-900">
+</td>
 
-            <td className="p-4 text-blue-400">
-              COD Shoes
-            </td>
+<td className="p-4">
 
-            <td className="p-4">
-              180
-            </td>
+  {report.visits}
 
-            <td className="p-4">
-              8
-            </td>
+</td>
 
-            <td className="p-4">
-              4.44%
-            </td>
+<td className="p-4">
 
-            <td className="p-4">
-              $0.18
-            </td>
+  {report.conversions}
 
-            <td className="p-4 text-green-400">
-              $32.00
-            </td>
+</td>
 
-          </tr>
+<td className="p-4">
 
-        </tbody>
+  {report.cr.toFixed(2)}%
+
+</td>
+
+<td className="p-4">
+
+  $
+  {report.epc.toFixed(3)}
+
+</td>
+
+<td className="p-4 text-green-400">
+
+  $
+  {report.revenue.toFixed(2)}
+
+</td>
+
+</tr>
+
+  )
+)}
+
+</tbody>        
 
       </table>
 
