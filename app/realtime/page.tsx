@@ -335,6 +335,18 @@ const today =
   new Date()
     .toISOString()
     .split("T")[0]
+	
+const yesterday =
+  new Date()
+
+yesterday.setDate(
+  yesterday.getDate() - 1
+)
+
+const yesterdayStr =
+  yesterday
+    .toISOString()
+    .split("T")[0]
 
 const countryStats =
   Object.entries(
@@ -407,10 +419,48 @@ function formatWIB(date:string){
 
 }
 
+const filteredClicks =
+  clicks.filter(
+    (click:any) => {
+
+      const clickDate =
+        getWIBDate(
+          click.created_at
+        )
+
+      if(
+        reportPeriod ===
+        "today"
+      ){
+
+        return (
+          clickDate ===
+          today
+        )
+
+      }
+
+      if(
+        reportPeriod ===
+        "yesterday"
+      ){
+
+        return (
+          clickDate ===
+          yesterdayStr
+        )
+
+      }
+
+      return true
+
+    }
+  )
+
 const campaignReports:any[]  =
   Object.values(
 
-    clicks.reduce(
+    filteredClicks.reduce(
       (
         acc:any,
         click:any
