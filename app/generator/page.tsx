@@ -413,6 +413,11 @@ useEffect(() => {
 
 }, [])
 
+console.log(
+  'shortDomain =',
+  shortDomain
+)
+
 useEffect(() => {
 
   async function loadShortDomains() {
