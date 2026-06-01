@@ -22,7 +22,12 @@ const [conversions, setConversions] =
   
   const [search, setSearch] =
   useState("")
-  
+
+const [
+  reportPeriod,
+  setReportPeriod
+] = useState("today")
+
 const [reportSearch, setReportSearch] =
   useState("")
 
@@ -1227,13 +1232,65 @@ className={`
 
     <div className="mb-4 flex flex-wrap gap-2">
 
-      <button className="rounded-lg border border-blue-500/20 bg-blue-500/10 px-3 py-1 text-xs text-blue-400">
-        Today
-      </button>
+<button
 
-      <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
-        Yesterday
-      </button>
+  onClick={() =>
+    setReportPeriod(
+      "today"
+    )
+  }
+
+  className={`
+    rounded-lg
+    px-3
+    py-1
+    text-xs
+
+    ${
+      reportPeriod ===
+      "today"
+
+      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+      : "border border-slate-800 text-slate-400"
+    }
+  `}
+
+>
+
+  Today
+
+</button>
+
+<button
+
+  onClick={() =>
+    setReportPeriod(
+      "yesterday"
+    )
+  }
+
+  className={`
+    rounded-lg
+    px-3
+    py-1
+    text-xs
+
+    ${
+      reportPeriod ===
+      "yesterday"
+
+      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+      : "border border-slate-800 text-slate-400"
+    }
+  `}
+
+>
+
+  Yesterday
+
+</button>
 
       <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
         Last 7 Days
