@@ -16,24 +16,29 @@ export async function GET() {
     0
   )
 
-  const { data, error } =
-    await supabase
+const { data, error } =
+  await supabase
 
-      .from("clicks")
+    .from("clicks")
 
-      .select("*")
+    .select("*")
 
-      .gte(
-        "created_at",
-        today.toISOString()
-      )
+    .gte(
+      "created_at",
+      today.toISOString()
+    )
 
-      .order(
-        "created_at",
-        {
-          ascending: false
-        }
-      )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    )
+
+    .range(
+      0,
+      5000
+    )
 
   if (error) {
 
