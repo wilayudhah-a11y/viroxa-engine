@@ -55,17 +55,20 @@ console.log(
 console.log(
   "SUPABASE DATA:",
   data?.length
-) if (error) {
-    return NextResponse.json({
+)
 
-      success: false,
+if (error) {
 
-      error:
-        error.message,
+  return NextResponse.json({
 
-    })
+    success: false,
 
-  }
+    error:
+      error.message,
+
+  })
+
+}
 
 return NextResponse.json({
 
