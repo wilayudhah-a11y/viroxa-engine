@@ -46,8 +46,16 @@ const {
       5000
     )
 
-  if (error) {
+ 
+console.log(
+  "SUPABASE COUNT:",
+  count
+)
 
+console.log(
+  "SUPABASE DATA:",
+  data?.length
+) if (error) {
     return NextResponse.json({
 
       success: false,
