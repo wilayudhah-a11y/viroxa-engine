@@ -609,7 +609,7 @@ setShortening(true)
       }
     )
 
-  const data =
+  const data: any =
     await response.json()
 
   if (!data.success) {
