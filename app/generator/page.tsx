@@ -349,6 +349,21 @@ useEffect(() => {
   setSelectedDomain] =
     useState('random')
 
+const [
+  shortDomains,
+  setShortDomains
+] = useState<any[]>([])
+
+const [
+  shortDomain,
+  setShortDomain
+] = useState('random')
+
+const [
+  shortening,
+  setShortening
+] = useState(false)
+
   const [generatedLinks, setGeneratedLinks] =
     useState<string[]>([])
 		const [loading, setLoading] =
@@ -395,6 +410,32 @@ useEffect(() => {
   }
 
   loadDomains()
+
+}, [])
+
+useEffect(() => {
+
+  async function loadShortDomains() {
+
+    const response =
+      await fetch(
+        'https://go.viroxa.io/api/domains.php'
+      )
+
+    const data =
+      await response.json()
+
+    if(data.success){
+
+      setShortDomains(
+        data.domains
+      )
+
+    }
+
+  }
+
+  loadShortDomains()
 
 }, [])
   
@@ -529,7 +570,65 @@ async function copyAll() {
     setCopied(false)
   }, 2000)
 }
-  
+
+async function handleShortLink() {
+
+setShortening(true)
+
+  if (
+    generatedLinks.length === 0
+  ) {
+    return
+  }
+
+  const formData =
+    new FormData()
+
+  generatedLinks.forEach(
+    (url) => {
+
+      formData.append(
+        'urls[]',
+        url
+      )
+
+    }
+  )
+
+  formData.append(
+    'domain',
+    shortDomain
+  )
+
+  const response =
+    await fetch(
+      'https://go.viroxa.io/api/shorten.php',
+      {
+        method: 'POST',
+        body: formData
+      }
+    )
+
+  const data =
+    await response.json()
+
+  if (!data.success) {
+
+    alert(
+      data.message ||
+      'Shorten failed'
+    )
+
+    return
+  }
+
+  setGeneratedLinks(
+    data.links
+	
+  )
+setShortening(false)
+}
+
   function unlock() {
   if (password === 'viroxa2026') {
     setAccess(true)
@@ -916,6 +1015,55 @@ if (!access) {
 						📋 Copy
 					</button>
 					)}
+					
+
+{generatedLinks.length > 0 && (
+
+<select
+  value={shortDomain}
+  onChange={(e) =>
+    setShortDomain(
+      e.target.value
+    )
+  }
+  className="px-3 py-1.5 text-xs rounded-xl bg-black/20 border border-white/10"
+>
+  <option value="random">
+    Random Short
+  </option>
+
+  {shortDomains.map((item) => (
+
+    <option
+      key={item.id}
+      value={item.domain}
+    >
+      {item.domain
+        .replace('https://','')
+        .replace('/','')}
+    </option>
+
+  ))}
+
+</select>
+
+)}			
+					{generatedLinks.length > 0 && (
+  <button
+  onClick={handleShortLink}
+  disabled={shortening}
+    className="px-3 py-1.5 text-xs rounded-xl bg-cyan-600 hover:bg-cyan-500 transition font-semibold shadow-lg shadow-cyan-900/40"
+  >
+    {
+    shortening
+      ? 'Shortening...'
+      : '🔗 Short Link'
+  }
+  </button>
+  
+)}
+
+					
 				</div>
 			
 				</div>
