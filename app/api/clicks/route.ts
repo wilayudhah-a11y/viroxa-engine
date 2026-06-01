@@ -67,12 +67,17 @@ console.log(
 
   }
 
-  return NextResponse.json({
+return NextResponse.json({
 
-    success: true,
+  success: true,
 
-    clicks: data,
+  count,
 
-  })
+  total:
+    data?.length,
+
+  clicks: data,
+
+})
 
 }
