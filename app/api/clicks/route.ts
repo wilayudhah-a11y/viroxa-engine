@@ -16,71 +16,53 @@ export async function GET() {
     0
   )
 
-const {
-  data,
-  error,
-  count
-} =
-  await supabase
+  const {
+    data,
+    error
+  } =
+    await supabase
 
-    .from("clicks")
+      .from("clicks")
 
-    .select("*", {
-      count: "exact"
+      .select("*")
+
+      .gte(
+        "created_at",
+        today.toISOString()
+      )
+
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      )
+
+      .range(
+        0,
+        5000
+      )
+
+  if (error) {
+
+    return NextResponse.json({
+
+      success: false,
+
+      error:
+        error.message,
+
     })
 
-    .gte(
-      "created_at",
-      today.toISOString()
-    )
-
-    .order(
-      "created_at",
-      {
-        ascending: false
-      }
-    )
-
-    .range(
-      0,
-      5000
-    )
-
- 
-console.log(
-  "SUPABASE COUNT:",
-  count
-)
-
-console.log(
-  "SUPABASE DATA:",
-  data?.length
-)
-
-if (error) {
+  }
 
   return NextResponse.json({
 
-    success: false,
+    success: true,
 
-    error:
-      error.message,
+    clicks:
+      data || [],
 
   })
-
-}
-
-return NextResponse.json({
-
-  success: true,
-
-  count,
-
-  total:
-    data?.length,
-
-  clicks: data,
-
-})
 
 }

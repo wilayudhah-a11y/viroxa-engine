@@ -555,27 +555,6 @@ campaignReports.forEach(
   }
 )
 
-console.log(
-  "CLICKS:",
-  clicks.length
-)
-
-console.log(
-  "FILTERED:",
-  filteredClicks.length
-)
-
-console.log(
-  "REPORT VISITS:",
-  campaignReports.reduce(
-    (
-      total:number,
-      report:any
-    ) =>
-      total + report.visits,
-    0
-  )
-)
 
   return (
 
@@ -1399,9 +1378,25 @@ className={`
     Visits
   </p>
 
-  <p className="mt-1 font-bold">
-    {stats.clicks}
-  </p>
+<p className="mt-1 font-bold">
+
+  {
+    campaignReports.reduce(
+      (
+        total:number,
+        report:any
+      ) =>
+
+        total +
+        Number(
+          report.visits || 0
+        ),
+
+      0
+    )
+  }
+
+</p>
 
 </div>
 
