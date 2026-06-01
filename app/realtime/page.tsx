@@ -1393,33 +1393,17 @@ className={`
 
   </div>
 
-  <div className="rounded-lg border border-slate-800 p-3">
+<div className="rounded-lg border border-slate-800 p-3">
 
-    <p className="text-xs text-slate-400">
-      Visits
-    </p>
+  <p className="text-xs text-slate-400">
+    Visits
+  </p>
 
-    <p className="mt-1 font-bold">
+  <p className="mt-1 font-bold">
+    {stats.clicks}
+  </p>
 
-{
-  campaignReports.reduce(
-    (
-      total:number,
-      report:any
-    ) =>
-
-      total +
-      Number(
-        report.visits || 0
-      ),
-
-    0
-  )
-}
-
-    </p>
-
-  </div>
+</div>
 
   <div className="rounded-lg border border-slate-800 p-3">
 
