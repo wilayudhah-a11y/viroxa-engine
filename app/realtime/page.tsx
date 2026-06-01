@@ -402,7 +402,7 @@ function formatWIB(date:string){
 
 }
 
-const campaignReports =
+const campaignReports:any[]  =
   Object.values(
 
     clicks.reduce(
