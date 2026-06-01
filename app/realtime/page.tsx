@@ -331,29 +331,20 @@ function getWIBDate(
 
 }
 
-const now =
-  new Date()
-
 const today =
-  new Date(
-    now.getTime() +
-    (7 * 60 * 60 * 1000)
-  )
+  new Date()
     .toISOString()
     .split("T")[0]
 
 const yesterday =
-  new Date(now)
+  new Date()
 
 yesterday.setDate(
   yesterday.getDate() - 1
 )
 
 const yesterdayStr =
-  new Date(
-    yesterday.getTime() +
-    (7 * 60 * 60 * 1000)
-  )
+  yesterday
     .toISOString()
     .split("T")[0]
 
@@ -460,7 +451,17 @@ const filteredClicks =
         )
 
       }
+console.log(
+  "RAW:",
+  clicks[0]?.created_at
+)
 
+console.log(
+  "WIB:",
+  getWIBDate(
+    clicks[0]?.created_at || ""
+  )
+)
       return true
 
     }
