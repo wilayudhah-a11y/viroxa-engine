@@ -422,7 +422,7 @@ useEffect(() => {
         'https://go.viroxa.io/api/domains.php'
       )
 
-    const data =
+    const data: any =
       await response.json()
 
     if(data.success){
