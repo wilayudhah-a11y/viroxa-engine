@@ -592,57 +592,56 @@ async function handleShortLink() {
 
   try {
 
-    const shortenedLinks =
-      await Promise.all(
+   const response =
+await fetch(
 
-        generatedLinks.map(
-          async (url) => {
 
-            const response =
-              await fetch(
+"https://go.nice-clu.store/bulk-shorten",
 
-                "https://go.nice-clu.store/shorten",
+{
 
-                {
+  method: "POST",
 
-                  method: "POST",
+  headers: {
 
-                  headers: {
+    "Content-Type":
+      "application/json"
 
-                    "Content-Type":
-                      "application/json",
+  },
 
-                  },
+  body: JSON.stringify({
 
-                  body: JSON.stringify({
+    urls:
+      generatedLinks
 
-                    url
+  })
 
-                  })
+}
 
-                }
 
-              )
-
-            const data:any =
-              await response.json()
-console.log(
-  "SHORTEN RESPONSE",
-  data
 )
-            return (
-              data.short_url ||
-              url
-            )
 
-          }
-        )
+const data:any =
+await response.json()
 
-      )
+if (
 
-    setGeneratedLinks(
-      shortenedLinks
-    )
+!data.success
+
+) {
+
+throw new Error(
+"Bulk shorten failed"
+)
+
+}
+
+setGeneratedLinks(
+
+data.links
+
+)
+ 
 
   } catch (err:any) {
 
