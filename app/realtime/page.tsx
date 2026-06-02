@@ -452,134 +452,135 @@ function formatWIB(date:string){
 }
 
 
-const filteredClicks =
-  clicks.filter(
-    (click:any) => {
+const filteredClicks = clicks.filter(
+  (click: any) => {
 
-      const clickDate =
-        getWIBDate(
-          click.created_at
-        )
-		
-      if(
-        reportPeriod ===
-        "today"
-      ){
-
-        return (
-          clickDate ===
-          today
-        )
-
-      }
-
-      if(
-        reportPeriod ===
-        "yesterday"
-      ){
-
-        return (
-          clickDate ===
-          yesterdayStr
-        )
-
-      }
-	  
-if(
-  reportPeriod ===
-  "last7days"
-){
-
-  const last7 =
-    new Date()
-
-  last7.setDate(
-    last7.getDate() - 7
-  )
-
-  return (
-    new Date(
+    const clickTime = new Date(
       click.created_at
-    ) >= last7
-  )
-
-}
-
-if(
-  reportPeriod ===
-  "thisweek"
-){
-
-  const now =
-    new Date()
-
-  const startOfWeek =
-    new Date(now)
-
-  startOfWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfWeek.setHours(
-    0,0,0,0
-  )
-
-  return (
-    new Date(
-      click.created_at
-    ) >= startOfWeek
-  )
-
-}
-
-if(
-  reportPeriod ===
-  "lastweek"
-){
-
-  const now =
-    new Date()
-
-  const startOfThisWeek =
-    new Date(now)
-
-  startOfThisWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfThisWeek.setHours(
-    0,0,0,0
-  )
-
-  const startOfLastWeek =
-    new Date(
-      startOfThisWeek
     )
 
-  startOfLastWeek.setDate(
-    startOfLastWeek.getDate() - 7
-  )
+    const clickDate =
+      getWIBDate(
+        click.created_at
+      )
 
-  return (
+    if (
+      reportPeriod === "today"
+    ) {
+      return (
+        clickDate === today
+      )
+    }
 
-    new Date(
-      click.created_at
-    ) >= startOfLastWeek &&
+    if (
+      reportPeriod ===
+      "yesterday"
+    ) {
+      return (
+        clickDate ===
+        yesterdayStr
+      )
+    }
 
-    new Date(
-      click.created_at
-    ) < startOfThisWeek
+    if (
+      reportPeriod ===
+      "last7days"
+    ) {
 
-  )
+      const last7 =
+        new Date()
 
-}
-	  
-      return true
+      last7.setDate(
+        last7.getDate() - 6
+      )
+
+      last7.setHours(
+        0, 0, 0, 0
+      )
+
+      return (
+        clickTime >= last7
+      )
 
     }
-  )
+
+    if (
+      reportPeriod ===
+      "thisweek"
+    ) {
+
+      const now =
+        new Date()
+
+      const day =
+        now.getDay() === 0
+          ? 6
+          : now.getDay() - 1
+
+      const startOfWeek =
+        new Date(now)
+
+      startOfWeek.setDate(
+        now.getDate() - day
+      )
+
+      startOfWeek.setHours(
+        0, 0, 0, 0
+      )
+
+      return (
+        clickTime >=
+        startOfWeek
+      )
+
+    }
+
+    if (
+      reportPeriod ===
+      "lastweek"
+    ) {
+
+      const now =
+        new Date()
+
+      const day =
+        now.getDay() === 0
+          ? 6
+          : now.getDay() - 1
+
+      const startOfThisWeek =
+        new Date(now)
+
+      startOfThisWeek.setDate(
+        now.getDate() - day
+      )
+
+      startOfThisWeek.setHours(
+        0, 0, 0, 0
+      )
+
+      const startOfLastWeek =
+        new Date(
+          startOfThisWeek
+        )
+
+      startOfLastWeek.setDate(
+        startOfLastWeek.getDate() - 7
+      )
+
+      return (
+        clickTime >=
+          startOfLastWeek &&
+        clickTime <
+          startOfThisWeek
+      )
+
+    }
+
+    return true
+
+  }
+)
 
 console.log(
   "PERIOD:",
