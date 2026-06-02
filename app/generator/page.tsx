@@ -651,38 +651,6 @@ async function handleShortLink() {
 
 }
 
-  const data: any =
-    await response.json()
-
-  if (!data.success) {
-
-    alert(
-      data.message ||
-      'Shorten failed'
-    )
-
-    return
-  }
-
-  setGeneratedLinks(
-    data.links
-	
-  )
-setShortening(false)
-}
-
-  function unlock() {
-  if (password === 'viroxa2026') {
-    setAccess(true)
-
-    localStorage.setItem(
-      'viroxa_access',
-      'granted'
-    )
-  } else {
-    alert('Wrong password')
-  }
-}
 
 if (!access) {
   return (
