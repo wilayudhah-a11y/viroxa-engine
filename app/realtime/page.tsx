@@ -87,16 +87,14 @@ async function loadConversions() {
 
   try {
 
-    const res =
-      await fetch("/api/conversions");
+const res =
+  await fetch(
+    "/api/report-conversions"
+  );
 
 const data:any =
   await res.json();
 
-console.log(
-  "API CONVERSIONS:",
-  data
-)
 
 setConversions(
   data.conversions || []
