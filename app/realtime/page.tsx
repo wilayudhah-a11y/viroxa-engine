@@ -493,6 +493,10 @@ const filteredClicks = clicks.filter(
       last7.setDate(
         last7.getDate() - 6
       )
+	  console.log(
+  "LAST7 DATE:",
+  last7
+)
 
       last7.setHours(
         0, 0, 0, 0
