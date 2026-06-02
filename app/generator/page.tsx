@@ -620,7 +620,7 @@ async function handleShortLink() {
 
               )
 
-            const data =
+            const data:any =
               await response.json()
 
             return (
