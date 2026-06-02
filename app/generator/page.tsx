@@ -595,31 +595,37 @@ async function handleShortLink() {
    const response =
 await fetch(
 
-
-"https://go.nice-clu.store/bulk-shorten",
+"https://viroxa.fun/api/bulk-shorten.php",
 
 {
 
-  method: "POST",
+method: "POST",
 
-  headers: {
+headers: {
 
-    "Content-Type":
-      "application/json"
 
-  },
+"Content-Type":
+  "application/json"
 
-  body: JSON.stringify({
 
-    urls:
-      generatedLinks
+},
 
-  })
+body: JSON.stringify({
+
+
+urls:
+  generatedLinks,
+
+domain:
+  "go.nice-clu.store"
+
+
+})
 
 }
 
-
 )
+
 
 const data:any =
 await response.json()
