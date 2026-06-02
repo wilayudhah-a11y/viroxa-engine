@@ -531,6 +531,11 @@ if(
     0,0,0,0
   )
 
+console.log(
+  "THISWEEK",
+  startOfWeek
+)
+
   return (
     new Date(
       click.created_at
@@ -539,10 +544,7 @@ if(
 
 }
 
-console.log(
-  "THISWEEK",
-  startOfWeek
-)
+
 
 if(
   reportPeriod ===
