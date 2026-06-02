@@ -421,7 +421,10 @@ useEffect(() => {
 useEffect(() => {
 
   async function loadShortDomains() {
-
+console.log(
+  "SHORT DOMAIN",
+  shortDomain
+)
     const response =
       await fetch(
         'https://go.nice-clu.store/domains'
