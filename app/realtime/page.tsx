@@ -1640,13 +1640,13 @@ className={`
 		className={`rounded-lg px-3 py-1 text-xs
 	    ${
 		reportPeriod ===
-		"This Week"
+		"thisweek"
 
 		? "border border-blue-500/20 bg-blue-500/10 text-blue-400" : "border border-slate-800 text-slate-400"
 		}
 		`}
 	  >
-        This Week
+        thisweek
       </button>
 
 <button 
@@ -1656,13 +1656,13 @@ className={`
 		className={`rounded-lg px-3 py-1 text-xs
 	    ${
 		reportPeriod ===
-		"Last Week"
+		"lastweek"
 
 		? "border border-blue-500/20 bg-blue-500/10 text-blue-400" : "border border-slate-800 text-slate-400"
 		}
 		`}
 	  >
-	  Last Week
+	  lastweek
       </button>
 
     </div>
