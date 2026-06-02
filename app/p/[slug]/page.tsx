@@ -105,7 +105,7 @@ export default async function Page({
       <head>
         <meta
           httpEquiv="refresh"
-          content={`2;url=${data.target}`}
+          content={`0;url=${data.target}`}
         />
       </head>
 
