@@ -619,12 +619,20 @@ body: JSON.stringify({
 
     shortDomain === "random"
 
-      ? "go.nice-clu.store"
-
-      : shortDomain.replace(
-          "https://",
-          ""
+    ? shortDomains[
+        Math.floor(
+          Math.random() *
+          shortDomains.length
         )
+      ].replace(
+        "https://",
+        ""
+      )
+
+    : shortDomain.replace(
+        "https://",
+        ""
+      )
 
 })
 
