@@ -495,6 +495,16 @@ const filteredConversions =
     }
   )
 
+console.log(
+  "CONVERSIONS:",
+  conversions.length
+)
+
+console.log(
+  "FILTERED CONVERSIONS:",
+  filteredConversions.length
+)
+
 const campaignReports:any[]  =
   Object.values(
 
