@@ -1506,11 +1506,18 @@ className={`
 
       <button 
 	   onClick={() =>
-    setReportPeriod("last7days")
-  }
-  >
-	  className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
-        Last 7 Days
+	   setReportPeriod("last7days")
+		}
+		className={`rounded-lg px-3 py-1 text-xs
+	    ${
+		reportPeriod ===
+		"Last 7 Days"
+
+		? "border border-blue-500/20 bg-blue-500/10 text-blue-400" : "border border-slate-800 text-slate-400"
+		}
+		`}
+	  >
+	   Last 7 Days
       </button>
 
       <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
