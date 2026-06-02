@@ -424,7 +424,7 @@ useEffect(() => {
 
     const response =
       await fetch(
-        'https://go.viroxa.io/api/domains.php'
+        'https://go.nice-clu.store/domains'
       )
 
     const data: any =
@@ -626,10 +626,7 @@ async function handleShortLink() {
 
             const data:any =
               await response.json()
-console.log(
-  "SET DOMAINS",
-  data.domains
-)
+
             return (
               data.short_url ||
               url
