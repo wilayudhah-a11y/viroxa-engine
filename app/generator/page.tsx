@@ -612,13 +612,15 @@ headers: {
 
 body: JSON.stringify({
 
+  urls:
+    generatedLinks,
 
-urls:
-  generatedLinks,
-
-domain:
-  "go.nice-clu.store"
-
+  domain:
+    shortDomain
+      .replace(
+        "https://",
+        ""
+      )
 
 })
 
