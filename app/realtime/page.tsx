@@ -581,6 +581,16 @@ if(
     }
   )
 
+console.log(
+  "PERIOD:",
+  reportPeriod
+)
+
+console.log(
+  "FILTERED CLICKS:",
+  filteredClicks.length
+)
+
 const filteredConversions =
   reportConversions.filter(
     (conversion:any) => {
