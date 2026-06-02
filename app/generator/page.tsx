@@ -626,7 +626,10 @@ async function handleShortLink() {
 
             const data:any =
               await response.json()
-
+console.log(
+  "SHORTEN RESPONSE",
+  data
+)
             return (
               data.short_url ||
               url
@@ -641,15 +644,16 @@ async function handleShortLink() {
       shortenedLinks
     )
 
-  } catch (err) {
+  } catch (err:any) {
 
-    console.error(err)
+  console.error(err)
 
-    alert(
-      "Shorten failed"
-    )
+  alert(
+    err?.message ||
+    "Shorten failed"
+  )
 
-  }
+}
 
   setShortening(false)
 
