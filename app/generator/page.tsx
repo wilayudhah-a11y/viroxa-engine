@@ -403,7 +403,7 @@ useEffect(() => {
 
       )
 
-
+      
     const data:any =
       await response.json()
 
@@ -1058,18 +1058,33 @@ if (!access) {
     Random Short
   </option>
 
-{shortDomains.map((domain:any) => (
+{shortDomains.map((item:any) => {
 
-  <option
-    key={domain}
-    value={domain}
-  >
-    {domain
-      .replace('https://','')
-      .replace('/','')}
-  </option>
+  const domain =
+    typeof item === "string"
+      ? item
+      : item.domain
 
-))}
+  return (
+
+    <option
+      key={domain}
+      value={domain}
+    >
+      {domain
+        ?.replace(
+          "https://",
+          ""
+        )
+        ?.replace(
+          "/",
+          ""
+        )}
+    </option>
+
+  )
+
+})}
 
 </select>
 
