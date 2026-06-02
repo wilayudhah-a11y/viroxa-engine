@@ -419,20 +419,6 @@ function formatWIB(date:string){
 
 }
 
-console.log(
-  "TODAY:",
-  today
-)
-
-console.log(
-  "YESTERDAY:",
-  yesterdayStr
-)
-
-console.log(
-  "PERIOD:",
-  reportPeriod
-)
 
 const filteredClicks =
   clicks.filter(
@@ -478,15 +464,6 @@ const filteredClicks =
     }
   )
 
-console.log(
-  "PERIOD:",
-  reportPeriod
-)
-
-console.log(
-  "FILTERED:",
-  filteredClicks.length
-)
 
 const campaignReports:any[]  =
   Object.values(
