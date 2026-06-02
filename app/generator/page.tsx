@@ -651,6 +651,18 @@ async function handleShortLink() {
 
 }
 
+  function unlock() {
+  if (password === 'viroxa2026') {
+    setAccess(true)
+
+    localStorage.setItem(
+      'viroxa_access',
+      'granted'
+    )
+  } else {
+    alert('Wrong password')
+  }
+}
 
 if (!access) {
   return (
