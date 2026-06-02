@@ -587,20 +587,6 @@ if(
     }
   )
 
-console.log(
-  "PERIOD:",
-  reportPeriod
-)
-
-console.log(
-  "TOTAL:",
-  clicks.length
-)
-
-console.log(
-  "FILTERED:",
-  filteredClicks.length
-)
 
 const filteredConversions =
   reportConversions.filter(
