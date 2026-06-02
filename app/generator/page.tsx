@@ -626,7 +626,10 @@ async function handleShortLink() {
 
             const data:any =
               await response.json()
-
+console.log(
+  "SET DOMAINS",
+  data.domains
+)
             return (
               data.short_url ||
               url
