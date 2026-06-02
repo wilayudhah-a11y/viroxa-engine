@@ -574,41 +574,82 @@ async function copyAll() {
 
 async function handleShortLink() {
 
-setShortening(true)
+  setShortening(true)
 
   if (
     generatedLinks.length === 0
   ) {
+
+    setShortening(false)
+
     return
+
   }
 
-  const formData =
-    new FormData()
+  try {
 
-  generatedLinks.forEach(
-    (url) => {
+    const shortenedLinks =
+      await Promise.all(
 
-      formData.append(
-        'urls[]',
-        url
+        generatedLinks.map(
+          async (url) => {
+
+            const response =
+              await fetch(
+
+                "https://go.nice-clu.store/shorten",
+
+                {
+
+                  method: "POST",
+
+                  headers: {
+
+                    "Content-Type":
+                      "application/json",
+
+                  },
+
+                  body: JSON.stringify({
+
+                    url
+
+                  })
+
+                }
+
+              )
+
+            const data =
+              await response.json()
+
+            return (
+              data.short_url ||
+              url
+            )
+
+          }
+        )
+
       )
 
-    }
-  )
-
-  formData.append(
-    'domain',
-    shortDomain
-  )
-
-  const response =
-    await fetch(
-      'https://go.viroxa.io/api/shorten.php',
-      {
-        method: 'POST',
-        body: formData
-      }
+    setGeneratedLinks(
+      shortenedLinks
     )
+
+  } catch (err) {
+
+    console.error(err)
+
+    alert(
+      "Shorten failed"
+    )
+
+  }
+
+  setShortening(false)
+
+}
 
   const data: any =
     await response.json()
