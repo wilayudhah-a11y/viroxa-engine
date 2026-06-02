@@ -21,21 +21,21 @@ const {
   error,
 } = await supabase
 
-  .from("conversions")
+.from("conversions")
 
-  .select("*")
+.select("*")
 
-  .gte(
-    "created_at",
-    today.toISOString()
-  )
+.order(
+  "created_at",
+  {
+    ascending: false
+  }
+)
 
-  .order(
-    "created_at",
-    {
-      ascending: false
-    }
-  )
+.range(
+  0,
+  100
+)
 
   if (error) {
 
