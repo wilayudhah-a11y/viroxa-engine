@@ -317,6 +317,7 @@ useEffect(() => {
         }
 
       )
+      
 
     const data:any =
       await response.json()
@@ -402,8 +403,17 @@ useEffect(() => {
 
       )
 
+      console.log(
+  "SHORTEN STATUS",
+  response.status
+)
     const data:any =
       await response.json()
+
+console.log(
+  "SHORTEN DATA",
+  data
+)
 
     setDomains(data)
 
