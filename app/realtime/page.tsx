@@ -527,7 +527,20 @@ const filteredConversions =
     }
   )
 
+console.log(
+  "PERIOD:",
+  reportPeriod
+)
 
+console.log(
+  "CLICKS:",
+  filteredClicks.length
+)
+
+console.log(
+  "CONV:",
+  filteredConversions.length
+)
 
 const campaignReports:any[]  =
   Object.values(
