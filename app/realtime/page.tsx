@@ -485,7 +485,10 @@ const filteredClicks = clicks.filter(
     if (
       reportPeriod ===
       "last7days"
-    ) {
+    )	  console.log(
+  "LAST7 DATE:",
+  last7
+) {
 
       const last7 =
         new Date()
@@ -493,10 +496,6 @@ const filteredClicks = clicks.filter(
       last7.setDate(
         last7.getDate() - 6
       )
-	  console.log(
-  "LAST7 DATE:",
-  last7
-)
 
       last7.setHours(
         0, 0, 0, 0
