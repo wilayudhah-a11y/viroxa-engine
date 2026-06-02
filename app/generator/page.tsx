@@ -617,7 +617,7 @@ body: JSON.stringify({
 
   domain:
 
-    shortDomain
+    shortDomain === "random"
 
     ? shortDomains[
         Math.floor(
