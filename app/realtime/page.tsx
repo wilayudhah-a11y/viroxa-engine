@@ -457,6 +457,43 @@ const filteredClicks =
     }
   )
 
+const filteredConversions =
+  conversions.filter(
+    (conversion:any) => {
+
+      const conversionDate =
+        getWIBDate(
+          conversion.created_at
+        )
+
+      if(
+        reportPeriod ===
+        "today"
+      ){
+
+        return (
+          conversionDate ===
+          today
+        )
+
+      }
+
+      if(
+        reportPeriod ===
+        "yesterday"
+      ){
+
+        return (
+          conversionDate ===
+          yesterdayStr
+        )
+
+      }
+
+      return true
+
+    }
+  )
 
 const campaignReports:any[]  =
   Object.values(
@@ -502,7 +539,7 @@ const campaignReports:any[]  =
 
   )
   
-  conversions.forEach(
+filteredConversions.forEach(
   (conversion:any) => {
 
     const campaign =
