@@ -421,10 +421,7 @@ useEffect(() => {
 useEffect(() => {
 
   async function loadShortDomains() {
-console.log(
-  "SHORT DOMAIN",
-  shortDomain
-)
+
     const response =
       await fetch(
         'https://go.nice-clu.store/domains'
@@ -619,11 +616,15 @@ body: JSON.stringify({
     generatedLinks,
 
   domain:
-    shortDomain
-      .replace(
-        "https://",
-        ""
-      )
+
+    shortDomain === "random"
+
+      ? "go.nice-clu.store"
+
+      : shortDomain.replace(
+          "https://",
+          ""
+        )
 
 })
 
