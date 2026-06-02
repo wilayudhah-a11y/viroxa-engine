@@ -87,10 +87,8 @@ async function loadConversions() {
 
   try {
 
-const res =
-  await fetch(
-    "/api/report-conversions"
-  );
+    const res =
+      await fetch("/api/conversions");
 
 const data:any =
   await res.json();
