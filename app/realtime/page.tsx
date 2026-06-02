@@ -20,6 +20,11 @@ const [clicks, setClicks] =
 const [conversions, setConversions] =
   useState<any[]>([]);
   
+const [
+  reportConversions,
+  setReportConversions
+] = useState<any[]>([]);
+  
   const [search, setSearch] =
   useState("")
 
@@ -136,12 +141,38 @@ setConversions(
     }
 
   }
+  
+async function loadReportConversions() {
+
+  try {
+
+    const res =
+      await fetch(
+        "/api/report-conversions"
+      );
+
+    const data:any =
+      await res.json();
+
+    setReportConversions(
+      data.conversions || []
+    );
+
+  } catch (err) {
+
+    console.log(err);
+
+  }
+
+}
 
   loadStats();
 
   loadConversions();
 
   loadClicks();
+  
+  loadReportConversions();
 
 
 const interval =
@@ -459,7 +490,7 @@ const filteredClicks =
   )
 
 const filteredConversions =
-  conversions.filter(
+  reportConversions.filter(
     (conversion:any) => {
 
       const conversionDate =
@@ -496,15 +527,6 @@ const filteredConversions =
     }
   )
 
-console.log(
-  "CONVERSIONS:",
-  conversions.length
-)
-
-console.log(
-  "FILTERED CONVERSIONS:",
-  filteredConversions.length
-)
 
 const campaignReports:any[]  =
   Object.values(
