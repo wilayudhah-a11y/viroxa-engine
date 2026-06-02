@@ -591,7 +591,10 @@ async function handleShortLink() {
   }
 
   try {
-
+console.log(
+  "DOMAIN SENT",
+  shortDomain
+)
    const response =
 await fetch(
 
@@ -617,7 +620,7 @@ body: JSON.stringify({
 
   domain:
 
-    shortDomain === "random"
+    shortDomain
 
     ? shortDomains[
         Math.floor(
