@@ -506,11 +506,6 @@ if(
 
 }
 
-console.log(
-  "LAST7",
-  click.created_at,
-  new Date(click.created_at)
-)
 
 if(
   reportPeriod ===
@@ -532,10 +527,6 @@ if(
     0,0,0,0
   )
 
-console.log(
-  "THISWEEK",
-  startOfWeek
-)
 
   return (
     new Date(
@@ -576,11 +567,6 @@ if(
     startOfLastWeek.getDate() - 7
   )
 
-console.log(
-  "LASTWEEK",
-  startOfLastWeek,
-  startOfThisWeek
-)
 
   return (
 
