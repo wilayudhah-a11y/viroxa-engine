@@ -1635,7 +1635,7 @@ className={`
 
 <button 
 	   onClick={() =>
-	   setReportPeriod("This Week")
+	   setReportPeriod("thisweek")
 		}
 		className={`rounded-lg px-3 py-1 text-xs
 	    ${
@@ -1651,7 +1651,7 @@ className={`
 
 <button 
 	   onClick={() =>
-	   setReportPeriod("Last Week")
+	   setReportPeriod("lastweek")
 		}
 		className={`rounded-lg px-3 py-1 text-xs
 	    ${
