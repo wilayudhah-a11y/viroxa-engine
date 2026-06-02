@@ -620,22 +620,14 @@ body: JSON.stringify({
 
   domain:
 
-    shortDomain
+    shortDomain === "random"
 
-    ? shortDomains[
-        Math.floor(
-          Math.random() *
-          shortDomains.length
+      ? "random"
+
+      : shortDomain.replace(
+          "https://",
+          ""
         )
-      ].replace(
-        "https://",
-        ""
-      )
-
-    : shortDomain.replace(
-        "https://",
-        ""
-      )
 
 })
 
