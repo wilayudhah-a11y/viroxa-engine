@@ -1520,12 +1520,35 @@ className={`
 	   Last 7 Days
       </button>
 
-      <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
+<button 
+	   onClick={() =>
+	   setReportPeriod("This Week")
+		}
+		className={`rounded-lg px-3 py-1 text-xs
+	    ${
+		reportPeriod ===
+		"This Week"
+
+		? "border border-blue-500/20 bg-blue-500/10 text-blue-400" : "border border-slate-800 text-slate-400"
+		}
+		`}
+	  >
         This Week
       </button>
 
-      <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
-        Last Week
+<button 
+	   onClick={() =>
+	   setReportPeriod("Last Week")
+		}
+		className={`rounded-lg px-3 py-1 text-xs
+	    ${
+		reportPeriod ===
+		"Last Week"
+
+		? "border border-blue-500/20 bg-blue-500/10 text-blue-400" : "border border-slate-800 text-slate-400"
+		}
+		`}
+	  >
       </button>
 
     </div>
