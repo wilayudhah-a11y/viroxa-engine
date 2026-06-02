@@ -485,20 +485,6 @@ const filteredClicks =
 
       }
 
-      console.log(
-  "REPORT PERIOD:",
-  reportPeriod
-)
-
-console.log(
-  "TOTAL CLICKS:",
-  clicks.length
-)
-
-console.log(
-  "FILTERED:",
-  filteredClicks.length
-)
 	  
 if(
   reportPeriod ===
@@ -615,7 +601,20 @@ console.log(
     }
   )
 
+console.log(
+  "PERIOD:",
+  reportPeriod
+)
 
+console.log(
+  "TOTAL:",
+  clicks.length
+)
+
+console.log(
+  "FILTERED:",
+  filteredClicks.length
+)
 
 const filteredConversions =
   reportConversions.filter(
