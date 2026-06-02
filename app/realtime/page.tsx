@@ -429,13 +429,6 @@ const filteredClicks =
           click.created_at
         )
 		
-		 console.log(
-        "RAW:",
-        click.created_at,
-        "=>",
-        clickDate
-      )
-
       if(
         reportPeriod ===
         "today"
