@@ -521,6 +521,97 @@ const filteredConversions =
         )
 
       }
+	  
+if(
+  reportPeriod ===
+  "last7days"
+){
+
+  const last7 =
+    new Date()
+
+  last7.setDate(
+    last7.getDate() - 7
+  )
+
+  return (
+    new Date(
+      conversion.created_at
+    ) >= last7
+  )
+
+}
+
+if(
+  reportPeriod ===
+  "thisweek"
+){
+
+  const now =
+    new Date()
+
+  const startOfWeek =
+    new Date(now)
+
+  startOfWeek.setDate(
+    now.getDate() -
+    now.getDay()
+  )
+
+  startOfWeek.setHours(
+    0,0,0,0
+  )
+
+  return (
+    new Date(
+      conversion.created_at
+    ) >= startOfWeek
+  )
+
+}
+
+if(
+  reportPeriod ===
+  "lastweek"
+){
+
+  const now =
+    new Date()
+
+  const startOfThisWeek =
+    new Date(now)
+
+  startOfThisWeek.setDate(
+    now.getDate() -
+    now.getDay()
+  )
+
+  startOfThisWeek.setHours(
+    0,0,0,0
+  )
+
+  const startOfLastWeek =
+    new Date(
+      startOfThisWeek
+    )
+
+  startOfLastWeek.setDate(
+    startOfLastWeek.getDate() - 7
+  )
+
+  return (
+
+    new Date(
+      conversion.created_at
+    ) >= startOfLastWeek &&
+
+    new Date(
+      conversion.created_at
+    ) < startOfThisWeek
+
+  )
+
+}	  
 
       return true
 
@@ -1413,7 +1504,12 @@ className={`
 
 </button>
 
-      <button className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
+      <button 
+	   onClick={() =>
+    setReportPeriod("last7days")
+  }
+  >
+	  className="rounded-lg border border-slate-800 px-3 py-1 text-xs text-slate-400">
         Last 7 Days
       </button>
 
