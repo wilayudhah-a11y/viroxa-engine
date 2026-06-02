@@ -505,6 +505,12 @@ if(
 
 }
 
+console.log(
+  "LAST7",
+  click.created_at,
+  new Date(click.created_at)
+)
+
 if(
   reportPeriod ===
   "thisweek"
@@ -532,6 +538,11 @@ if(
   )
 
 }
+
+console.log(
+  "THISWEEK",
+  startOfWeek
+)
 
 if(
   reportPeriod ===
@@ -562,6 +573,12 @@ if(
     startOfLastWeek.getDate() - 7
   )
 
+console.log(
+  "LASTWEEK",
+  startOfLastWeek,
+  startOfThisWeek
+)
+
   return (
 
     new Date(
@@ -582,15 +599,6 @@ if(
   )
 
 
-console.log(
-  "PERIOD:",
-  reportPeriod
-)
-
-console.log(
-  "FILTERED CLICKS:",
-  filteredClicks.length
-)
 
 const filteredConversions =
   reportConversions.filter(
