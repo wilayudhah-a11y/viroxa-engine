@@ -93,6 +93,11 @@ async function loadConversions() {
 const data:any =
   await res.json();
 
+console.log(
+  "API CONVERSIONS:",
+  data
+)
+
 setConversions(
   data.conversions || []
 );
