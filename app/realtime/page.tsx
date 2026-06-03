@@ -1715,19 +1715,7 @@ className={`
 <p className="mt-1 font-bold">
 
   {
-    campaignReports.reduce(
-      (
-        total:number,
-        report:any
-      ) =>
-
-        total +
-        Number(
-          report.visits || 0
-        ),
-
-      0
-    )
+    reportSummary?.clicks || 0
   }
 
 </p>
