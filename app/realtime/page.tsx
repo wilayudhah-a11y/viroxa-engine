@@ -482,7 +482,12 @@ const filteredClicks =
           clickDate ===
           yesterdayStr
         )
-
+console.log(
+  "PERIOD:",
+  reportPeriod,
+  "CLICKS:",
+  filteredClicks.length
+)
       }
 
 	  
