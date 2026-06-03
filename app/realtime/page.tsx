@@ -1744,27 +1744,17 @@ className={`
       Revenue
     </p>
 
-    <p className="mt-1 font-bold text-green-400">
+<p className="mt-1 font-bold text-green-400">
 
-      $
+  $
 
-      {
-        campaignReports
-          .reduce(
-            (
-              total:any,
-              report:any
-            ) =>
+  {
+    Number(
+      reportSummary?.revenue || 0
+    ).toFixed(2)
+  }
 
-              total +
-              report.revenue,
-
-            0
-          )
-          .toFixed(2)
-      }
-
-    </p>
+</p>
 
   </div>
 
