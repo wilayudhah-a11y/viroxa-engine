@@ -102,7 +102,7 @@ export async function GET(
       )
 
     startDate.setDate(
-      startDate.getDate() - 6
+      startDate.getDate() - 7
     )
 
     endDate =
