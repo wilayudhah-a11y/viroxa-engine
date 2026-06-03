@@ -567,6 +567,15 @@ if(
     startOfLastWeek.getDate() - 7
   )
 
+  console.log(
+    "START THIS WEEK",
+    startOfThisWeek
+  )
+
+  console.log(
+    "START LAST WEEK",
+    startOfLastWeek
+  )
 
   return (
 
