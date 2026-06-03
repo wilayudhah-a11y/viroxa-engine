@@ -568,17 +568,18 @@ if(
   )
 
 
-  return (
-
-    new Date(
-      click.created_at
-    ) >= startOfLastWeek &&
-
-    new Date(
-      click.created_at
-    ) < startOfThisWeek
-
+const clickDate =
+  new Date(
+    click.created_at.replace(
+      " ",
+      "T"
+    )
   )
+
+return (
+  clickDate >= startOfLastWeek &&
+  clickDate < startOfThisWeek
+)
 
 }
 	  
@@ -586,7 +587,6 @@ if(
 
     }
   )
-
 
 const filteredConversions =
   reportConversions.filter(
@@ -673,7 +673,6 @@ if(
   reportPeriod ===
   "lastweek"
 ){
-
   const now =
     new Date()
 
