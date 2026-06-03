@@ -180,7 +180,9 @@ const interval =
 
     loadStats();
     loadConversions();
-	loadClicks();
+	  loadClicks();
+    loadReportConversions();
+
 
   }, 5000);
 
@@ -422,7 +424,20 @@ const countryStats =
   )
 
   .slice(0,5)
-  
+
+function parseDate(
+  date:string
+){
+
+  return new Date(
+    date.replace(
+      " ",
+      "T"
+    )
+  )
+
+}
+
 function formatGMT(date:string){
 
   return date.substring(
@@ -498,11 +513,11 @@ if(
     last7.getDate() - 7
   )
 
-  return (
-    new Date(
-      click.created_at
-    ) >= last7
-  )
+ return (
+  parseDate(
+    click.created_at
+  ) >= last7
+)
 
 }
 
@@ -528,11 +543,11 @@ if(
   )
 
 
-  return (
-    new Date(
-      click.created_at
-    ) >= startOfWeek
-  )
+return (
+  parseDate(
+    click.created_at
+  ) >= startOfWeek
+)
 
 }
 
@@ -569,11 +584,8 @@ if(
 
 
 const clickDate =
-  new Date(
-    click.created_at.replace(
-      " ",
-      "T"
-    )
+  parseDate(
+    click.created_at
   )
 
 return (
@@ -662,9 +674,9 @@ if(
   )
 
   return (
-    new Date(
-      conversion.created_at
-    ) >= startOfWeek
+  parseDate(
+  conversion.created_at
+)
   )
 
 }
@@ -697,17 +709,21 @@ if(
     startOfLastWeek.getDate() - 7
   )
 
-  return (
+ 
 
-    new Date(
-      conversion.created_at
-    ) >= startOfLastWeek &&
+return (
 
-    new Date(
-      conversion.created_at
-    ) < startOfThisWeek
+  parseDate(
+    conversion.created_at
+  ) >= startOfLastWeek &&
 
-  )
+  parseDate(
+    conversion.created_at
+  ) < startOfThisWeek
+
+)
+
+
 
 }	  
 
