@@ -482,12 +482,7 @@ const filteredClicks =
           clickDate ===
           yesterdayStr
         )
-console.log(
-  "PERIOD:",
-  reportPeriod,
-  "CLICKS:",
-  filteredClicks.length
-)
+
       }
 
 	  
@@ -572,15 +567,6 @@ if(
     startOfLastWeek.getDate() - 7
   )
 
-  console.log(
-    "START THIS WEEK",
-    startOfThisWeek
-  )
-
-  console.log(
-    "START LAST WEEK",
-    startOfLastWeek
-  )
 
   return (
 
