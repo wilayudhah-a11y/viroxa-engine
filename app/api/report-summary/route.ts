@@ -164,18 +164,181 @@ export async function GET(
     count: conversions
   } = await conversionsQuery
 
-  return NextResponse.json({
+  let clicksDataQuery =
+  supabase
+    .from("clicks")
+    .select(
+      "campaign"
+    )
+    .gte(
+      "created_at",
+      startDate.toISOString()
+    )
 
-    success:true,
+if(endDate){
 
-    period,
-
-    clicks:
-      clicks || 0,
-
-    conversions:
-      conversions || 0
-
-  })
+  clicksDataQuery =
+    clicksDataQuery.lt(
+      "created_at",
+      endDate.toISOString()
+    )
 
 }
+
+const {
+  data: clickRows
+} =
+  await clicksDataQuery
+
+  const campaignMap:any = {}
+
+;(clickRows || [])
+.forEach(
+  (click:any) => {
+
+    const campaign =
+      click.campaign ||
+      "Unknown"
+
+    if(
+      !campaignMap[campaign]
+    ){
+
+      campaignMap[campaign] = {
+
+        campaign,
+
+        visits:0,
+
+        conversions:0,
+
+        revenue:0
+
+      }
+
+    }
+
+    campaignMap[
+      campaign
+    ].visits++
+
+  }
+)
+
+let conversionsDataQuery =
+  supabase
+    .from("conversions")
+    .select(
+      "campaign,payout"
+    )
+    .gte(
+      "created_at",
+      startDate.toISOString()
+    )
+
+if(endDate){
+
+  conversionsDataQuery =
+    conversionsDataQuery.lt(
+      "created_at",
+      endDate.toISOString()
+    )
+
+}
+
+const {
+  data: conversionRows
+} =
+  await conversionsDataQuery
+
+  ;(conversionRows || [])
+.forEach(
+  (conversion:any) => {
+
+    const campaign =
+      conversion.campaign ||
+      "Unknown"
+
+    if(
+      !campaignMap[campaign]
+    ){
+
+      campaignMap[campaign] = {
+
+        campaign,
+
+        visits:0,
+
+        conversions:0,
+
+        revenue:0
+
+      }
+
+    }
+
+    campaignMap[
+      campaign
+    ].conversions++
+
+    campaignMap[
+      campaign
+    ].revenue +=
+      Number(
+        conversion.payout || 0
+      )
+
+  }
+)
+
+const campaigns =
+  Object.values(
+    campaignMap
+  ).map(
+    (report:any) => ({
+
+      ...report,
+
+      cr:
+        report.visits > 0
+
+          ? (
+              report.conversions /
+              report.visits
+            ) * 100
+
+          : 0,
+
+      rpc:
+        report.visits > 0
+
+          ? (
+              report.revenue /
+              report.visits
+            )
+
+          : 0
+
+    })
+  )
+
+
+return NextResponse.json({
+
+  success:true,
+
+  period,
+
+  clicks:
+    clicks || 0,
+
+  conversions:
+    conversions || 0,
+
+  campaigns
+
+})
+  
+
+}
+
