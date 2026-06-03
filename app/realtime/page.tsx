@@ -1672,7 +1672,7 @@ className={`
 <div className="rounded-lg border border-slate-800 p-3">
 
   <p className="text-xs text-slate-400">
-    Visits
+    visits
   </p>
 
 <p className="mt-1 font-bold">
