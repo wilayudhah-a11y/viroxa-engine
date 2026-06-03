@@ -164,6 +164,52 @@ export async function GET(
     count: conversions
   } = await conversionsQuery
 
+  let revenueQuery =
+  supabase
+    .from("conversions")
+    .select(
+      "payout"
+    )
+    .gte(
+      "created_at",
+      startDate.toISOString()
+    )
+
+if(endDate){
+
+  revenueQuery =
+    revenueQuery.lt(
+      "created_at",
+      endDate.toISOString()
+    )
+
+}
+
+const {
+  data: revenueRows
+} =
+  await revenueQuery
+
+  const revenue =
+
+  (revenueRows || [])
+
+    .reduce(
+
+      (
+        total:number,
+        row:any
+      ) =>
+
+        total +
+        Number(
+          row.payout || 0
+        ),
+
+      0
+
+    )
+
   let clicksDataQuery =
   supabase
     .from("clicks")
@@ -189,11 +235,6 @@ const {
   data: clickRows
 } =
   await clicksDataQuery
-
-  console.log(
-  "CLICK ROWS:",
-  clickRows?.length
-)
 
   const campaignMap:any = {}
 
@@ -339,6 +380,8 @@ return NextResponse.json({
 
   conversions:
     conversions || 0,
+
+  revenue,
 
   campaigns
 
