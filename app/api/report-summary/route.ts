@@ -190,6 +190,11 @@ const {
 } =
   await clicksDataQuery
 
+  console.log(
+  "CLICK ROWS:",
+  clickRows?.length
+)
+
   const campaignMap:any = {}
 
 ;(clickRows || [])
