@@ -11,30 +11,21 @@ export default function RealtimePage() {
 const [password, setPassword] = useState("")
 const [authorized, setAuthorized] = useState(false)
 const [showPassword, setShowPassword] = useState(false)
-const [activeTab, setActiveTab] =
-  useState("dashboard")
+const [activeTab, setActiveTab] =  useState("dashboard")
 
-const [clicks, setClicks] =
-  useState<any[]>([]);
+const [clicks, setClicks] =  useState<any[]>([]);
 
-const [conversions, setConversions] =
-  useState<any[]>([]);
+const [conversions, setConversions] =  useState<any[]>([]);
   
-const [
-  reportConversions,
-  setReportConversions
-] = useState<any[]>([]);
+const [  reportConversions,  setReportConversions] = useState<any[]>([]);
   
-  const [search, setSearch] =
-  useState("")
+const [search, setSearch] =  useState("")
 
-const [
-  reportPeriod,
-  setReportPeriod
-] = useState("today")
+const [  reportPeriod,  setReportPeriod] = useState("today")
 
-const [reportSearch, setReportSearch] =
-  useState("")
+const [  reportSummary,  setReportSummary] = useState<any>(null)
+
+const [reportSearch, setReportSearch] =  useState("")
 
 const [stats,setStats] =
   useState({
@@ -166,6 +157,30 @@ async function loadReportConversions() {
 
 }
 
+async function loadReportSummary() {
+
+  try {
+
+    const res =
+      await fetch(
+        `/api/report-summary?period=${reportPeriod}`
+      )
+
+    const data:any =
+      await res.json()
+
+    setReportSummary(
+      data
+    )
+
+  } catch (err) {
+
+    console.log(err)
+
+  }
+
+}
+
   loadStats();
 
   loadConversions();
@@ -173,6 +188,8 @@ async function loadReportConversions() {
   loadClicks();
   
   loadReportConversions();
+
+  loadReportSummary();
 
 
 const interval =
@@ -182,14 +199,19 @@ const interval =
     loadConversions();
 	  loadClicks();
     loadReportConversions();
+    loadReportSummary();
 
 
   }, 5000);
 
-  return () =>
-    clearInterval(interval);
+console.log(
+  reportSummary
+)
 
-}, []);
+return () =>
+  clearInterval(interval);
+
+}, [reportPeriod]);
 
 
 
