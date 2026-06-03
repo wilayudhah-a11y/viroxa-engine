@@ -1728,23 +1728,13 @@ className={`
       Conv
     </p>
 
-    <p className="mt-1 font-bold">
+<p className="mt-1 font-bold">
 
-      {
-        campaignReports.reduce(
-          (
-            total:any,
-            report:any
-          ) =>
+  {
+    reportSummary?.conversions || 0
+  }
 
-            total +
-            report.conversions,
-
-          0
-        )
-      }
-
-    </p>
+</p>
 
   </div>
 
