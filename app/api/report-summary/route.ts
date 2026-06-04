@@ -256,7 +256,8 @@ const {
 
   const campaignMap:any = {}
 
-  ;(visitRows || [])
+  
+;(visitRows || [])
 .forEach(
   (row:any) => {
 
@@ -277,39 +278,6 @@ const {
       revenue:0
 
     }
-
-  }
-)
-
-;(clickRows || [])
-.forEach(
-  (click:any) => {
-
-    const campaign =
-      click.campaign ||
-      "Unknown"
-
-    if(
-      !campaignMap[campaign]
-    ){
-
-      campaignMap[campaign] = {
-
-        campaign,
-
-        visits:0,
-
-        conversions:0,
-
-        revenue:0
-
-      }
-
-    }
-
-    campaignMap[
-      campaign
-    ].visits++
 
   }
 )
