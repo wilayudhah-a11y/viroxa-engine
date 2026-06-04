@@ -1849,21 +1849,27 @@ className={`
 
 <td className="p-4">
 
-  {report.cr.toFixed(2)}%
+ {Number(
+  report.cr || 0
+).toFixed(2)}%
 
 </td>
 
 <td className="p-4">
 
   $
-  {report.epc.toFixed(3)}
+  {Number(
+    report.rpc || 0
+  ).toFixed(3)}
 
 </td>
 
 <td className="p-4 text-green-400">
 
   $
-  {report.revenue.toFixed(2)}
+  {Number(
+  report.revenue || 0
+).toFixed(2)}
 
 </td>
 
