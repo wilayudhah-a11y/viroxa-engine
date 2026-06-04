@@ -751,10 +751,107 @@ return (
     }
   )
 
+
+/*const campaignReports:any[]  =
+  Object.values(
+
+    filteredClicks.reduce(
+      (
+        acc:any,
+        click:any
+      ) => {
+
+        const campaign =
+          click.campaign ||
+          "Unknown"
+
+        if(
+          !acc[campaign]
+        ){
+
+          acc[campaign] = {
+
+            campaign,
+
+            visits:0,
+
+            conversions:0,
+
+            revenue:0
+
+          }
+
+        }
+
+        acc[campaign]
+          .visits++
+
+        return acc
+
+      },
+
+      {}
+
+    )
+
+  )
+  
+filteredConversions.forEach(
+  (conversion:any) => {
+
+    const campaign =
+      conversion.campaign ||
+      "Unknown"
+
+    const report:any =
+      campaignReports.find(
+        (item:any) =>
+          item.campaign ===
+          campaign
+      )
+
+    if(report){
+
+      report.conversions++
+
+      report.revenue +=
+        Number(
+          conversion.payout || 0
+        )
+
+    }
+
+  }
+)
+
+campaignReports.forEach(
+  (report:any) => {
+
+    report.cr =
+      report.visits > 0
+
+        ? (
+            report.conversions /
+            report.visits
+          ) * 100
+
+        : 0
+
+    report.epc =
+      report.visits > 0
+
+        ? (
+            report.revenue /
+            report.visits
+          )
+
+        : 0
+
+  }
+)*/
+
 const campaignReports:any[] =
   reportSummary?.campaigns || []
-
-
 
   return (
 
