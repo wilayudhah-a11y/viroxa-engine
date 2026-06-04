@@ -24,7 +24,7 @@ export async function GET() {
 
     .range(
       0,
-      10000
+      50
     )
 
   if (error) {
