@@ -211,11 +211,21 @@ const {
     )
 
     const {
+const {
   data: visitRows,
   error: visitError
 } =
   await supabase.rpc(
-    "get_campaign_visits"
+    "get_campaign_visits",
+    {
+      start_date:
+        startDate.toISOString(),
+
+      end_date:
+        endDate
+          ? endDate.toISOString()
+          : null
+    }
   )
 
 console.log(
