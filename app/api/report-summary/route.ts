@@ -228,6 +228,19 @@ const {
     }
   )
 
+  console.log(
+  "START DATE:",
+  startDate.toISOString()
+)
+
+console.log(
+  "END DATE:",
+  endDate
+    ? endDate.toISOString()
+    : null
+)
+
+
 console.log(
   "VISIT ROWS:",
   visitRows
