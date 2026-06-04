@@ -228,16 +228,6 @@ const {
     }
   )
 
-  
-console.log(
-  "VISIT ROWS:",
-  visitRows
-)
-
-console.log(
-  "VISIT ERROR:",
-  visitError
-)
 
   let clicksDataQuery =
   supabase
