@@ -202,7 +202,7 @@ const interval =
     loadReportSummary();
 
 
-  }, 5000);
+  }, 60000);
 
   
 return () =>
