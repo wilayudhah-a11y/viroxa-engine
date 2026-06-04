@@ -26,7 +26,7 @@ export async function GET() {
           ascending:false
         }
       )
-      .limit(5)
+      .limit(20)
 
   if(error){
 
