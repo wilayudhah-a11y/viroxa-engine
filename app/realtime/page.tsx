@@ -204,7 +204,7 @@ const interval =
 
   }, 5000);
 
-  
+
 return () =>
   clearInterval(interval);
 
@@ -752,49 +752,8 @@ return (
   )
 
 
-const campaignReports:any[]  =
-  Object.values(
-
-    filteredClicks.reduce(
-      (
-        acc:any,
-        click:any
-      ) => {
-
-        const campaign =
-          click.campaign ||
-          "Unknown"
-
-        if(
-          !acc[campaign]
-        ){
-
-          acc[campaign] = {
-
-            campaign,
-
-            visits:0,
-
-            conversions:0,
-
-            revenue:0
-
-          }
-
-        }
-
-        acc[campaign]
-          .visits++
-
-        return acc
-
-      },
-
-      {}
-
-    )
-
-  )
+const campaignReports:any[] =
+  reportSummary?.campaigns || []
   
 filteredConversions.forEach(
   (conversion:any) => {
