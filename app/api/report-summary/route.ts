@@ -297,6 +297,11 @@ const {
 } =
   await conversionsDataQuery
 
+  console.log(
+  "CONVERSION ROWS:",
+  conversionRows?.length
+)
+
   ;(conversionRows || [])
 .forEach(
   (conversion:any) => {
