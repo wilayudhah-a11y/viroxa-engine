@@ -256,6 +256,31 @@ const {
 
   const campaignMap:any = {}
 
+  ;(visitRows || [])
+.forEach(
+  (row:any) => {
+
+    campaignMap[
+      row.campaign
+    ] = {
+
+      campaign:
+        row.campaign,
+
+      visits:
+        Number(
+          row.visits || 0
+        ),
+
+      conversions:0,
+
+      revenue:0
+
+    }
+
+  }
+)
+
 ;(clickRows || [])
 .forEach(
   (click:any) => {
