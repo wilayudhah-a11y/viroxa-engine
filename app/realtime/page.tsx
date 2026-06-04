@@ -755,7 +755,7 @@ return (
 const campaignReports:any[] =
   reportSummary?.campaigns || []
   
-filteredConversions.forEach(
+/*filteredConversions.forEach(
   (conversion:any) => {
 
     const campaign =
@@ -781,9 +781,9 @@ filteredConversions.forEach(
     }
 
   }
-)
+)*/
 
-campaignReports.forEach(
+/*campaignReports.forEach(
   (report:any) => {
 
     report.cr =
@@ -807,7 +807,7 @@ campaignReports.forEach(
         : 0
 
   }
-)
+)*/
 
 
   return (
