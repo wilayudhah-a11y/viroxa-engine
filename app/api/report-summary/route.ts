@@ -210,6 +210,24 @@ const {
 
     )
 
+    const {
+  data: visitRows,
+  error: visitError
+} =
+  await supabase.rpc(
+    "get_campaign_visits"
+  )
+
+console.log(
+  "VISIT ROWS:",
+  visitRows
+)
+
+console.log(
+  "VISIT ERROR:",
+  visitError
+)
+
   let clicksDataQuery =
   supabase
     .from("clicks")
@@ -297,10 +315,7 @@ const {
 } =
   await conversionsDataQuery
 
-  console.log(
-  "CONVERSION ROWS:",
-  conversionRows?.length
-)
+
 
   ;(conversionRows || [])
 .forEach(
