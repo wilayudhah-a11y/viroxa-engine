@@ -204,7 +204,7 @@ const interval =
 
   }, 5000);
 
-
+  
 return () =>
   clearInterval(interval);
 
@@ -751,63 +751,9 @@ return (
     }
   )
 
-
 const campaignReports:any[] =
   reportSummary?.campaigns || []
-  
-/*filteredConversions.forEach(
-  (conversion:any) => {
 
-    const campaign =
-      conversion.campaign ||
-      "Unknown"
-
-    const report:any =
-      campaignReports.find(
-        (item:any) =>
-          item.campaign ===
-          campaign
-      )
-
-    if(report){
-
-      report.conversions++
-
-      report.revenue +=
-        Number(
-          conversion.payout || 0
-        )
-
-    }
-
-  }
-)*/
-
-/*campaignReports.forEach(
-  (report:any) => {
-
-    report.cr =
-      report.visits > 0
-
-        ? (
-            report.conversions /
-            report.visits
-          ) * 100
-
-        : 0
-
-    report.epc =
-      report.visits > 0
-
-        ? (
-            report.revenue /
-            report.visits
-          )
-
-        : 0
-
-  }
-)*/
 
 
   return (
