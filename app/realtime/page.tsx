@@ -204,10 +204,7 @@ const interval =
 
   }, 5000);
 
-console.log(
-  reportSummary
-)
-
+  
 return () =>
   clearInterval(interval);
 
