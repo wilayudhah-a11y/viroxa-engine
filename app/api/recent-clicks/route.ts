@@ -18,8 +18,7 @@ export async function GET() {
         country,
         device,
         created_at
-        ip
-        `
+         `
       )
       .order(
         "created_at",
