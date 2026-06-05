@@ -52,7 +52,7 @@ function unlock() {
 
   if (
     password ===
-    'admin2026'
+    'Habiburrohman89'
   ) {
 
     localStorage.setItem(
@@ -261,7 +261,31 @@ if (!access) {
 				Viroxa Control Center
 			
 			</p>
-			
+			<div className="mb-4">
+
+  <a
+    href="https://viroxa.fun/panelshort"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      block
+      text-center
+      py-3
+      rounded-2xl
+      bg-gradient-to-r
+      from-emerald-600
+      to-green-600
+      hover:opacity-80
+      transition
+      font-semibold
+    "
+  >
+
+    🔥 Open Shortener Panel
+
+  </a>
+
+</div>
 			</div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_1fr] gap-5 items-start">
@@ -687,6 +711,7 @@ if (result.success) {
 
 </div>
 
+
           {/* DOMAINS */}
 
 			<div className="bg-white/5 border border-white/10 rounded-3xl p-6 shadow-2xl">
@@ -696,6 +721,8 @@ if (result.success) {
   Domains ({domains.length})
 
 </h2>
+
+
 
 <div className="mb-5 space-y-3">
 
