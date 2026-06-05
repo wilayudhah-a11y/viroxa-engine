@@ -536,7 +536,7 @@ const domain =
     : selectedDomain
 
 links.unshift(
-  `${domain}/${slug}`
+   `${domain}/p/${slug}`
 )
 
 rows.push({
