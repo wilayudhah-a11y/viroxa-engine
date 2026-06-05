@@ -424,7 +424,7 @@ useEffect(() => {
 
     const response =
       await fetch(
-        'https://go.nice-clu.store/domains'
+        'https://shortlinks.swastamita.workers.dev/domains'
       )
 
     const data: any =
@@ -1133,7 +1133,8 @@ if (!access) {
 </select>
 
 )}			
-					{generatedLinks.length > 0 && (
+				{generatedLinks.length > 0 && (
+          
   <button
   onClick={handleShortLink}
   disabled={shortening}
@@ -1145,6 +1146,7 @@ if (!access) {
       : '🔗 Short Link'
   }
   </button>
+  
   
 )}
 
