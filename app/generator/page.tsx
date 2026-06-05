@@ -1,7 +1,7 @@
 'use client'
-import { encodePayload } from '@/lib/encode'
+import { generateSlug }from '@/lib/slug'
 
-import type { Payload } from '@/types/payload'
+import { supabase }from '@/lib/supabase'
 
 import { useState, useEffect } from 'react'
 
@@ -477,7 +477,9 @@ if (!target.trim()) {
 
 setLoading(true)
 
-    const links: string[] = []
+const links: string[] = []
+
+const rows:any[] = []
 
     for (let i = 0; i < count; i++) {
       const randomImage =
@@ -520,18 +522,10 @@ const randomDescription =
     )
   ] || ''
 
-const data: Payload = {
-  title: randomTitle,
-  
-        description:  randomDescription,
-        image: randomImage,
-        target,
-      }
+const slug =
+  generateSlug()
 
-      const encoded =
-        encodePayload(data)
-
-      const domain =
+const domain =
   selectedDomain === 'random'
     ? domains[
         Math.floor(
@@ -541,11 +535,43 @@ const data: Payload = {
       ].url
     : selectedDomain
 
-const url =
-  `${domain}/p/${encoded}`
+links.unshift(
+  `${domain}/${slug}`
+)
 
-      links.unshift(url)
+rows.push({
+
+  slug,
+
+  title:
+    randomTitle,
+
+  description:
+    randomDescription,
+
+  image:
+    randomImage,
+
+  target
+
+})
     }
+const { error } =
+  await supabase
+
+    .from("payloads")
+
+    .insert(rows)
+
+if (error) {
+
+  alert(error.message)
+
+  setLoading(false)
+
+  return
+
+}
 
     setGeneratedLinks(links)
 	setTimeout(() => {

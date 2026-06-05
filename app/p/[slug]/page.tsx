@@ -1,8 +1,8 @@
 import type { Metadata }
 from 'next'
 
-import { decodePayload }
-from '@/lib/decode'
+import { supabase }
+from '@/lib/supabase'
 
 type Props = {
   params: Promise<{
@@ -28,8 +28,19 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const { slug } = await params
 
-  const data =
-    decodePayload(slug)
+ const { data } =
+  await supabase
+
+    .from("payloads")
+
+    .select("*")
+
+    .eq(
+      "slug",
+      slug
+    )
+
+    .single()
 
   if (!data) {
     return {
@@ -79,8 +90,19 @@ export default async function Page({
 }: Props) {
   const { slug } = await params
 
-  const data =
-    decodePayload(slug)
+const { data } =
+  await supabase
+
+    .from("payloads")
+
+    .select("*")
+
+    .eq(
+      "slug",
+      slug
+    )
+
+    .single()
 
   if (!data) {
     return (
