@@ -636,18 +636,34 @@ body: JSON.stringify({
 )
 
 
+const text =
+  await response.text()
+
+console.log(
+  "BULK RESPONSE:",
+  text
+)
+
+if (!text.trim()) {
+
+  throw new Error(
+    "API returned empty response"
+  )
+
+}
+
 const data:any =
-await response.json()
+  JSON.parse(text)
 
 if (
 
-!data.success
+  !data.success
 
 ) {
 
-throw new Error(
-"Bulk shorten failed"
-)
+  throw new Error(
+    "Bulk shorten failed"
+  )
 
 }
 
