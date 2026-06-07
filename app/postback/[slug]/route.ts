@@ -40,6 +40,15 @@ const status =
     "status"
   ) || "approved"
 
+console.log(
+  "POSTBACK HIT",
+  {
+    clickid,
+    payout,
+    status
+  }
+)
+
   if (!clickid) {
 
     return new NextResponse(
