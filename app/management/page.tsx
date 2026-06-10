@@ -140,6 +140,8 @@ async function deleteLink(
 }
  useEffect(() => {
 
+  
+
   async function loadDomains() {
 
   const response =
@@ -150,8 +152,7 @@ async function deleteLink(
       {
         headers: {
           "x-api-key":
-            process.env
-              .NEXT_PUBLIC_API_KEY!
+            process.env.NEXT_PUBLIC_API_KEY || ""
         }
       }
 
@@ -182,8 +183,7 @@ async function loadLinks() {
         headers: {
 
           "x-api-key":
-            process.env
-              .NEXT_PUBLIC_API_KEY!
+            process.env.NEXT_PUBLIC_API_KEY || ""
 
         }
       }
