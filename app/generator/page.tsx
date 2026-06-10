@@ -424,7 +424,7 @@ useEffect(() => {
 
     const response =
       await fetch(
-        'https://shortlinks.swastamita.workers.dev/domains'
+        'https://magnifystyle.org/domains'
       )
 
     const data: any =
