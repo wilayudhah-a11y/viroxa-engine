@@ -636,7 +636,7 @@ headers: {
   "application/json",
 
 "x-api-key":
-  process.env.NEXT_PUBLIC_API_KEY="VROX_9xK2mP7Qa4Yz_2026"
+  process.env.NEXT_PUBLIC_API_KEY
 
 },
 
