@@ -97,7 +97,7 @@ const [links, setLinks] =
 
 const [newDomain, setNewDomain] =
   useState("")
-  
+
   async function addDomain() {
 
   console.log(
@@ -1314,7 +1314,7 @@ return (
 <div
   onClick={() =>
     setActiveTab(
-      "domains"
+      "Domains"
     )
   }
   className={`
@@ -1327,7 +1327,7 @@ return (
 
     ${
       activeTab ===
-      "domains"
+      "Domains"
 
         ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
 
@@ -1364,7 +1364,7 @@ return (
 
   `}
 >
-  🔗 Links
+  🔗 links
 </div>
 
         </div>
@@ -2059,6 +2059,282 @@ return (
 
 )}
 
+{activeTab === "Domains" && (
+
+  <>
+
+    <div className="mb-6 flex items-center justify-between">
+
+      <div>
+
+        <h1 className="text-3xl font-bold">
+          Domains
+        </h1>
+
+        <p className="mt-1 text-slate-400">
+          Manage shortlink domains
+        </p>
+
+      </div>
+
+    </div>
+
+    <div className="mb-6 flex gap-2">
+
+      <input
+        value={newDomain}
+        onChange={(e) =>
+          setNewDomain(
+            e.target.value
+          )
+        }
+        placeholder="example.com"
+        className="
+          flex-1
+          rounded-xl
+          border
+          border-slate-800
+          bg-[#111827]
+          p-3
+        "
+      />
+
+      <button
+        onClick={addDomain}
+        className="
+          rounded-xl
+          bg-blue-600
+          px-4
+          py-3
+          text-sm
+        "
+      >
+        Add Domain
+      </button>
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800 text-slate-400">
+
+            <th className="p-4 text-left">
+              Domain
+            </th>
+
+            <th className="p-4 text-left">
+              Status
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {domains.map(
+            (domain:any) => (
+
+              <tr
+                key={domain.id}
+                className="
+                  border-b
+                  border-slate-800
+                "
+              >
+
+                <td className="p-4">
+                  {domain.domain}
+                </td>
+
+                <td className="p-4">
+
+                  {domain.status === 1
+                    ? "🟢 Active"
+                    : "🔴 Hidden"}
+
+                </td>
+
+                <td className="p-4">
+
+                  <div className="flex gap-2">
+
+                    <button
+                      onClick={() =>
+                        toggleDomain(
+                          domain.id
+                        )
+                      }
+                      className="
+                        rounded
+                        bg-yellow-600
+                        px-3
+                        py-1
+                        text-xs
+                      "
+                    >
+
+                      {domain.status === 1
+                        ? "Hide"
+                        : "Show"}
+
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        deleteDomain(
+                          domain.id
+                        )
+                      }
+                      className="
+                        rounded
+                        bg-red-600
+                        px-3
+                        py-1
+                        text-xs
+                      "
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </>
+
+)}
+
+{activeTab === "links" && (
+
+  <>
+
+    <div className="mb-6 flex items-center justify-between">
+
+      <div>
+
+        <h1 className="text-3xl font-bold">
+          links
+        </h1>
+
+        <p className="mt-1 text-slate-400">
+          Manage shortlinks
+        </p>
+
+      </div>
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800 text-slate-400">
+
+            <th className="p-4 text-left">
+              Domain
+            </th>
+
+            <th className="p-4 text-left">
+              Slug
+            </th>
+
+            <th className="p-4 text-left">
+              Target URL
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {links.map(
+            (link:any) => (
+
+              <tr
+                key={link.id}
+                className="
+                  border-b
+                  border-slate-800
+                "
+              >
+
+                <td className="p-4">
+                  {link.domain}
+                </td>
+
+                <td className="p-4 text-cyan-400">
+                  {link.slug}
+                </td>
+
+                <td className="p-4 text-xs">
+
+                  {link.target_url}
+
+                </td>
+
+                <td className="p-4">
+
+                  <button
+                    onClick={() =>
+                      deleteLink(
+                        link.id
+                      )
+                    }
+                    className="
+                      rounded
+                      bg-red-600
+                      px-3
+                      py-1
+                      text-xs
+                    "
+                  >
+                    Delete
+                  </button>
+
+                </td>
+
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </>
+
+)}
+
         {activeTab === "campaigns" && (
 
           <>
@@ -2506,280 +2782,8 @@ return (
   </div>
 
 )}
-{activeTab === "Domains" && (
 
-  <>
 
-    <div className="mb-6 flex items-center justify-between">
-
-      <div>
-
-        <h1 className="text-3xl font-bold">
-          Domains
-        </h1>
-
-        <p className="mt-1 text-slate-400">
-          Manage shortlink domains
-        </p>
-
-      </div>
-
-    </div>
-
-    <div className="mb-6 flex gap-2">
-
-      <input
-        value={newDomain}
-        onChange={(e) =>
-          setNewDomain(
-            e.target.value
-          )
-        }
-        placeholder="example.com"
-        className="
-          flex-1
-          rounded-xl
-          border
-          border-slate-800
-          bg-[#111827]
-          p-3
-        "
-      />
-
-      <button
-        onClick={addDomain}
-        className="
-          rounded-xl
-          bg-blue-600
-          px-4
-          py-3
-          text-sm
-        "
-      >
-        Add Domain
-      </button>
-
-    </div>
-
-    <div className="rounded-xl border border-slate-800 bg-[#111827]">
-
-      <table className="w-full text-sm">
-
-        <thead>
-
-          <tr className="border-b border-slate-800 text-slate-400">
-
-            <th className="p-4 text-left">
-              Domain
-            </th>
-
-            <th className="p-4 text-left">
-              Status
-            </th>
-
-            <th className="p-4 text-left">
-              Actions
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {domains.map(
-            (domain:any) => (
-
-              <tr
-                key={domain.id}
-                className="
-                  border-b
-                  border-slate-800
-                "
-              >
-
-                <td className="p-4">
-                  {domain.domain}
-                </td>
-
-                <td className="p-4">
-
-                  {domain.status === 1
-                    ? "🟢 Active"
-                    : "🔴 Hidden"}
-
-                </td>
-
-                <td className="p-4">
-
-                  <div className="flex gap-2">
-
-                    <button
-                      onClick={() =>
-                        toggleDomain(
-                          domain.id
-                        )
-                      }
-                      className="
-                        rounded
-                        bg-yellow-600
-                        px-3
-                        py-1
-                        text-xs
-                      "
-                    >
-
-                      {domain.status === 1
-                        ? "Hide"
-                        : "Show"}
-
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        deleteDomain(
-                          domain.id
-                        )
-                      }
-                      className="
-                        rounded
-                        bg-red-600
-                        px-3
-                        py-1
-                        text-xs
-                      "
-                    >
-                      Delete
-                    </button>
-
-                  </div>
-
-                </td>
-
-              </tr>
-
-            )
-          )}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </>
-
-)}
-{activeTab === "Links" && (
-
-  <>
-
-    <div className="mb-6 flex items-center justify-between">
-
-      <div>
-
-        <h1 className="text-3xl font-bold">
-          Links
-        </h1>
-
-        <p className="mt-1 text-slate-400">
-          Manage shortlinks
-        </p>
-
-      </div>
-
-    </div>
-
-    <div className="rounded-xl border border-slate-800 bg-[#111827]">
-
-      <table className="w-full text-sm">
-
-        <thead>
-
-          <tr className="border-b border-slate-800 text-slate-400">
-
-            <th className="p-4 text-left">
-              Domain
-            </th>
-
-            <th className="p-4 text-left">
-              Slug
-            </th>
-
-            <th className="p-4 text-left">
-              Target URL
-            </th>
-
-            <th className="p-4 text-left">
-              Actions
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {links.map(
-            (link:any) => (
-
-              <tr
-                key={link.id}
-                className="
-                  border-b
-                  border-slate-800
-                "
-              >
-
-                <td className="p-4">
-                  {link.domain}
-                </td>
-
-                <td className="p-4 text-cyan-400">
-                  {link.slug}
-                </td>
-
-                <td className="p-4 text-xs">
-
-                  {link.target_url}
-
-                </td>
-
-                <td className="p-4">
-
-                  <button
-                    onClick={() =>
-                      deleteLink(
-                        link.id
-                      )
-                    }
-                    className="
-                      rounded
-                      bg-red-600
-                      px-3
-                      py-1
-                      text-xs
-                    "
-                  >
-                    Delete
-                  </button>
-
-                </td>
-
-              </tr>
-
-            )
-          )}
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </>
-
-)}
     </div>
 
   )
