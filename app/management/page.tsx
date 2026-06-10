@@ -88,8 +88,284 @@ const [offerId, setOfferId] =
 
 const [networkId, setNetworkId] =
   useState("")
+
+const [domains, setDomains] =
+  useState<any[]>([])
+
+const [links, setLinks] =
+  useState<any[]>([])
+
+const [newDomain, setNewDomain] =
+  useState("")
   
+  async function addDomain() {
+
+  console.log(
+    "add domain"
+  )
+
+}
+
+async function toggleDomain(
+  id:number
+) {
+
+  console.log(
+    "toggle",
+    id
+  )
+
+}
+
+async function deleteDomain(
+  id:number
+) {
+
+  console.log(
+    "delete domain",
+    id
+  )
+
+}
+
+async function deleteLink(
+  id:number
+) {
+
+  console.log(
+    "delete link",
+    id
+  )
+
+}
  useEffect(() => {
+
+  async function loadDomains() {
+
+  const response =
+    await fetch(
+
+      "https://magnifystyle.org/api/domains",
+
+      {
+        headers: {
+          "x-api-key":
+            process.env
+              .NEXT_PUBLIC_API_KEY!
+        }
+      }
+
+    )
+
+  const data:any =
+    await response.json()
+
+  if (
+    data.success
+  ) {
+
+    setDomains(
+      data.domains
+    )
+
+  }
+
+}
+async function loadLinks() {
+
+  const response =
+    await fetch(
+
+      "https://magnifystyle.org/api/links",
+
+      {
+        headers: {
+
+          "x-api-key":
+            process.env
+              .NEXT_PUBLIC_API_KEY!
+
+        }
+      }
+
+    )
+
+  const data:any =
+    await response.json()
+
+  if (
+    data.success
+  ) {
+
+    setLinks(
+      data.links
+    )
+
+  }
+
+}
+async function addDomain() {
+
+  if (
+    !newDomain.trim()
+  ) {
+    return
+  }
+
+  await fetch(
+
+    "https://magnifystyle.org/api/domain/create",
+
+    {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type":
+          "application/json",
+
+        "x-api-key":
+          process.env
+            .NEXT_PUBLIC_API_KEY!
+
+      },
+
+      body: JSON.stringify({
+
+        domain:
+          newDomain.trim()
+
+      })
+
+    }
+
+  )
+
+  setNewDomain("")
+
+  loadDomains()
+
+}
+async function toggleDomain(
+  id:number
+) {
+
+  await fetch(
+
+    "https://magnifystyle.org/api/domain/toggle",
+
+    {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type":
+          "application/json",
+
+        "x-api-key":
+          process.env
+            .NEXT_PUBLIC_API_KEY!
+
+      },
+
+      body: JSON.stringify({
+        id
+      })
+
+    }
+
+  )
+
+  loadDomains()
+
+}
+async function deleteDomain(
+  id:number
+) {
+
+  if (
+    !confirm(
+      "Delete domain?"
+    )
+  ) {
+    return
+  }
+
+  await fetch(
+
+    "https://magnifystyle.org/api/domain/delete",
+
+    {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type":
+          "application/json",
+
+        "x-api-key":
+          process.env
+            .NEXT_PUBLIC_API_KEY!
+
+      },
+
+      body: JSON.stringify({
+        id
+      })
+
+    }
+
+  )
+
+  loadDomains()
+
+}
+async function deleteLink(
+  id:number
+) {
+
+  if (
+    !confirm(
+      "Delete link?"
+    )
+  ) {
+    return
+  }
+
+  await fetch(
+
+    "https://magnifystyle.org/api/link/delete",
+
+    {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type":
+          "application/json",
+
+        "x-api-key":
+          process.env
+            .NEXT_PUBLIC_API_KEY!
+
+      },
+
+      body: JSON.stringify({
+        id
+      })
+
+    }
+
+  )
+
+  loadLinks()
+
+}
+
  
   async function loadData() {
 
@@ -1033,6 +1309,62 @@ return (
   `}
 >
   campaigns
+</div>
+
+<div
+  onClick={() =>
+    setActiveTab(
+      "domains"
+    )
+  }
+  className={`
+
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab ===
+      "domains"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  🌐 Domains
+ </div>
+
+<div
+  onClick={() =>
+    setActiveTab(
+      "links"
+    )
+  }
+  className={`
+
+    cursor-pointer
+    rounded-lg
+    px-3
+    py-2
+    text-sm
+
+    ${
+      activeTab ===
+      "links"
+
+        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+
+        : "border border-slate-800 text-slate-400"
+    }
+
+  `}
+>
+  🔗 Links
 </div>
 
         </div>
@@ -2172,6 +2504,280 @@ return (
     </div>
 
   </div>
+
+)}
+{activeTab === "Domains" && (
+
+  <>
+
+    <div className="mb-6 flex items-center justify-between">
+
+      <div>
+
+        <h1 className="text-3xl font-bold">
+          Domains
+        </h1>
+
+        <p className="mt-1 text-slate-400">
+          Manage shortlink domains
+        </p>
+
+      </div>
+
+    </div>
+
+    <div className="mb-6 flex gap-2">
+
+      <input
+        value={newDomain}
+        onChange={(e) =>
+          setNewDomain(
+            e.target.value
+          )
+        }
+        placeholder="example.com"
+        className="
+          flex-1
+          rounded-xl
+          border
+          border-slate-800
+          bg-[#111827]
+          p-3
+        "
+      />
+
+      <button
+        onClick={addDomain}
+        className="
+          rounded-xl
+          bg-blue-600
+          px-4
+          py-3
+          text-sm
+        "
+      >
+        Add Domain
+      </button>
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800 text-slate-400">
+
+            <th className="p-4 text-left">
+              Domain
+            </th>
+
+            <th className="p-4 text-left">
+              Status
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {domains.map(
+            (domain:any) => (
+
+              <tr
+                key={domain.id}
+                className="
+                  border-b
+                  border-slate-800
+                "
+              >
+
+                <td className="p-4">
+                  {domain.domain}
+                </td>
+
+                <td className="p-4">
+
+                  {domain.status === 1
+                    ? "🟢 Active"
+                    : "🔴 Hidden"}
+
+                </td>
+
+                <td className="p-4">
+
+                  <div className="flex gap-2">
+
+                    <button
+                      onClick={() =>
+                        toggleDomain(
+                          domain.id
+                        )
+                      }
+                      className="
+                        rounded
+                        bg-yellow-600
+                        px-3
+                        py-1
+                        text-xs
+                      "
+                    >
+
+                      {domain.status === 1
+                        ? "Hide"
+                        : "Show"}
+
+                    </button>
+
+                    <button
+                      onClick={() =>
+                        deleteDomain(
+                          domain.id
+                        )
+                      }
+                      className="
+                        rounded
+                        bg-red-600
+                        px-3
+                        py-1
+                        text-xs
+                      "
+                    >
+                      Delete
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </>
+
+)}
+{activeTab === "Links" && (
+
+  <>
+
+    <div className="mb-6 flex items-center justify-between">
+
+      <div>
+
+        <h1 className="text-3xl font-bold">
+          Links
+        </h1>
+
+        <p className="mt-1 text-slate-400">
+          Manage shortlinks
+        </p>
+
+      </div>
+
+    </div>
+
+    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+
+      <table className="w-full text-sm">
+
+        <thead>
+
+          <tr className="border-b border-slate-800 text-slate-400">
+
+            <th className="p-4 text-left">
+              Domain
+            </th>
+
+            <th className="p-4 text-left">
+              Slug
+            </th>
+
+            <th className="p-4 text-left">
+              Target URL
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {links.map(
+            (link:any) => (
+
+              <tr
+                key={link.id}
+                className="
+                  border-b
+                  border-slate-800
+                "
+              >
+
+                <td className="p-4">
+                  {link.domain}
+                </td>
+
+                <td className="p-4 text-cyan-400">
+                  {link.slug}
+                </td>
+
+                <td className="p-4 text-xs">
+
+                  {link.target_url}
+
+                </td>
+
+                <td className="p-4">
+
+                  <button
+                    onClick={() =>
+                      deleteLink(
+                        link.id
+                      )
+                    }
+                    className="
+                      rounded
+                      bg-red-600
+                      px-3
+                      py-1
+                      text-xs
+                    "
+                  >
+                    Delete
+                  </button>
+
+                </td>
+
+              </tr>
+
+            )
+          )}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </>
 
 )}
     </div>

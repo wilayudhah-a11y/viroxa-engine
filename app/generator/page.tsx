@@ -632,11 +632,11 @@ method: "POST",
 
 headers: {
 
-  "Content-Type":
-    "application/json",
+"Content-Type":
+  "application/json",
 
-  "x-api-key":
-    "VROX_9xK2mP7Qa4Yz_2026"
+"x-api-key":
+  process.env.NEXT_PUBLIC_API_KEY || ""
 
 },
 
