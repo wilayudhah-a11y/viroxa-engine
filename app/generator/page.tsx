@@ -624,7 +624,7 @@ console.log(
    const response =
 await fetch(
 
-"https://viroxa.fun/api/bulk-shorten.php",
+"https://magnifystyle.org/api/link/bulk-create",
 
 {
 
@@ -632,10 +632,11 @@ method: "POST",
 
 headers: {
 
-
 "Content-Type":
-  "application/json"
+  "application/json",
 
+"x-api-key":
+  process.env.NEXT_PUBLIC_API_KEY="VROX_9xK2mP7Qa4Yz_2026"
 
 },
 
@@ -658,7 +659,6 @@ body: JSON.stringify({
 })
 
 }
-
 )
 
 
