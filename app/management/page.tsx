@@ -98,51 +98,69 @@ const [links, setLinks] =
 const [newDomain, setNewDomain] =
   useState("")
 
-  async function addDomain() {
-
-  console.log(
-    "add domain"
-  )
-
-}
-
-async function toggleDomain(
-  id:number
-) {
-
-  console.log(
-    "toggle",
-    id
-  )
-
-}
-
-async function deleteDomain(
-  id:number
-) {
-
-  console.log(
-    "delete domain",
-    id
-  )
-
-}
-
-async function deleteLink(
-  id:number
-) {
-
-  console.log(
-    "delete link",
-    id
-  )
-
-}
- useEffect(() => {
-
   
+ 
+ useEffect(() => {
+  
+  async function loadData() {
 
-  async function loadDomains() {
+    const sourceRes =
+      await fetch(
+        "/api/traffic-sources"
+      )
+
+    const sourceData:any =
+      await sourceRes.json()
+
+    setSources(
+      sourceData.sources || []
+    )
+
+    const offerRes =
+      await fetch(
+        "/api/offers"
+      )
+
+    const offerData:any =
+      await offerRes.json()
+
+    setOffers(
+      offerData.offers || []
+    )
+
+    const networkRes =
+      await fetch(
+        "/api/networks"
+      )
+
+    const networkData:any =
+      await networkRes.json()
+
+    setNetworks(
+      networkData.networks || []
+    )
+
+const campaignRes =
+  await fetch(
+    "/api/campaigns"
+  )
+
+const campaignData:any =
+  await campaignRes.json()
+
+setCampaigns(
+  campaignData.campaigns || []
+)
+
+  }
+
+  loadData()
+  loadDomains()
+loadLinks()
+
+}, []) 
+
+async function loadDomains() {
 
   const response =
     await fetch(
@@ -226,9 +244,8 @@ async function addDomain() {
           "application/json",
 
         "x-api-key":
-          process.env
-            .NEXT_PUBLIC_API_KEY!
-
+          process.env.NEXT_PUBLIC_API_KEY || ""
+           
       },
 
       body: JSON.stringify({
@@ -265,8 +282,7 @@ async function toggleDomain(
           "application/json",
 
         "x-api-key":
-          process.env
-            .NEXT_PUBLIC_API_KEY!
+          process.env.NEXT_PUBLIC_API_KEY || ""
 
       },
 
@@ -365,63 +381,6 @@ async function deleteLink(
   loadLinks()
 
 }
-
- 
-  async function loadData() {
-
-    const sourceRes =
-      await fetch(
-        "/api/traffic-sources"
-      )
-
-    const sourceData:any =
-      await sourceRes.json()
-
-    setSources(
-      sourceData.sources || []
-    )
-
-    const offerRes =
-      await fetch(
-        "/api/offers"
-      )
-
-    const offerData:any =
-      await offerRes.json()
-
-    setOffers(
-      offerData.offers || []
-    )
-
-    const networkRes =
-      await fetch(
-        "/api/networks"
-      )
-
-    const networkData:any =
-      await networkRes.json()
-
-    setNetworks(
-      networkData.networks || []
-    )
-
-const campaignRes =
-  await fetch(
-    "/api/campaigns"
-  )
-
-const campaignData:any =
-  await campaignRes.json()
-
-setCampaigns(
-  campaignData.campaigns || []
-)
-
-  }
-
-  loadData()
-
-}, []) 
 
 async function createSource() {
 
