@@ -621,66 +621,68 @@ console.log(
   "DOMAIN SENT",
   shortDomain
 )
-   const response =
-await fetch(
+const chunkSize = 250
 
-"https://magnifystyle.org/api/link/bulk-create",
+const allLinks = []
 
-{
-
-method: "POST",
-
-headers: {
-
-"Content-Type":
-  "application/json",
-
-"x-api-key":
-  process.env.NEXT_PUBLIC_API_KEY || ""
-
-},
-
-body: JSON.stringify({
-
-  urls:
-    generatedLinks,
-
-  domain:
-
-    shortDomain === "random"
-
-      ? "random"
-
-      : shortDomain.replace(
-          "https://",
-          ""
-        )
-
-})
-
-}
-)
-
-
-const data:any =
-await response.json()
-
-if (
-
-!data.success
-
+for (
+  let i = 0;
+  i < generatedLinks.length;
+  i += chunkSize
 ) {
 
-throw new Error(
-"Bulk shorten failed"
-)
+  const chunk =
+    generatedLinks.slice(
+      i,
+      i + chunkSize
+    )
+
+  const response =
+    await fetch(
+      "https://magnifystyle.org/api/link/bulk-create",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type":
+            "application/json",
+          "x-api-key":
+            process.env.NEXT_PUBLIC_API_KEY || ""
+        },
+        body: JSON.stringify({
+
+          urls: chunk,
+
+          domain:
+            shortDomain === "random"
+              ? "random"
+              : shortDomain.replace(
+                  "https://",
+                  ""
+                )
+
+        })
+      }
+    )
+
+  const data:any =
+    await response.json()
+
+  if (!data.success) {
+
+    throw new Error(
+      "Bulk shorten failed"
+    )
+
+  }
+
+  allLinks.push(
+    ...data.links
+  )
 
 }
 
 setGeneratedLinks(
-
-data.links
-
+  allLinks
 )
  
 
