@@ -265,8 +265,9 @@ async function addDomain() {
 
 }
 async function toggleDomain(
-  id:number
-) {
+  id:number,
+  currentStatus:number
+){
 
   await fetch(
 
@@ -274,27 +275,36 @@ async function toggleDomain(
 
     {
 
-      method: "POST",
+      method:"POST",
 
-      headers: {
+      headers:{
 
         "Content-Type":
           "application/json",
 
         "x-api-key":
-          process.env.NEXT_PUBLIC_API_KEY || ""
+          process.env
+            .NEXT_PUBLIC_API_KEY || ""
 
       },
 
-      body: JSON.stringify({
-        id
-      })
+      body:
+        JSON.stringify({
+
+          id,
+
+          status:
+            currentStatus === 1
+              ? 0
+              : 1
+
+        })
 
     }
 
   )
 
-  loadDomains()
+  await loadDomains()
 
 }
 async function deleteDomain(
@@ -2129,7 +2139,8 @@ return (
                     <button
                       onClick={() =>
                         toggleDomain(
-                          domain.id
+                          domain.id,
+						  domain.status
                         )
                       }
                       className="
@@ -2189,25 +2200,59 @@ return (
 
     <div className="mb-6 flex items-center justify-between">
 
-      <div>
+		<div>
+		
+			<h1 className="text-3xl font-bold">
+			Links
+			</h1>
+		
+			<p className="mt-1 text-slate-400">
+			Manage shortlinks
+			</p>
+		
+		</div>
+		
+		<div
+			className="
+			rounded-xl
+			border
+			border-cyan-500/20
+			bg-cyan-500/10
+			px-5
+			py-3
+			"
+		>
+			<div className="text-xs text-cyan-300">
+			Total Links
+			</div>
+		
+			<div className="text-2xl font-bold text-cyan-400">
+			{links.length}
+			</div>
+		</div>
+		
+		</div>
 
-        <h1 className="text-3xl font-bold">
-          links
-        </h1>
-
-        <p className="mt-1 text-slate-400">
-          Manage shortlinks
-        </p>
-
-      </div>
-
-    </div>
-
-    <div className="rounded-xl border border-slate-800 bg-[#111827]">
+				<div
+			className="
+				rounded-xl
+				border
+				border-slate-800
+				bg-[#111827]
+				overflow-hidden
+			"
+			>
+			
+			<div
+				className="
+				max-h-[800px]
+				overflow-y-auto
+				"
+			>
 
       <table className="w-full text-sm">
 
-        <thead>
+        <thead className="sticky top-0 z-10 bg-[#111827]">
 
           <tr className="border-b border-slate-800 text-slate-400">
 
@@ -2289,6 +2334,8 @@ return (
       </table>
 
     </div>
+	
+	</div>
 
   </>
 
