@@ -28,10 +28,6 @@ export async function GET() {
       )
       .limit(20)
 
-      console.log(
-  "RECENT CLICKS:",
-  data?.slice(0,20)
-)
 
   if(error){
 

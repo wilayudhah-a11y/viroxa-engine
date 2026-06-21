@@ -363,24 +363,28 @@ return (
 }
 
 function getWIBDate(
-  date:string
-){
+  date: string
+) {
 
-  const d =
+  const d = new Date(date)
+
+  const wib =
     new Date(
-      date.replace(
-        " ",
-        "T"
-      )
+      d.getTime() +
+      7 * 60 * 60 * 1000
     )
 
-  d.setHours(
-    d.getHours() + 7
+  return (
+    wib.getUTCFullYear() +
+    "-" +
+    String(
+      wib.getUTCMonth() + 1
+    ).padStart(2, "0") +
+    "-" +
+    String(
+      wib.getUTCDate()
+    ).padStart(2, "0")
   )
-
-  return d
-    .toISOString()
-    .split("T")[0]
 
 }
 
@@ -576,6 +580,20 @@ const today =
     new Date()
       .toISOString()
   )
+
+  console.log(
+  "TODAY:",
+  today
+)
+
+console.log(
+  "CLICK DATE:",
+  clicks[0]
+    ? getWIBDate(
+        clicks[0].created_at
+      )
+    : "NO CLICK"
+)
 
 const yesterday =
   new Date(
