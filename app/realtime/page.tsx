@@ -726,149 +726,88 @@ const campaignReports:any[] =
 
 <div className="min-h-screen bg-[#0B1220] text-white">
 
-  <div className="grid grid-cols-12">
+  <div className="grid grid-cols-12 gap-4 px-4 py-6">
 
     {/* LEFT SIDEBAR */}
 
-<div className="flex-1 overflow-y-auto p-3 space-y-4">
+    <div className="
+  col-span-12
+  md:col-span-2
+  md:sticky
+  md:top-0
+  border-r
+  border-slate-800
+  bg-[#111827]
+  p-4
+  flex
+  flex-col
+  gap-2
+  min-h-[calc(100vh-48px)]
+">
+      <nav className="flex flex-col gap-2">
+        <button
+          onClick={() => setActiveTab("dashboard")}
+          className={`w-full text-left flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
+            activeTab === "dashboard"
+              ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+              : "border border-slate-800 text-slate-400"
+          }`}
+        >
+          <div className="h-2 w-2 rounded-full bg-blue-400" />
+          Dashboard
+        </button>
 
-<div
-  onClick={() =>
-    setActiveTab("dashboard")
-  }
-  className={`
-    flex
-    cursor-pointer
-    items-center
-    gap-2
-    rounded-lg
-    px-3
-    py-2
-    text-sm
+        <button
+          onClick={() => setActiveTab("clicks")}
+          className={`w-full text-left rounded-lg px-3 py-2 text-sm transition-colors ${
+            activeTab === "clicks"
+              ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+              : "border border-slate-800 text-slate-400"
+          }`}
+        >
+          Clicks
+        </button>
 
-    ${
-      activeTab === "dashboard"
+        <button
+          onClick={() => setActiveTab("conversions")}
+          className={`w-full text-left rounded-lg px-3 py-2 text-sm transition-colors ${
+            activeTab === "conversions"
+              ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+              : "border border-slate-800 text-slate-400"
+          }`}
+        >
+          Conversions
+        </button>
 
-        ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+        <button
+          onClick={() => setActiveTab("reports")}
+          className={`w-full text-left rounded-lg px-3 py-2 text-sm transition-colors ${
+            activeTab === "reports"
+              ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
+              : "border border-slate-800 text-slate-400"
+          }`}
+        >
+          Reports
+        </button>
+      </nav>
 
-        : "border border-slate-800 text-slate-400"
-    }
-  `}
->
-    <div className="h-2 w-2 rounded-full bg-blue-400" />
-    Dashboard
-  </div>
-
-  <div
-    onClick={() => setActiveTab("clicks")}
-className={`
-  cursor-pointer
-  rounded-lg
-  px-3
-  py-2
-  text-sm
-
-  ${
-    activeTab === "clicks"
-
-      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
-
-      : "border border-slate-800 text-slate-400"
-  }
-`}
-  >
-    Clicks
-  </div>
-
-  <div
-    onClick={() => setActiveTab("conversions")}
-className={`
-  cursor-pointer
-  rounded-lg
-  px-3
-  py-2
-  text-sm
-
-  ${
-    activeTab === "conversions"
-
-      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
-
-      : "border border-slate-800 text-slate-400"
-  }
-`}
-  >
-    Conversions
-  </div>
-
-  <div
-    onClick={() => setActiveTab("reports")}
-className={`
-  cursor-pointer
-  rounded-lg
-  px-3
-  py-2
-  text-sm
-
-  ${
-    activeTab === "reports"
-
-      ? "border border-blue-500/20 bg-blue-500/10 text-blue-400"
-
-      : "border border-slate-800 text-slate-400"
-  }
-`}
-  >
-    Reports
-  </div>
-
-</div>
-
-      {/* LOGOUT */}
-
-      <div className="p-3 border-t border-slate-800">
-
-<button
-
-  onClick={() => {
-
-    localStorage.removeItem(
-      "realtime_auth"
-    )
-
-    setAuthorized(
-      false
-    )
-
-    setPassword("")
-
-  }}
-
-  className="
-    w-full
-    rounded-lg
-    border
-    border-red-500/20
-    bg-red-500/10
-    py-2
-    text-sm
-    text-red-400
-    hover:bg-red-500/20
-  "
-
->
-
-  Logout
-
-</button>
-
+      <div className="mt-auto pt-4 border-t border-slate-800">
+        <button
+          onClick={() => {
+            localStorage.removeItem("realtime_auth");
+            setAuthorized(false);
+            setPassword("");
+          }}
+          className="w-full rounded-lg border border-red-500/20 bg-red-500/10 py-2 text-sm text-red-400 hover:bg-red-500/20"
+        >
+          Logout
+        </button>
       </div>
-
     </div>
 
         {/* MAIN CONTENT */}
 
-<div className="col-span-8 p-6">
+  <div className="col-span-12 md:col-span-8 p-6">
 
  {activeTab === "dashboard" && (
     <>
@@ -877,20 +816,31 @@ className={`
 
   <div className="mb-6">
 
-<div className="flex items-center gap-3">
+<div className="flex items-center justify-between">
 
-  <h1 className="text-3xl font-bold">
-    Realtime Analytics
-  </h1>
+  <div>
 
-  <div className="flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1">
+    <h1 className="text-3xl font-bold">
+      Realtime Analytics
+    </h1>
 
-    <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
+    <p className="mt-1 text-sm text-slate-400">
+      Live tracker dashboard
+    </p>
 
-    <span className="text-xs text-green-400">
-      LIVE
+  </div>
+
+  <div className="
+    rounded-xl
+    border
+    border-green-500/20
+    bg-green-500/10
+    px-4
+    py-2
+  ">
+    <span className="text-green-400 text-sm">
+      ● Live Tracking
     </span>
-
   </div>
 
 </div>
@@ -903,9 +853,20 @@ className={`
 
   {/* TOP CARDS */}
 
-  <div className="grid grid-cols-4 gap-3">
+  <div className="
+  grid
+  grid-cols-1
+  md:grid-cols-2
+  xl:grid-cols-4
+  gap-4
+">
 
-    <div className="rounded-xl border border-slate-800 bg-[#111827] p-4">
+    <div className="rounded-2xl
+border
+border-slate-800
+bg-[#111827]
+p-5
+shadow-[0_0_20px_rgba(0,0,0,0.25)]">
 
       <p className="text-slate-400 text-sm">
         Total Clicks
@@ -1546,7 +1507,13 @@ className={`
 
     {/* REPORT TABLE */}
 	
-	<div className="mb-4 grid grid-cols-4 gap-3">
+	<div className="
+  mb-6
+  grid
+  grid-cols-2
+  md:grid-cols-4
+  gap-4
+">
 
   <div className="rounded-lg border border-slate-800 p-3">
 
@@ -1746,11 +1713,19 @@ className={`
 </div>
         {/* RIGHT SIDEBAR */}
 
-<div className="sticky top-0 col-span-2 border-l border-slate-800 bg-[#111827] h-screen p-4 flex flex-col gap-4">
+<div className="col-span-12 md:col-span-2 md:sticky md:top-0 border-l border-slate-800 bg-[#111827] p-4 flex flex-col gap-4 min-h-[calc(100vh-48px)]">
 
   {/* LIVE CLICKS */}
 
-  <div className="flex-1 rounded-xl border border-slate-800 bg-[#0B1220] p-4">
+  <div className="
+  rounded-2xl
+  border
+  border-slate-800
+  bg-[#111827]
+  p-4
+  max-h-[420px]
+  overflow-y-auto
+">
 
     <div className="mb-4">
 
@@ -1817,7 +1792,7 @@ className={`
 
   {/* TOP COUNTRIES */}
 
-  <div className="flex-1 rounded-xl border border-slate-800 bg-[#0B1220] p-4">
+  <div className="rounded-xl border border-slate-800 bg-[#111827] p-4 overflow-y-auto">
 
     <div className="mb-4">
 
@@ -1876,7 +1851,8 @@ className={`
 </div>
 
       </div>
-   
+
+    </div>
   
   );
 }
