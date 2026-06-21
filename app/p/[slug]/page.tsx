@@ -1,6 +1,15 @@
 import type { Metadata }
 from 'next'
 
+import { unstable_cache }
+from 'next/cache'
+
+import { headers }
+from 'next/headers'
+
+import { redirect }
+from 'next/navigation'
+
 import { supabase }
 from '@/lib/supabase'
 
@@ -23,24 +32,64 @@ function isValidUrl(url: string) {
   }
 }
 
+function isCrawlerUserAgent(userAgent: string) {
+  const normalized = userAgent.toLowerCase()
+
+  return [
+    'facebookexternalhit',
+    'facebot',
+    'twitterbot',
+    'slackbot',
+    'whatsapp',
+    'telegrambot',
+    'linkedinbot',
+    'pinterest',
+    'discordbot',
+    'redditbot',
+    'applebot',
+    'googlebot',
+    'bingpreview',
+    'embedly',
+    'quora link preview',
+    'petalbot',
+    'okhttp',
+    'vkshare',
+  ].some((agent) => normalized.includes(agent))
+}
+
+const getPayloadBySlug =
+  unstable_cache(
+    async (slug: string) => {
+      const { data } =
+        await supabase
+          .from("payloads")
+          .select(
+            "title,description,image,target"
+          )
+          .eq(
+            "slug",
+            slug
+          )
+          .maybeSingle()
+
+      return data
+    },
+    ["payload-by-slug"],
+    {
+      revalidate: 3600,
+      tags: ["payloads"],
+    }
+  )
+
 export async function generateMetadata({
   params,
 }: Props): Promise<Metadata> {
   const { slug } = await params
 
- const { data } =
-  await supabase
-
-    .from("payloads")
-
-    .select("*")
-
-    .eq(
-      "slug",
+  const data =
+    await getPayloadBySlug(
       slug
     )
-
-    .single()
 
   if (!data) {
     return {
@@ -61,10 +110,10 @@ export async function generateMetadata({
         data.description,
 
       images: [
-  {
-    url: data.image,
-  },
-],
+        {
+          url: data.image,
+        },
+      ],
     },
 
     twitter: {
@@ -77,10 +126,10 @@ export async function generateMetadata({
         data.description,
 
       images: [
-  {
-    url: data.image,
-  },
-],
+        {
+          url: data.image,
+        },
+      ],
     },
   }
 }
@@ -90,19 +139,10 @@ export default async function Page({
 }: Props) {
   const { slug } = await params
 
-const { data } =
-  await supabase
-
-    .from("payloads")
-
-    .select("*")
-
-    .eq(
-      "slug",
+  const data =
+    await getPayloadBySlug(
       slug
     )
-
-    .single()
 
   if (!data) {
     return (
@@ -120,6 +160,15 @@ const { data } =
         Invalid Target
       </main>
     )
+  }
+
+  const userAgent =
+    (await headers()).get(
+      'user-agent'
+    ) || ''
+
+  if (!isCrawlerUserAgent(userAgent)) {
+    redirect(data.target)
   }
 
   return (

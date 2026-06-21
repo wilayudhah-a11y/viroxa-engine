@@ -13,101 +13,163 @@ export async function GET(
       "period"
     ) || "today"
 
+  const WIB_OFFSET_MS =
+    7 * 60 * 60 * 1000
+
+  function toWIB(
+    date: Date
+  ) {
+    return new Date(
+      date.getTime() +
+        WIB_OFFSET_MS
+    )
+  }
+
+  function fromWIB(
+    date: Date
+  ) {
+    return new Date(
+      date.getTime() -
+        WIB_OFFSET_MS
+    )
+  }
+
+  function getWIBDayStart(
+    date: Date
+  ) {
+    const start =
+      new Date(date)
+
+    start.setHours(
+      7, 0, 0, 0
+    )
+
+    if (start > date) {
+      start.setDate(
+        start.getDate() - 1
+      )
+    }
+
+    return start
+  }
+
+  function getWIBWeekStart(
+    date: Date
+  ) {
+    const day =
+      date.getDay()
+
+    const offset =
+      day === 0
+        ? 6
+        : day - 1
+
+    const weekStart =
+      new Date(date)
+
+    weekStart.setDate(
+      date.getDate() -
+        offset
+    )
+
+    weekStart.setHours(
+      7, 0, 0, 0
+    )
+
+    if (
+      day === 1 &&
+      date.getHours() < 7
+    ) {
+      weekStart.setDate(
+        weekStart.getDate() -
+          7
+      )
+    }
+
+    return weekStart
+  }
+
   let startDate =
     new Date()
 
   let endDate:
     Date | null = null
 
-  if(period === "today"){
+  const wibNow =
+    toWIB(startDate)
 
-    startDate.setHours(
-      0,0,0,0
+  const currentDayStart =
+    getWIBDayStart(wibNow)
+
+  if (period === "today") {
+    startDate = fromWIB(
+      currentDayStart
     )
-
-  }
-
-  else if(
+  } else if (
     period ===
     "yesterday"
-  ){
+  ) {
+    const yesterdayStart =
+      new Date(
+        currentDayStart
+      )
 
-    startDate.setDate(
-      startDate.getDate() - 1
+    yesterdayStart.setDate(
+      yesterdayStart.getDate() -
+        1
     )
 
-    startDate.setHours(
-      0,0,0,0
+    startDate = fromWIB(
+      yesterdayStart
     )
-
-    endDate =
-      new Date(startDate)
-
-    endDate.setDate(
-      endDate.getDate() + 1
+    endDate = fromWIB(
+      currentDayStart
     )
-
-  }
-
-  else if(
+  } else if (
     period ===
     "last7days"
-  ){
-
-    startDate.setDate(
-      startDate.getDate() - 6
+  ) {
+    const startOfLast7Days =
+      new Date(
+        currentDayStart
+      )
+    startOfLast7Days.setDate(
+      startOfLast7Days.getDate() -
+        6
     )
 
-  }
-
-  else if(
+    startDate = fromWIB(
+      startOfLast7Days
+    )
+  } else if (
     period ===
     "thisweek"
-  ){
-
-    startDate.setDate(
-      startDate.getDate() -
-      startDate.getDay()
+  ) {
+    startDate = fromWIB(
+      getWIBWeekStart(wibNow)
     )
-
-    startDate.setHours(
-      0,0,0,0
-    )
-
-  }
-
-  else if(
+  } else if (
     period ===
     "lastweek"
-  ){
-
-    const now =
-      new Date()
-
+  ) {
     const startOfThisWeek =
-      new Date(now)
+      getWIBWeekStart(wibNow)
 
-    startOfThisWeek.setDate(
-      now.getDate() -
-      now.getDay()
-    )
-
-    startOfThisWeek.setHours(
-      0,0,0,0
-    )
-
-    startDate =
+    const startOfLastWeek =
       new Date(
         startOfThisWeek
       )
-
-    startDate.setDate(
-      startDate.getDate() - 7
+    startOfLastWeek.setDate(
+      startOfLastWeek.getDate() -
+        7
     )
 
-    endDate =
+    startDate = fromWIB(
+      startOfLastWeek
+    )
+    endDate = fromWIB(
       startOfThisWeek
-
+    )
   }
 
   let clicksQuery =
@@ -164,56 +226,8 @@ export async function GET(
     count: conversions
   } = await conversionsQuery
 
-  let revenueQuery =
-  supabase
-    .from("conversions")
-    .select(
-      "payout"
-    )
-    .gte(
-      "created_at",
-      startDate.toISOString()
-    )
-
-if(endDate){
-
-  revenueQuery =
-    revenueQuery.lt(
-      "created_at",
-      endDate.toISOString()
-    )
-
-}
-
-const {
-  data: revenueRows
-} =
-  await revenueQuery
-
-  const revenue =
-
-  (revenueRows || [])
-
-    .reduce(
-
-      (
-        total:number,
-        row:any
-      ) =>
-
-        total +
-        Number(
-          row.payout || 0
-        ),
-
-      0
-
-    )
-
-
 const {
   data: visitRows,
-  error: visitError
 } =
   await supabase.rpc(
     "get_campaign_visits",
@@ -228,32 +242,6 @@ const {
     }
   )
 
-
-  let clicksDataQuery =
-  supabase
-    .from("clicks")
-    .select(
-      "campaign"
-    )
-    .gte(
-      "created_at",
-      startDate.toISOString()
-    )
-
-if(endDate){
-
-  clicksDataQuery =
-    clicksDataQuery.lt(
-      "created_at",
-      endDate.toISOString()
-    )
-
-}
-
-const {
-  data: clickRows
-} =
-  await clicksDataQuery
 
   const campaignMap:any = {}
 
@@ -308,6 +296,20 @@ const {
   data: conversionRows
 } =
   await conversionsDataQuery
+
+const revenue =
+  (conversionRows || [])
+    .reduce(
+      (
+        total:number,
+        row:any
+      ) =>
+        total +
+        Number(
+          row.payout || 0
+        ),
+      0
+    )
 
 
 

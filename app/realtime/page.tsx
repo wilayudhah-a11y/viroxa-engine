@@ -384,22 +384,210 @@ function getWIBDate(
 
 }
 
+const WIB_OFFSET_MS =
+  7 * 60 * 60 * 1000
+
+function toWIB(
+  date: Date
+) {
+  return new Date(
+    date.getTime() +
+      WIB_OFFSET_MS
+  )
+}
+
+function fromWIB(
+  date: Date
+) {
+  return new Date(
+    date.getTime() -
+      WIB_OFFSET_MS
+  )
+}
+
+function getWIBDayStart(
+  date: Date
+) {
+  const start =
+    new Date(date)
+
+  start.setHours(
+    7, 0, 0, 0
+  )
+
+  if (
+    start > date
+  ) {
+    start.setDate(
+      start.getDate() - 1
+    )
+  }
+
+  return start
+}
+
+function getWIBWeekStart(
+  date: Date
+) {
+  const day =
+    date.getDay()
+
+  const offset =
+    day === 0
+      ? 6
+      : day - 1
+
+  const weekStart =
+    new Date(date)
+
+  weekStart.setDate(
+    date.getDate() -
+      offset
+  )
+
+  weekStart.setHours(
+    7, 0, 0, 0
+  )
+
+  if (
+    day === 1 &&
+    date.getHours() < 7
+  ) {
+    weekStart.setDate(
+      weekStart.getDate() - 7
+    )
+  }
+
+  return weekStart
+}
+
+function getReportBounds(
+  period:string
+) {
+  const now =
+    new Date()
+
+  const wibNow =
+    toWIB(now)
+
+  const currentDayStart =
+    getWIBDayStart(wibNow)
+
+  if (
+    period ===
+    "today"
+  ) {
+    return {
+      start: fromWIB(
+        currentDayStart
+      ),
+      end: null,
+    }
+  }
+
+  if (
+    period ===
+    "yesterday"
+  ) {
+    const yesterdayStart =
+      new Date(
+        currentDayStart
+      )
+
+    yesterdayStart.setDate(
+      yesterdayStart.getDate() -
+        1
+    )
+
+    return {
+      start: fromWIB(
+        yesterdayStart
+      ),
+      end: fromWIB(
+        currentDayStart
+      ),
+    }
+  }
+
+  if (
+    period ===
+    "last7days"
+  ) {
+    const last7 =
+      new Date(
+        currentDayStart
+      )
+
+    last7.setDate(
+      last7.getDate() - 6
+    )
+
+    return {
+      start: fromWIB(last7),
+      end: null,
+    }
+  }
+
+  if (
+    period ===
+    "thisweek"
+  ) {
+    return {
+      start: fromWIB(
+        getWIBWeekStart(wibNow)
+      ),
+      end: null,
+    }
+  }
+
+  if (
+    period ===
+    "lastweek"
+  ) {
+    const startOfThisWeek =
+      getWIBWeekStart(wibNow)
+
+    const startOfLastWeek =
+      new Date(startOfThisWeek)
+
+    startOfLastWeek.setDate(
+      startOfLastWeek.getDate() -
+        7
+    )
+
+    return {
+      start: fromWIB(
+        startOfLastWeek
+      ),
+      end: fromWIB(
+        startOfThisWeek
+      ),
+    }
+  }
+
+  return {
+    start: new Date(0),
+    end: null,
+  }
+}
+
 const today =
-  new Date()
-    .toISOString()
-    .split("T")[0]
+  getWIBDate(
+    new Date()
+      .toISOString()
+  )
 
 const yesterday =
-  new Date()
-
-yesterday.setDate(
-  yesterday.getDate() - 1
-)
+  new Date(
+    Date.now() -
+      24 * 60 * 60 * 1000
+  )
 
 const yesterdayStr =
-  yesterday
-    .toISOString()
-    .split("T")[0]
+  getWIBDate(
+    yesterday
+      .toISOString()
+  )
 
 const countryStats =
   Object.entries(
@@ -486,272 +674,51 @@ function formatWIB(date:string){
 }
 
 
+const {
+  start: reportStart,
+  end: reportEnd,
+} = getReportBounds(
+  reportPeriod
+)
+
 const filteredClicks =
   clicks.filter(
     (click:any) => {
-
       const clickDate =
-        getWIBDate(
+        parseDate(
           click.created_at
         )
-		
-      if(
-        reportPeriod ===
-        "today"
-      ){
 
+      if (reportEnd) {
         return (
-          clickDate ===
-          today
+          clickDate >= reportStart &&
+          clickDate < reportEnd
         )
-
       }
 
-      if(
-        reportPeriod ===
-        "yesterday"
-      ){
-
-        return (
-          clickDate ===
-          yesterdayStr
-        )
-
-      }
-
-	  
-if(
-  reportPeriod ===
-  "last7days"
-){
-
-  const last7 =
-    new Date()
-
-  last7.setDate(
-    last7.getDate() - 7
-  )
-
- return (
-  parseDate(
-    click.created_at
-  ) >= last7
-)
-
-}
-
-
-if(
-  reportPeriod ===
-  "thisweek"
-){
-
-  const now =
-    new Date()
-
-  const startOfWeek =
-    new Date(now)
-
-  startOfWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfWeek.setHours(
-    0,0,0,0
-  )
-
-
-return (
-  parseDate(
-    click.created_at
-  ) >= startOfWeek
-)
-
-}
-
-
-
-if(
-  reportPeriod ===
-  "lastweek"
-){
-
-  const now =
-    new Date()
-
-  const startOfThisWeek =
-    new Date(now)
-
-  startOfThisWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfThisWeek.setHours(
-    0,0,0,0
-  )
-
-  const startOfLastWeek =
-    new Date(
-      startOfThisWeek
-    )
-
-  startOfLastWeek.setDate(
-    startOfLastWeek.getDate() - 7
-  )
-
-
-const clickDate =
-  parseDate(
-    click.created_at
-  )
-
-return (
-  clickDate >= startOfLastWeek &&
-  clickDate < startOfThisWeek
-)
-
-}
-	  
-      return true
-
+      return clickDate >= reportStart
     }
   )
 
 const filteredConversions =
   reportConversions.filter(
     (conversion:any) => {
-
       const conversionDate =
-        getWIBDate(
+        parseDate(
           conversion.created_at
         )
 
-      if(
-        reportPeriod ===
-        "today"
-      ){
-
+      if (reportEnd) {
         return (
-          conversionDate ===
-          today
+          conversionDate >= reportStart &&
+          conversionDate < reportEnd
         )
-
       }
 
-      if(
-        reportPeriod ===
-        "yesterday"
-      ){
-
-        return (
-          conversionDate ===
-          yesterdayStr
-        )
-
-      }
-	  
-if(
-  reportPeriod ===
-  "last7days"
-){
-
-  const last7 =
-    new Date()
-
-  last7.setDate(
-    last7.getDate() - 7
-  )
-
-  return (
-    new Date(
-      conversion.created_at
-    ) >= last7
-  )
-
-}
-
-if(
-  reportPeriod ===
-  "thisweek"
-){
-
-  const now =
-    new Date()
-
-  const startOfWeek =
-    new Date(now)
-
-  startOfWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfWeek.setHours(
-    0,0,0,0
-  )
-
-  return (
-  parseDate(
-  conversion.created_at
-)
-  )
-
-}
-
-if(
-  reportPeriod ===
-  "lastweek"
-){
-  const now =
-    new Date()
-
-  const startOfThisWeek =
-    new Date(now)
-
-  startOfThisWeek.setDate(
-    now.getDate() -
-    now.getDay()
-  )
-
-  startOfThisWeek.setHours(
-    0,0,0,0
-  )
-
-  const startOfLastWeek =
-    new Date(
-      startOfThisWeek
-    )
-
-  startOfLastWeek.setDate(
-    startOfLastWeek.getDate() - 7
-  )
-
- 
-
-return (
-
-  parseDate(
-    conversion.created_at
-  ) >= startOfLastWeek &&
-
-  parseDate(
-    conversion.created_at
-  ) < startOfThisWeek
-
-)
-
-
-
-}	  
-
-      return true
-
+      return conversionDate >= reportStart
     }
   )
 
-  
 const campaignReports:any[] =
   reportSummary?.campaigns || []
 
@@ -762,20 +729,6 @@ const campaignReports:any[] =
   <div className="grid grid-cols-12">
 
     {/* LEFT SIDEBAR */}
-
-    <div className="col-span-2 border-r border-slate-800 bg-[#111827] h-screen flex flex-col pt-10">
-
-      {/* LOGO */}
-
-      <div className="p-3 border-b border-slate-800">
-
-        <h1 className="text-lg font-bold">
-          VIROXA
-        </h1>
-
-      </div>
-
-{/* MENU */}
 
 <div className="flex-1 overflow-y-auto p-3 space-y-4">
 
@@ -1019,7 +972,7 @@ className={`
     <div className="mb-4">
 
       <h2 className="text-lg font-semibold">
-        Today's Conversions
+        Today&apos;s Conversions
       </h2>
 
       <p className="text-sm text-slate-400">
@@ -1554,7 +1507,7 @@ className={`
 		}
 		`}
 	  >
-	   last7days
+	   Last 7 Days
       </button>
 
 <button 
@@ -1570,7 +1523,7 @@ className={`
 		}
 		`}
 	  >
-        thisweek
+        This Week
       </button>
 
 <button 
@@ -1586,7 +1539,7 @@ className={`
 		}
 		`}
 	  >
-	  lastweek
+	  Last Week
       </button>
 
     </div>

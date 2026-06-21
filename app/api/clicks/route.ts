@@ -1,10 +1,42 @@
-import { NextResponse }
+import {
+  NextRequest,
+  NextResponse
+}
 from "next/server"
 
 import { supabase }
 from "@/lib/supabase"
 
-export async function GET() {
+function getLimit(
+  request: NextRequest
+) {
+
+  const rawLimit =
+    Number(
+      request.nextUrl.searchParams.get(
+        "limit"
+      ) || 500
+    )
+
+  if (
+    Number.isNaN(rawLimit) ||
+    rawLimit < 1
+  ) {
+    return 500
+  }
+
+  return Math.min(
+    rawLimit,
+    1000
+  )
+}
+
+export async function GET(
+  request: NextRequest
+) {
+
+  const limit =
+    getLimit(request)
 
   const {
     data,
@@ -14,7 +46,9 @@ export async function GET() {
 
       .from("clicks")
 
-      .select("*")
+      .select(
+        "clickid,campaign,country,device,created_at"
+      )
 
       .order(
         "created_at",
@@ -23,9 +57,8 @@ export async function GET() {
         }
       )
 
-      .range(
-        0,
-        10000
+      .limit(
+        limit
       )
 
   if (error) {

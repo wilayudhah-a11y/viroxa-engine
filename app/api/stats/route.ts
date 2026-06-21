@@ -34,20 +34,26 @@ export async function GET() {
     )
 
   const {
-    data: conversions
+    data: conversions,
+    count: totalConversions
   } = await supabase
 
     .from("conversions")
 
-    .select("*")
+    .select(
+      "payout",
+      {
+        count: "exact"
+      }
+    )
 
     .gte(
       "created_at",
       today.toISOString()
     )
 
-  const totalConversions =
-    conversions?.length || 0
+  const conversionCount =
+    totalConversions || 0
 
   const revenue =
     conversions?.reduce(
@@ -67,7 +73,7 @@ export async function GET() {
     clicks && clicks > 0
 
       ? (
-          totalConversions /
+          conversionCount /
           clicks
         ) * 100
 
@@ -79,7 +85,7 @@ export async function GET() {
       clicks || 0,
 
     conversions:
-      totalConversions,
+      conversionCount,
 
     revenue:
       revenue.toFixed(2),

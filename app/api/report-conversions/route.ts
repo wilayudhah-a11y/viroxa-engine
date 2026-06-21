@@ -1,10 +1,42 @@
-import { NextResponse }
+import {
+  NextRequest,
+  NextResponse
+}
 from "next/server"
 
 import { supabase }
 from "@/lib/supabase"
 
-export async function GET() {
+function getLimit(
+  request: NextRequest
+) {
+
+  const rawLimit =
+    Number(
+      request.nextUrl.searchParams.get(
+        "limit"
+      ) || 500
+    )
+
+  if (
+    Number.isNaN(rawLimit) ||
+    rawLimit < 1
+  ) {
+    return 500
+  }
+
+  return Math.min(
+    rawLimit,
+    1000
+  )
+}
+
+export async function GET(
+  request: NextRequest
+) {
+
+  const limit =
+    getLimit(request)
 
   const {
     data: conversions,
@@ -13,7 +45,9 @@ export async function GET() {
 
     .from("conversions")
 
-    .select("*")
+    .select(
+      "clickid,payout,status,created_at"
+    )
 
     .order(
       "created_at",
@@ -22,9 +56,8 @@ export async function GET() {
       }
     )
 
-    .range(
-      0,
-      10000
+    .limit(
+      limit
     )
 
   if (error) {
@@ -41,25 +74,34 @@ export async function GET() {
   }
 
   const clickIds =
-    conversions.map(
+    (conversions || []).map(
       (c) => c.clickid
-    )
+    ).filter(Boolean)
 
   const {
     data: clicks
-  } = await supabase
+  } =
+    clickIds.length > 0
 
-    .from("clicks")
+      ? await supabase
 
-    .select("*")
+        .from("clicks")
 
-    .in(
-      "clickid",
-      clickIds
-    )
+        .select(
+          "clickid,campaign,country,device,ip"
+        )
+
+        .in(
+          "clickid",
+          clickIds
+        )
+
+      : {
+          data: []
+        }
 
   const merged =
-    conversions.map(
+    (conversions || []).map(
       (conversion) => {
 
         const click =
