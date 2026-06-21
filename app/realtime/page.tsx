@@ -824,10 +824,7 @@ const campaignReports:any[] =
       Realtime Analytics
     </h1>
 
-    <p className="mt-1 text-sm text-slate-400">
-      Live tracker dashboard
-    </p>
-
+    
   </div>
 
   <div className="
@@ -1806,42 +1803,72 @@ shadow-[0_0_20px_rgba(0,0,0,0.25)]">
 
     </div>
 
-<div className="space-y-2">
+<div className="space-y-3">
 
   {countryStats.map(
-    ([country,count]:any) => (
+    ([country, count]: any, index) => {
 
-      <div
+const clicks =
+  Number(count)
 
-        key={country}
+const max =
+  Number(countryStats[0]?.[1] ?? 1)
 
-        className="
-          flex
-          items-center
-          justify-between
-          rounded-lg
-          border
-          border-slate-800
-          p-3
-        "
+const percent =
+  (clicks / max) * 100
 
-      >
+      return (
 
-        <span>
+        <div
+          key={country}
+          className="
+            rounded-xl
+            border
+            border-slate-800
+            p-3
+          "
+        >
 
-          {country}
+          <div className="mb-2 flex items-center justify-between">
 
-        </span>
+            <div className="flex items-center gap-2">
 
-        <span className="text-slate-400">
+              <span className="text-xs text-slate-500">
+                #{index + 1}
+              </span>
 
-          {count}
+              <span className="font-medium">
+                {country}
+              </span>
 
-        </span>
+            </div>
 
-      </div>
+            <span className="text-sm text-orange-400 font-semibold">
+              {count}
+            </span>
 
-    )
+          </div>
+
+          <div className="h-1.5 rounded-full bg-slate-800">
+
+            <div
+              className="
+                h-1.5
+                rounded-full
+                bg-orange-500
+              "
+              style={{
+                width: `${percent}%`
+              }}
+            />
+
+          </div>
+
+        </div>
+
+      )
+
+    }
   )}
 
 </div>
