@@ -581,19 +581,6 @@ const today =
       .toISOString()
   )
 
-  console.log(
-  "TODAY:",
-  today
-)
-
-console.log(
-  "CLICK DATE:",
-  clicks[0]
-    ? getWIBDate(
-        clicks[0].created_at
-      )
-    : "NO CLICK"
-)
 
 const yesterday =
   new Date(
@@ -612,14 +599,7 @@ const countryStats =
 
     clicks
 
-      .filter(
-        (click:any) =>
-          getWIBDate(
-            click.created_at
-          ) === today
-      )
-
-      .reduce(
+          .reduce(
 
         (
           acc:any,
